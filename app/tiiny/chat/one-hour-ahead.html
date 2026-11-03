@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sun Path Visualization</title>
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap);
+    @import url(https://fonts.googleapis.com/css2?family=Barlow:wght@100..900&display=swap);
+
+    body {
+      font-family: Inter, Tahoma, Sans-Serif;
+      background-color: #121212;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #sunPath {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 335px;
+    }
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    input[type="text"], #submit-location {
+      margin: 10px 0;
+      padding: 10px;
+      width: 250px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: #222;
+      color: white;
+    }
+    #submit-location {
+      background-color: #007bff;
+      cursor: pointer;
+    }
+    #submit-location:hover { background-color: #0056b3; }
+    #localTime { font-size: 18px; color: #FFD700; margin-top: 20px; }
+    h4, h5 { font-size: 18px; color: #FFD700; }
+    p { font-size: 16px; color: #FFD700; }
+    .box-large {
+      display: flex;
+      width: 335px;
+      background-color: #ffffff0a;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-radius: 5px;
+      border-top: 1px solid #ffffff1c;
+    }
+    .box-large h4, .box-large h5 {
+      font-family: Barlow, serif;
+      font-size: 40px;
+      font-weight: 400;
+      color: #75FBFD;
+      padding: 0 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sun Path Visualization</h1>
+  <div class="box-large">
+    <h4 id="primaryTimeString"> --:--</h4>
+    <svg id="sunPath" xmlns="http://www.w3.org/2000/svg" width="335" height="73" viewBox="0 0 335 73" fill="none">
+      <path id="sun-path" d="M0 69.9C56.2 69.9 111.3 3 167.5 3C227.2 3 274.4 69.9 335 69.9" stroke="white" stroke-opacity="0.2" stroke-width="5"></path>
+      <circle id="sun-glow" r="10" fill="#FFC300"></circle>
+      <circle id="sunrisemarker" r="4" fill="#FFD700" opacity="0.8"></circle>
+      <circle id="sunsetmarker" r="4" fill="#FF6347" opacity="0.8"></circle>
+    </svg>
+    <h5 id="secondaryTimeString"> --:--</h5>
+    <p id="daylightHours">Total daylight hours: --</p>
+  </div>
+
+  <div class="input-row">
+    <input type="text" id="location" placeholder="City, Countrycode" value="London,GB">
+    <input type="text" id="apikey" placeholder="32 Character API Key" value="409cc3736e4fa7176890bed5e9656117">
+    <div id="submit-location">Submit Location</div>
+  </div>
+  
+  <p id="localTime">Local time: --:--</p>
+  <p id="currentLocalTime">Your local time: --:--</p>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById("submit-location").addEventListener("click", fetchSunData);
+    
+      function fetchSunData() {
+        const location = document.getElementById("location").value.trim();
+        const apiKey = document.getElementById("apikey").value.trim();
+        if (!location || !apiKey) {
+          alert("Please provide a valid location and API key.");
+          return;
+        }
+    
+        const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`;
+    
+        fetch(apiURL)
+          .then(response => response.json())
+          .then(data => {
+            const timezoneOffset = data.timezone * 1000; // Offset in milliseconds
+            const nowUTC = new Date();
+            let nowLocal = new Date(nowUTC.getTime() + timezoneOffset);
+    
+            // 🌍 Detect if DST is active in the location
+            const janOffset = new Date(nowLocal.getFullYear(), 0, 1).getTimezoneOffset();
+            const julOffset = new Date(nowLocal.getFullYear(), 6, 1).getTimezoneOffset();
+            const isDST = nowLocal.getTimezoneOffset() < Math.max(janOffset, julOffset);
+    
+            // ✅ Subtract 1 hour instead of adding it
+            if (isDST) nowLocal = new Date(nowLocal.getTime() - 3600000);
+    
+            document.getElementById("localTime").innerText = `Local time: ${nowLocal.toLocaleTimeString()}`;
+    
+            const pathElement = document.getElementById("sun-path");
+            const pathLength = pathElement.getTotalLength();
+            const secondsSinceStartOfDay = nowLocal.getHours() * 3600 + nowLocal.getMinutes() * 60 + nowLocal.getSeconds();
+            const fractionOfDay = secondsSinceStartOfDay / 86400;
+            const sunPosition = fractionOfDay * pathLength;
+            const sunCoordinates = pathElement.getPointAtLength(sunPosition);
+    
+            document.getElementById("sun-glow").setAttribute("cx", sunCoordinates.x);
+            document.getElementById("sun-glow").setAttribute("cy", sunCoordinates.y);
+    
+            // ✅ Convert sunrise & sunset timestamps from UTC → Corrected Local Time
+            const sunriseUTC = new Date(data.sys.sunrise * 1000);
+            const sunsetUTC = new Date(data.sys.sunset * 1000);
+            let sunriseLocal = new Date(sunriseUTC.getTime() + timezoneOffset);
+            let sunsetLocal = new Date(sunsetUTC.getTime() + timezoneOffset);
+    
+            // ✅ Apply the same DST correction (subtracting an hour if needed)
+            if (isDST) {
+              sunriseLocal = new Date(sunriseLocal.getTime() - 3600000);
+              sunsetLocal = new Date(sunsetLocal.getTime() - 3600000);
+            }
+    
+            // 🌅 Adjust sunrise/sunset markers
+            const sunriseFraction = (sunriseLocal.getHours() * 3600 + sunriseLocal.getMinutes() * 60) / 86400;
+            const sunsetFraction = (sunsetLocal.getHours() * 3600 + sunsetLocal.getMinutes() * 60) / 86400;
+            const sunriseCoordinates = pathElement.getPointAtLength(sunriseFraction * pathLength);
+            const sunsetCoordinates = pathElement.getPointAtLength(sunsetFraction * pathLength);
+    
+            document.getElementById("sunrisemarker").setAttribute("cx", sunriseCoordinates.x);
+            document.getElementById("sunrisemarker").setAttribute("cy", sunriseCoordinates.y);
+            document.getElementById("sunsetmarker").setAttribute("cx", sunsetCoordinates.x);
+            document.getElementById("sunsetmarker").setAttribute("cy", sunsetCoordinates.y);
+            
+            document.getElementById("primaryTimeString").innerHTML = `<img src="sunup.svg" width="24" height="24" alt="Sunrise"> ${sunrisetLocal.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+            document.getElementById("secondaryTimeString").innerHTML = `<img src="sundown.svg" width="24" height="24" alt="Sunset"> ${sunsetLocal.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+          })
+          .catch(error => alert("Failed to retrieve data. Check your inputs."));
+      }
+    
+      window.onload = fetchSunData;
+      setInterval(() => document.getElementById("currentLocalTime").innerText = `Your local time: ${new Date().toLocaleTimeString()}`, 1000);
+    });
+    </script>
+    
+</body>
+</html>

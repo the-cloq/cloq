@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'CloqStencilRegular';
+    src: url('fonts/cloq/CloqStencilRegular.eot');
+    src: url('fonts/cloq/CloqStencilRegular.eot') format('embedded-opentype'),
+         url('fonts/cloq/CloqStencilRegular.woff2') format('woff2'),
+         url('fonts/cloq/CloqStencilRegular.woff') format('woff'),
+         url('fonts/cloq/CloqStencilRegular.ttf') format('truetype'),
+         url('fonts/cloq/CloqStencilRegular.svg#CloqStencilRegular') format('svg');
+}
+
+body {
+    background: #111;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    margin:0;
+    padding:0;
+}
+#clockGrid {
+    font-family: 'CloqStencilRegular', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(16, 1.5vw);
+    grid-template-rows: repeat(16, 1.5vw);
+    gap: 0.15vw;
+    margin: 2vw auto 1vw auto;
+    width: max-content;
+    background: #222;
+    border-radius: 2px;
+    padding: 1.5vw;
+}
+
+.letter {
+    width: 1.5vw;
+    height: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1vw;
+    color: #444;
+    background: none;
+    border-radius: 0.2vw;
+    transition: color 0.2s, background 0.2s;
+}
+
+
+@media (max-width: 700px) {
+  #clockGrid {
+    grid-template-columns: repeat(16, 5vw);
+    grid-template-rows: repeat(16, 5vw);
+    gap: 0.5vw;
+    padding: 15px;
+  }
+  .letter {
+    width: 5vw;
+    height: 5vw;
+    font-size: 3.5vw;
+  }
+}
+
+
+
+.letter.lit { color: #fff; }
+.letter.cold { color: #00bfff; }
+.letter.cool { color: #00b6ff;}
+.letter.warm { color: #ffb300; }
+.letter.hot  { color: #ff3030; }
+.letter.sec-lit { color: #fff; }
+
+.centered-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+  gap:20px;
+}
+
+#status {
+  font-size: 16px;
+  color: #ccc;
+  margin-bottom: 15px;
+  text-align: center;
+  min-width: 90%;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+#locationInput {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background: #222;
+  color: #fff;
+}
+
+#modeToggle, #submitBtn {
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 0.5vw;
+  border: 1px solid #444;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#modeToggle:hover {
+  background: #333;
+}
+
+/* Responsive: Stack controls vertically on small screens if you want */
+@media (max-width: 700px) {
+  .centered-bar {
+    width: 100%;
+  }
+  #status {
+    font-size: 18px;
+    min-width: 0;
+    width: 90vw;
+    font-family: 'Roboto', sans-serif;
+  }
+  .controls {
+    flex-direction: column;
+    gap: 5vw;
+  }
+  #locationInput, #modeToggle, #submitBtn {
+    width: 50vw;
+    text-align: center;
+  }
+}
+.digital-cursor {
+  cursor: pointer;
+}

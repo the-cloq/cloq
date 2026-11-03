@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css">
+<link rel="stylesheet" href="https://prjmjennings.co.uk/assets/cq/app/thecloq.css">
+<!--<link rel="stylesheet" href="https://{{URL}}/thecloq.css">-->
+<link rel="apple-touch-icon" sizes=180x180 href="https://{{URL}}/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes=32x32 href="https://{{URL}}/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes=16x16 href="https://{{URL}}/favicon-16x16.png">
+<link rel="mask-icon" href="https://{{URL}}/safari-pinned-tab.svg" color="#020b16">
+<link rel="manifest" href='data:application/manifest+json,{"display":"standalone","short_name":"CLOQ","orientation":"portrait"}'/>
+<meta name="theme-color" content="#030A15">
+<style>#preloader{position: fixed;top:0;left:0;right:0;bottom:0;background-color:#17171c;z-index:99;}.status {margin: 300px auto;transform: translateZ(0);}</style>
+<style>.status:before, .status:after {content: '';position: absolute;top: 0;}.status:before, .status:after, .status {border-radius: 10%;width: 2em;height: 2em;animation: animation 1.2s infinite ease-in-out;}</style>
+<style>.status {animation-delay: -0.16s;}.status:before {left: -3.5em;animation-delay: -0.32s;}.status:after {left: 3.5em;}@keyframes animation {0%, 80%, 100% {box-shadow: 0 2em 0 -1em #29AEAE;}40% {box-shadow: 0 2em 0 0 #29AEAE;}}.loader{display:none;top:50%;left:42%;position:absolute;transform:translate(-50%, -50%);}</style>
+</head>
+<body>
+<input type="checkbox" id="hbx">
+<label class="hamburger" for="hbx">
+<div id="hamburger-top">
+</div>
+<div id="hamburger-mid">
+</div>
+<div id="hamburger-bot">
+</div>
+</label>
+<div id="about">
+<div class="j-brief-header">
+</div>
+<h2 class="sm-header">ABOUT THE ARTIST</h2>
+</div>
+</div>
+<form method="post" id="settings">
+<div class="topnav">
+<img src="https://{{URL}}/cloq_logo.svg" alt="CLOQ">
+<input type="hidden" name="ok" value="ok">
+<button id="submitBtn" class="button" name="ok" type="submit" value="ok">
+<img src="https://{{URL}}/send_w.svg">
+</button>
+</div>
+<div class="waves">
+<div id="panel1" class="tab_panel" aria-hidden="false">
+<div class="container">
+<div class="title">
+<img class="wc_icon" src="https://{{URL}}/color.svg">
+<h1>Colours</h1>
+</div>
+<h2>Set the colours for hours and minutes to alter the mood</h2>
+<div id="colours" class="box">
+<div class="fanen-container">
+<div class="tabs">
+<div class="fanen active" id="tab1">Hours & Minutes</div>
+<div class="fanen" id="tab2">Seconds</div>
+<div class="fanen-indicator">
+</div>
+</div>
+<div class="fanen-content tab1-active">
+<div class="fanen-panel" id="content1">
+<div class="radio-buttons">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="white" name="color" value="white">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="cyan" name="color" value="cyan">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="green" name="color" value="green">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="pink" name="color" value="pink">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="orange" name="color" value="orange">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="red" name="color" value="red">
+</div>
+</div>
+<div class="fanen-panel" id="content2">
+<div class="radio-buttons">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="white_s" name="scolor" value="white">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="cyan_s" name="scolor" value="cyan">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="green_s" name="scolor" value="green">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="pink_s" name="scolor" value="pink">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="orange_s" name="scolor" value="orange">
+    <input class="radio-btn" onchange="myFunction(this.value)" type="radio" id="red_s" name="scolor" value="red">
+</div>
+</div>
+</div>
+</div>
+<div class="toggle-item">
+<div class="toggle-wrapper">
+<input type=hidden name=seconds_status value="{{seconds_status}}">
+<input type="checkbox" class="ios-toggle" id="seconds_status" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for=seconds_status class=ios-toggle-label></label>
+<span>Display Seconds</span>
+</div>
+<p>Choose to show or hide the ambient temperature in CLOQ Mode</p>
+</div>
+</div>
+</div>
+</div>
+<div id="panel2" class="tab_panel" aria-hidden="true">
+<div class="container">
+<div class="title">
+<img class="wc_icon" src="https://{{URL}}/brightness.svg">
+<h1>Auto Brightness</h1>
+</div>
+<h2>CLOQ senses the presence or absence of light, and adjusts brightness accordingly</h2>
+<div class="box">
+<h3>Refine brightness</h3>
+<div class="slider_wrap">
+<div id="slider1">
+</div>
+<input type="hidden" name="brightness" id="brightness" class="slider-input"  value="{{brightness}}">
+<p class="spacer">Adjust the global brightness to suit the ambience of your living space</p>
+</div>
+<div class="toggle-item">
+<div class="toggle-wrapper">
+<input type=hidden name=ldrSensor_status value="{{ldrSensor_status}}">
+<input type="checkbox" class="ios-toggle" id="ldrSensor_status" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for=ldrSensor_status class=ios-toggle-label></label>
+<span>Auto Brightness Sensor</span>
+</div>
+<p>If the Auto Brightness is set to OFF, CLOQ will not adjust brightness automatically</p>
+</div>
+</div>
+</div>
+</div>
+<div id="panel3" class="tab_panel" aria-hidden="true">
+<div class="container">
+<div class="title">
+<img class="wc_icon" src="https://{{URL}}/msensor.svg">
+<h1>Motion Sensor</h1>
+</div>
+<h2>The sensor checks for movement every 1 - 15 minutes. If movement isn't detected, CLOQ's display reverts to standby mode but remains active</h2>
+<div class="box">
+<h3>Motion Detection</h3>
+<div class="slider_wrap">
+<div id="slider2">
+</div>
+<input type="hidden" name="sensor_timer" id="sensor_timer" class="slider-input" value="{{sensor_timer}}">
+<p class="spacer">Adjust the global brightness to suit the ambience of your living space</p>
+</div>
+<div class="toggle-item">
+<div class="toggle-wrapper">
+<input type=hidden name=motionSensor value="{{motionSensor}}">
+<input type="checkbox" class="ios-toggle" id="motionSensor" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for=motionSensor class=ios-toggle-label></label>
+<span>Motion Sensor</span>
+</div>
+<p>If the Motion Sensor is set to OFF, CLOQ will remain lit at all times</p>
+</div>
+</div>
+</div>
+</div>
+<div id="panel4" class="tab_panel" aria-hidden="true">
+<div class="container">
+<div class="title">
+<img class="wc_icon" src="https://{{URL}}/weather.svg">
+<h1>Weather Conditions</h1>
+</div>
+<h2>CLOQ uses the free Open Weather Map Service to display the current temperature and weather conditions</h2>
+
+<div class="card-container">
+<div class="card" id="flipCard">
+<div class="side front">
+<h3>Location</h3>
+
+<div class="input-row" style="flex-direction:column">
+
+<div style="display:flex; align-items:center;width:100%;">
+<input type="text" id="location" name="cityName" placeholder="City, Countrycode" onblur="this.value=removeSpaceAfterComma(this.value);" value="{{cityName}}">
+<button id="submit-location"></button>
+</div>
+
+<div class="toggle-item g40">
+<div style="display:flex;align-items:center;gap:20px">
+<input type=hidden name=time_mode value="{{time_mode}}">
+<input type="checkbox" class="ios-toggle" id="time_mode" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for=time_mode class=ios-toggle-label></label>
+<span style="color:#ffffff94">Use City Local Time</span>
+</div>
+</div>
+
+</div>
+
+<div class="flip-icon" onclick="flipCard()" role="button" tabindex="0">
+</div>
+</div>
+<div class="side back">
+<h3>API Key</h3>
+<input type="text" id="apikey" name="APIKEY" placeholder="32 Character API Key" value="3f572b62fea31c192fae70757e9de676">
+<div class="flip-icon" onclick="flipCard()" role="button" tabindex="0">
+</div>
+</div>
+</div>
+</div>
+<div id="ss" class="box-large">
+<h3 id="title_">Solar Terminator</h3>
+<div class="sunlight-container">
+<h4 id="first-event"></h4>
+
+<div style="display:flex;flex-direction: column;margin-top: 30px;">
+<div id="localTime"></div>
+<h5 id="timezoneOffset"></h5>
+</div>
+
+</h5>
+</div>
+<div class="anchor-baseline">
+<div class="beziercurve">
+<svg id="sunPath" xmlns="http://www.w3.org/2000/svg" width="335" height="73" viewBox="0 0 335 73" fill="none">
+<path id="curve" d="M0 69.8975C56.1994 69.8975 111.319 3 167.541 3C227.168 3 274.438 69.8975 335 69.8975" stroke="white" stroke-opacity="0.2" stroke-width="5"/>
+<circle id="sunSVG" r="10" fill="#FFC300">
+<animateMotion id="sunMotion" begin="0s" dur="24h" repeatCount="indefinite" path="M0 69.8975C56.1994 69.8975 111.319 3 167.541 3C227.168 3 274.438 69.8975 335 69.8975" />
+</circle>
+<circle id="sunriseMarker" r="4" fill="#FFD700" opacity="0.8" />
+<circle id="sunsetMarker" r="4" fill="#FF6347" opacity="0.8" />
+</svg>
+<h5 id="second-event">.</h5>
+</div>
+</div>
+<p id="sunlight-hours-time"></p>
+</div>
+<div class="box">
+<h3>Current Temperature</h3>
+<div class="temp-toggles">
+<input type="checkbox" class="radio-input" name="Temp_mode" id="celcius" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for="celcius" class="radio-label">Celsius</label>
+<input type="checkbox" class="radio-input" name="Temp_mode" id="fahrenheit" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for="fahrenheit" class="radio-label">Fahrenheit</label>
+</div>
+<div class="squeezed">
+<div class="temp">
+<div id="conditions">
+</div>
+<div id="cel" class="hidden-box">
+<h4><span>C</span>
+</h4>
+</div>
+<div id="fah" class="hidden-box">
+<h4><span>F</span>
+</h4>
+</div>
+</div>
+<p class="center">Choose your preferred temperature scale</p>
+</div>
+</div>
+<div class="box">
+<h3>Ambient Temperatures</h3>
+<div class="slider_wrap">
+<div id="slider3">
+</div>
+<input type="hidden" name="cool" id="cool" class="slider-input" value="{{cool}}">
+<input type="hidden" name="warm" id="warm" class="slider-input" value="{{warm}}">
+<input type="hidden" name="hot" id="hot" class="slider-input" value="{{hot}}">
+<p style="margin-top:50px;">Adjust the temperatures to favour your <span class="c-cool">COOL</span>, <span class="c-warm">WARM</span> and <span class="c-hot">HOT</span> comfort levels</p>
+</div>
+</div>
+<div class="box">
+<h3>Weather Features</h3>
+<div class="toggle-item">
+<div class="toggle-wrapper">
+<input type=hidden name=ambience value="{{ambience}}">
+<input type="checkbox" class="ios-toggle" id="ambience" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for=ambience class=ios-toggle-label></label>
+<span>Display Ambience</span>
+</div>
+<p>Choose to show or hide the ambient temperature in CLOQ Mode</p>
+</div>
+<div class="toggle-item">
+<div class="toggle-wrapper">
+<input type=hidden name=show_weather value="{{show_weather}}">
+<input type="checkbox" class="ios-toggle" id="show_weather" onclick="this.previousSibling.value=1-this.previousSibling.value">
+<label for=show_weather class=ios-toggle-label></label>
+<span>Display Ambience</span>
+</div>
+<p>Choose to show or hide the weather conditions in Weather Mode</p>
+</div>
+</div>
+<div id="api_key" class="box sm padding-bottom-0">
+<div class="accordion">
+<h3>Advanced Settings</h3>
+</div>
+<div class="accordion-content">
+<h5>APP Styling and Functions URL</h5>
+<input class="spacing" style="margin-bottom:20px;" name="URL" id="URL" type="text" spellcheck="false" value={{URL}}>
+</div>
+</div>
+</div>
+</div>
+<div id="panel5" class="tab_panel" aria-hidden="true">
+<div class="container">
+<div class="title">
+<img class="wc_icon" src="https://{{URL}}/zone_pink.svg">
+<h1>Daylight Saving Time</h1>
+</div>
+<h2>Daylight saving during the summer months so that darkness falls at a later clock time</h2>
+<div class="box">
+<h3>Setting the clock</h3>
+<div class="dst-toggles">
+
+<input type="radio" name="DST_mode" id="auto" class="radio-input" onchange="myFunction(this.value)" value="auto">
+<label for="auto" class="radio-label">Auto</label>
+<input type="radio" name="DST_mode" id="sumer" class="radio-input" onchange="myFunction(this.value)" value="summer">
+<label for="summer" class="radio-label">Summer</label>
+<input type="radio" name="DST_mode" id="winter" class="radio-input" onchange="myFunction(this.value)" value="winter">
+<label for="winter" class="radio-label">Winter</label>
+
+</div>
+</div>
+<div id="sumR" class="box hidden-box">
+<div class="slider_wrap">
+<h5>Summer Offset</h5>
+<div id="slider4">
+</div>
+<input type="hidden" id="summer_offset" name="summer_offset" class="slider-input" value="{{summer_offset}}">
+<p class="spacer">Setting the time backwards from standard time during the winter months</p>
+</div>
+</div>
+<div id="wintR" class="box hidden-box">
+<div class="slider_wrap">
+<h5>Winter Offset</h5>
+<div id="slider5">
+</div>
+<input type="hidden" id="winter_offset" name="winter_offset" class="slider-input" value="{{winter_offset}}">
+<p class="spacer">Setting the time forwards from standard time during the winter months</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="basenav">
+<div class="inside">
+<div class="tab_heading col" aria-controls="panel1" aria-selected="true">Colours</div>
+<div class="tab_heading lumins" aria-controls="panel2" aria-selected="false">Lumins</div>
+<div class="tab_heading motion" aria-controls="panel3" aria-selected="false">Motion</div>
+<div class="tab_heading weather" aria-controls="panel4" aria-selected="false">Weather</div>
+<div class="tab_heading wifi" aria-controls="panel5" aria-selected="false">DST</div>
+</div>
+</div>
+</form>
+<script>window.addEventListener('load', function () { var preloader = document.getElementById('preloader');var status = document.querySelector('.status'); status.style.transition = "opacity 1s ease-out\status.style.opacity = 0;status.addEventListener('transitionend', function() {preloader.style.display = 'none';});document.body.style.overflow = 'visible';});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js"></script>
+<script src="https://prjmjennings.co.uk/assets/cq/app/sta_root.js"></script>
+<script src="https://prjmjennings.co.uk/assets/cq/app/backup_special.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+	<title>CLOQ</title>
+    <meta name="description" content="CLOQ: A piece of art in time">
+    <meta property="og:title" content="CLOQ4">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="assets/img/cover@2x.jpg">
+    <meta property="og:description" content="Tech Art Wordclock by CLOQ">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/flickity-fade@2/flickity-fade.css">
+	<link rel="stylesheet" href="assets/css/main﹖v=0.5.css">
+	<link rel="apple-touch-icon" type="image/svg+xml" sizes="180x180" href="favicon.svg">
+	<link rel="icon" type="image/svg+xml" href="favicon.svg">
+	<link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icon512_maskable.png"></link>
+  <link rel="shortcut icon" type="image/png" href="icon512_maskable.png"/>
+	<link rel="mask-icon" href="safari-pinned-tab.svg" color="#000000">
+  <link rel="manifest" href='data:application/manifest+json,{"display":"standalone"}'/>
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+	<style>
+
+h1 {
+  color:#fff;
+}
+.carousel {
+}
+
+.carousel-cell {
+  width: 400px;
+  min-height: 400px;
+  margin-right: 50px;
+  background: #132230;
+  cursor:pointer;
+}
+.carousel-cell:hover .wrap img.hov {
+  opacity:1;
+  transform: scale(1.1);
+}
+.wrap {
+  padding:30px;
+  width: 400px;
+  height:400px;
+  position:relative;
+  overflow: hidden;
+}
+.wrap img {
+  width:100%;
+  box-shadow: 0px 10px 25px 0px rgba(0,0,0,0.8);
+}
+.wrap img.hov {
+  width:100%;
+  opacity:0;
+  position:absolute;
+  /*filter: grayscale(1);*/
+  top:0;
+  left:0;
+  box-shadow: none;
+  transition: all 0.6s cubic-bezier(.4,0,.2,1);
+  padding:0;
+}
+.carousel-cell-image {
+  
+}
+.info {
+  width:100%;
+  color:#fff;
+  padding:30px;
+  background:#1A2F43;
+  text-align:center;
+}
+.info p {
+  font-size:16px;
+}
+.info p span {
+  text-decoration-line: line-through;
+  color:#ccc;
+}
+.info h2 {
+  color:#A79C6A;
+  font-weight:500;
+}
+.plantino {
+  filter: grayscale(1);
+}
+
+.flickity-prev-next-button {
+  border-radius: 0%;
+}
+
+.flickity-prev-next-button.previous {
+    left: 80px;
+}
+
+header {
+  background: #27425B;
+}
+h2 strong {
+  color: #A79C6A;
+  font-weight: normal;
+}
+.flickity-prev-next-button {
+    width: 50px;
+    height: 50px;
+}
+.flickity-prev-next-button .flickity-button-icon {
+    height: 40%;
+    width: 40%;
+}
+.flickity-prev-next-button .flickity-button-icon {
+    position: absolute;
+    left: 30%;
+    top: 30%;
+}
+.association {
+
+  font-size:28px;
+  color:#ccc;
+  padding-top:80px;
+}
+.association span {
+  color:#A79C6A;
+}
+.des {
+  color:#ccc;
+  letter-spacing: 0.5px;
+  padding-bottom:20px;
+}
+</style>
+  </head>
+  <body> 
+    <section class="cookie-bar"><br>
+  			<p style="margin-bottom: 1rem;">We use cookies to give you the best experience of our website. By browsing you agree to our use of cookies which are outlined in our <a class="j-outro-link-item" href="../privatepolicy.html" data-toggle="modal" data-target="#myModal">Private Policy</a>.&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-sm btn-light" href="#" id="cookie-understand">Accept</a>
+  </p>
+	</section>
+	  
+	  	<!-- Modal Gumf -->
+	<div class="modal fade" id="myModal">
+		
+			<div class="modal-dialog modal-dialog-slideout" role="document">
+			<div class="modal-content bmd-modalContent">
+
+				<div class="modal-body">
+          
+          <div class="close-button">
+			  <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<iframe id="iframe_container" frameborder="0"></iframe>
+				</div>
+
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div>
+	  
+    <div class="j-loader j-loader_overlay -visible"></div>
+    <nav class="j-menu">
+      <div class="j-menu-logo">
+        <a aria-label="jaseography" href="/">
+				<img src="assets/svg/cloq.svg" width="170" height="25" alt="CLOQ"> 
+			</a>
+      </div>
+      <div class="j-menu-toggle">
+        <button class="j-btn j-btn_menu" aria-label="menu" data-cursor="-menu" data-cursor-stick=".j-btn_menu-box">
+          <span class="j-btn_menu-title" style="color:#acacac" >shop</span>
+          <span class="j-btn_menu-box" data-magnetic="{&quot;x&quot;:&quot;0.08&quot;,&quot;y&quot;:&quot;0.08&quot;}">
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+      <div class="j-menu-box">
+        <div class="j-menu-backdrop"></div>
+        <div class="j-menu-content">
+          <div class="j-menu-body">
+            <div class="j-menu-container">
+              <div class="j-menu-grid">
+                  <div class="j-menu-grid-col -left">
+                  <div class="j-menu-title">CLOQ</div>
+                  <div id="lang-switch" class="j-menu-social" style="cursor: pointer;">
+                    <div class="j-menu-social-item">
+                      <em><a href="/contact/">
+                        <span data-text="Contact">Contact</span>
+						  </a>
+                      </em>
+					 </div>
+                  </div>
+                </div>
+                <div class="j-menu-grid-col -right">
+                  <div class="j-menu-title">Collections</div>
+                  <div class="j-menu-nav" role="navigation">
+					<div class="j-menu-nav-item">
+                      <a href="/classica/">
+                        <em>
+                          <span data-text="Classica">Classica</span>
+                        </em>
+                      </a>
+                    </div>
+					<div class="j-menu-nav-item">
+                      <a href="/grande/">
+                        <em>
+                          <span data-text="Grande">Grande</span>
+                        </em>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
+		 <div class="j-menu-footer">
+            
+          </div>
+       </div>
+     </div>
+	<div class="j-menu-contact">
+        <a class="j-btn j-btn_contact" href="/contact/" data-cursor="-exclusion" aria-label="Get in touch">
+          <img src="assets/svg/mail.svg" alt="" style="z-index:100;">
+        </a>
+      </div>
+  </nav>
+	  
+  		  	<!-- Modal -->
+	<div class="modal fade" id="ModalSlide" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-slideout" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+          <h3 class="modal-title d-inline-flex">Available for commission</h3>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+      <div class="modal-body">
+		  <div class="container">
+			  <div class="row">
+				  <div class="col-lg-12">
+	<img id="imageToSwap" class="profile" src="size.png" alt="">
+				<div class="modal-body">
+	<div class="col-xs-6" id="app">
+  <div class="form-group">
+    <label for="make">Size</label>
+    <select class="form-control" name="make" id="make" v-model="make" onchange="$('#imageToSwap').attr('src', this.options[this.selectedIndex].value +'.png');">
+      <option :value="null" disabled selected>Size</option>
+      <option v-for="option in makes_options" v-bind:value="option.id">{{option.text}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="model">Colour</label>
+    <select class="form-control" name="model" id="model" v-model="model" onchange="$('#imageToSwap').attr('src', this.options[this.selectedIndex].value +'.png');">
+	  <option :value="null" disabled selected>Colour</option>
+      <option v-for="option in model_options[make]" v-bind:value="option.id" v-bind:key="option.id">{{option.text}}</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="model">Language</label>
+    <select class="form-control" name="year" id="item_options" v-model="year" onchange="$('#imageToSwap').attr('src', this.options[this.selectedIndex].value +'.png');">
+	  <option :value="null" disabled selected>Language</option>
+      <option v-for="option in year_options[model]" v-bind:value="option.id" v-bind:key="option.id" v-bind:price="option.price">{{option.text}}</option>
+    </select>
+  </div>
+</div>
+      <div id="paypal-button-container"></div>
+    </div>
+	</div>
+		  </div>
+		</div>
+	  </div>
+    </div>
+  </div>
+</div>
+	  
+	  
+
+
+	  
+    <div class="j-view" data-controller="projectController" data-project="cloq" id="view-main">
+      <div class="j-layout" role="main" data-cursor="-cloq-turquoise">
+        <div class="j-navbar">
+          <div class="j-navbar-strip">
+            <div class="j-navbar-grid">
+              <div class="j-navbar-grid-col -left">
+                <div class="j-navbar-logo">
+                  <a aria-label="cloq" href="/">
+				<img src="assets/svg/cloq_dm.svg" width="170" height="25" alt="CLOQ"> 
+			</a>
+                </div>
+              </div>
+              <div class="j-navbar-grid-col -right">
+                <div class="j-navbar-toggle">
+                  <button class="j-btn j-btn_menu" aria-label="menu">
+					  <!--<span class="j-btn_menu-title">menu</span>-->
+                    <span class="j-btn_menu-box" style="visibility:hidden">
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </button>
+					
+                </div>
+				  
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <header class="j-tophead section" data-color="#C07858">
+          <div class="j-tophead-content">
+            <div class="j-tophead-container">
+              <div class="j-tophead-header">
+				<h1>HANDCRAFTED CLOCK ART</h1>
+              </div>
+              <div class="j-tophead-title">
+				<h2 class="big_headline"><span style="text-shadow: 2px 3px 2px rgba(54, 88, 111, 0.7); -webkit-background-clip: text; background-clip: text; background-color: #000; color: transparent;">A PIECE OF </span><br><strong>ART IN TIME</strong> </h2>
+              </div>
+              <div class="association">Limited offers with <span> The Hit or Miss, Penn Street</span></div>
+            </div>
+          </div>
+        </header>
+
+
+        <section class="j-description" style="background: #27425B; padding:100px 0; padding-top:0">
+          <div class="carousel"
+            data-flickity='{ "draggable": true, "pageDots": false, "wrapAround": true, "initialIndex": 3  }'>
+            <div class="carousel-cell">
+              <div class="wrap">
+                <img class="carousel-cell-image" src="https://prjmjennings.co.uk/assets/cq/nevada.webp" alt="Nevada CLOQ" />
+              <img class="carousel-cell-image hov" src="https://prjmjennings.co.uk/assets/cq/r1_b.webp" alt="Nevada CLOQ in situ" />
+                
+              </div>
+              <div class="info">
+                <h2>NEVADA</h2>
+                <p class="des">RUSTED CARBON STEEL</p>
+                <p><span>£2,650</span> Limited offer £1,750</p>
+              </div>
+            </div>
+            <div class="carousel-cell">
+              <div class="wrap">
+                <img class="carousel-cell-image" src="https://prjmjennings.co.uk/assets/cq/zante.webp" alt="tulip" />
+              <img class="carousel-cell-image hov" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/tulip.jpg" alt="tulip" />
+                
+              </div>
+              <div class="info">
+                <h2>ZANTE</h2>
+                <p class="des">PATINA COPPER</p>
+                <p><span>£2,850</span> Limited offer £1,750</p>
+              </div>
+            </div>
+            <div class="carousel-cell">
+              <div class="wrap">
+                <img class="carousel-cell-image plantino" src="https://prjmjennings.co.uk/assets/cq/oro.webp" alt="tulip" />
+              <img class="carousel-cell-image hov" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/tulip.jpg" alt="tulip" />
+                
+              </div>
+              <div class="info">
+                <h2>PLATINO</h2>
+                <p class="des">PLATINUM LEAF</p>
+                <p><span>£2,995</span> Limited offer £1,995</p>
+              </div>
+            </div>
+            <div class="carousel-cell">
+              <div class="wrap">
+                <img class="carousel-cell-image" src="https://prjmjennings.co.uk/assets/cq/oro.webp" alt="tulip" />
+              <img class="carousel-cell-image hov" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/82/tulip.jpg" alt="tulip" />
+                
+              </div>
+              <div class="info">
+                <h2>ORO</h2>
+                <p class="des">24CT GOLD LEAF</p>
+                <p><span>£2,895</span> Limited offer £1,895</p>
+              </div>
+            </div>
+          </div>
+          </section>
+
+
+        <section class="j-screenshot">
+          <div class="j-screenshot-preview -lg">
+            <img src="assets/img/goldleaf.jpg" loading="lazy" alt>
+          </div>
+        </section>
+		  
+        <section class="j-outro">
+          <div class="j-outro-content" data-cursor="-inverse">
+            <div class="j-outro-body">
+              <div class="j-outro-container">
+                <div class="j-outro-header">
+					<h2>Interested in <span class="-cloq-turquoise">CLOQ?</span></h2>
+                </div>
+				<div class="j-outro-text">
+				  <p><a class="j-outro-link-item -medium-link text-white" style="font-size:28px;" href="/contact/">Tell me about it</a>
+          		  </p>
+                </div>
+              </div>
+            </div>
+            <div class="j-outro-footer">
+              <div class="j-outro-container">
+                <div class="j-outro-grid">
+                  <div class="j-outro-grid-col -left">
+                    <div class="j-outro-address">
+                      <address>
+                        <p>CLOQ Limited // Buckinghamshire, England. Company Number: 15729376.</p>
+                      </address>
+                    </div>
+					<div class="j-outro-link">
+                      <a class="j-outro-link-item" href="privatepolicy.html" data-toggle="modal" data-target="#myModal">Private Policy</a>
+                    </div>
+					<div class="j-outro-link">
+                      <a class="j-outro-link-item" href="faq.html" data-toggle="modal" data-target="#myModal">FAQ</a>
+                    </div>
+                  </div>
+				  
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div> 
+<script src="assets/js/main.js"></script>
+<script src="assets/js/gfbfhft__gh_1.1.js"></script>
+<script src="assets/js/flickity.pkgd.js"></script>
+<script src="https://unpkg.com/flickity-fade@1/flickity-fade.js"></script>	
+<script src="https://unpkg.com/flickity-sync@2.0.0/flickity-sync.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	
+<script>
+
+</script>
+<!-- Prevents vertical scrolling when swiping left and right on the carousel. [if !IE]-->
+	  <script>
+		  var tapArea, startX ;
+            tapArea = document.querySelectorAll('.slider, .time, .carousel');
+            startX = 0;
+            for (var item of tapArea) {
+                item.ontouchstart = function(e) {
+                    startX = e.touches[0].clientX;
+                };
+                item.ontouchmove = function(e) {
+                    if (Math.abs(e.touches[0].clientX - startX) > 5 && e.cancelable ) {
+                        e.preventDefault();
+                    }
+                };
+            }
+	</script><!--<![endif]-->
+	
+    <noscript><link rel="stylesheet" href="assets/css/noscript﹖v=4.5.21.css"></noscript>
+		
+	<script src="https://code.tidio.co/qtofxqnz7y5w7b26h6r2sr5pv9newa4n.js"></script>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AfdxZawhsW8-AIYHYizk5aby4mjrRGaHiGtXB8y_evgmsKYqWhH8_utWTzY5bxH-sijmtHh3TNNvHmYb&enable-funding=venmo&currency=GBP" data-sdk-integration-source="button-factory"></script>
+<script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'paypal',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"Some description goes here..","amount":{"currency_code":"GBP","value":51.2,"breakdown":{"item_total":{"currency_code":"GBP","value":1},"shipping":{"currency_code":"GBP","value":50},"tax_total":{"currency_code":"GBP","value":0.2}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+            // Or go to another URL:  actions.redirect('thank_you.html');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+	<script>
+var addUserVue = new Vue({
+  el: "#app",
+  data: {
+    make: null,
+    model: null,
+    year: null,
+    makes_options: [
+      {
+        text: "Classic",
+        id: 1
+      },
+      {
+        text: "Large",
+        id: 2
+      }
+    ],
+    model_options: {
+      1: [
+        {
+          text: "Red",
+          id: 1
+        },
+        {
+          text: "Classic Black",
+          id: 2
+        }
+      ],
+      2: [
+        {
+          text: "Large Red",
+          id: 3
+        },
+        {
+          text: "Large Black",
+          id: 4
+        }
+      ]
+    },
+    year_options: {
+      1: [
+        {
+          text: "English",
+          id:   "Classic Red English",
+		  price: 1450
+        },
+        {
+          text: "Classic Red Nor",
+          id: 2,
+          price: 1450
+        }
+      ],
+      2: [
+        {
+          text: "Classic Black Eng",
+          id: 1,
+		  price: 1450
+        },
+        {
+          text: "Classic Black Nor",
+          id: 2,
+		  price: 1450
+        }
+      ],
+      3: [
+        {
+          text: "Large Red Eng",
+          id: 1,
+		  price: 2450
+        },
+        {
+          text: "Large Red Nor",
+          id: 2,
+		  price: 2450
+        }
+      ],
+      4: [
+        {
+          text: "Large Black Eng",
+          id: 1,
+		  price: 2450
+        },
+        {
+          text: "Large Black Nor",
+          id: 2,
+		  price: 2450
+        }
+      ]
+    }
+  }
+});
+	</script>
+	<script>
+$('[data-target="#myModal"]').on('click', function (e) {
+    e.preventDefault();
+
+    var _linky = $(this).attr('href');
+    var _target = $(this).data('target'); 
+    var $target = $(_target);
+
+    if ($target.length > 0) {
+      
+        $target.find('iframe').attr('src', 'about:blank');
+
+        var _isRemote = false;
+        if (_linky.indexOf('http') > -1) {
+            _isRemote = true;
+        }
+
+        if (!_isRemote) {
+            if (_linky.indexOf('?') > -1) {
+                _linky += '&tmpl=component';
+            } else {
+                _linky += '?tmpl=component';
+            }
+        }
+      
+        $target.find('iframe').attr('src', _linky).load(function() {
+            $target.modal('show');
+        });
+    }
+});
+
+$('body').on('hidden.bs.modal', '.modal', function () {
+    $(this).removeData('bs.modal');
+});
+</script>
+<script>
+
+// Button ID
+var buttonId = '#cookie-understand';
+// Cookie name
+var cookieName = 'lecookie';
+// Cookie value
+var cookieValue = 'le-cookie1';
+// Cookie expire (days)
+var cookieExpire = 10;
+
+// When click button, create cookie.
+$(document).ready(function(){
+  $(buttonId).click(function() {
+    if ($.cookie(cookieName) == null){
+
+      // Create the cookie.
+      $.cookie(cookieName, cookieValue, { expires: cookieExpire, path: '/' });
+
+      // Hide the alert message.
+      $('.cookie-bar').removeClass('cookie-bar--active');
+    }
+  });
+
+  checkCookie();
+
+  $('body').on('click', '#delete-cookie', function() {
+    
+    // Delete the cookie
+    $.removeCookie(cookieName, { path: '/' }); 
+  
+    checkCookie();        
+  });
+
+}); 
+
+// If no cookie, show the cookie bar.
+function checkCookie(){
+    if ($.cookie(cookieName) == null) {
+      // No cookie = Show cookie bar
+      $('.cookie-bar').addClass('cookie-bar--active');
+    }
+}	  
+</script>
+  </body>
+</html>

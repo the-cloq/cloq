@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sun Path Visualization</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #sunPath {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 335px;
+    }
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      margin: 10px 0;
+      padding: 10px;
+      width: 250px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: #222;
+      color: white;
+    }
+    #submit-location {
+      background-color: #007bff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #submit-location:hover {
+      background-color: #0056b3;
+    }
+    #localTime {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #FFD700;
+    }
+    h4, h5 {
+      font-size: 18px;
+      color: #FFD700;
+    }
+    p {
+      font-size: 16px;
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sun Path Visualization</h1>
+  
+  <!-- SVG for sun path and markers -->
+  <svg id="sunPath" xmlns="http://www.w3.org/2000/svg" width="335" height="73" viewBox="0 0 335 73" fill="none">
+    <path id="sun-path" d="M0 69.8975C56.1994 69.8975 111.319 3 167.541 3C227.168 3 274.438 69.8975 335 69.8975" stroke="white" stroke-opacity="0.2" stroke-width="5"></path>
+    <circle id="sun-glow" r="10" fill="#FFC300"></circle>
+    <circle id="sunrisemarker" r="4" fill="#FFD700" opacity="0.8"></circle>
+    <circle id="sunsetmarker" r="4" fill="#FF6347" opacity="0.8"></circle>
+  </svg>
+
+  <!-- Input Fields for Location and API Key -->
+  <div class="input-row">
+    <input type="text" id="location" name="cityName" placeholder="City, Countrycode" value="London,GB">
+    <input type="text" id="apikey" name="APIKEY" placeholder="32 Character API Key" value="3f572b62fea31c192fae70757e9de676">
+    <div id="submit-location">Submit Location</div>
+  </div>
+  
+  <!-- Local Time Display -->
+  <div class="toggle-item g40">
+    <p id="localTime">Local time: --:--</p>
+  </div>
+
+  <!-- Sunrise and Sunset Times -->
+  <h4 id="sunriseTime">H4: --:--</h4>
+  <h5 id="sunsetTime">H5: --:--</h5>
+
+  <p id="currentLocalTime">Your local time: --:--:--</p>
+  
+  <!-- Total Daylight Hours -->
+  <p id="daylightHours">Total daylight hours: --</p>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById("submit-location").addEventListener("click", fetchSunData);
+  
+      function fetchSunData() {
+        const location = document.getElementById("location").value.trim();
+        const apiKey = document.getElementById("apikey").value.trim();
+  
+        if (!location || !apiKey) {
+          alert("Please provide a valid location and API key.");
+          return;
+        }
+  
+        const locationParts = location.split(",");
+        if (locationParts.length !== 2) {
+          alert("Please provide a valid city and country code (e.g., London,GB).");
+          return;
+        }
+  
+        const cityName = locationParts[0].trim();
+        const countryCode = locationParts[1].trim();
+  
+        if (!cityName || !countryCode) {
+          alert("Invalid location format. Please ensure it is 'City, Countrycode'.");
+          return;
+        }
+  
+        const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${apiKey}`;
+  
+        fetch(apiURL)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`Error fetching data: ${response.statusText}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (data.cod !== 200) {
+              throw new Error(`API Error: ${data.message}`);
+            }
+  
+            const timezoneOffset = data.timezone; // Timezone offset in seconds
+            console.log("API Timezone Offset (seconds):", timezoneOffset);
+            console.log("API Timezone Offset (hours):", timezoneOffset / 3600);
+  
+            // Convert UTC sunrise and sunset times to local time using the timezone offset
+            const primaryTime = new Date(data.sys.sunrise * 1000 + timezoneOffset * 1000); // Convert to local time in milliseconds
+            const secondaryTime = new Date(data.sys.sunset * 1000 + timezoneOffset * 1000); // Convert to local time in milliseconds
+  
+            console.log("UTC Time:", new Date().toISOString());
+            console.log("Converted Sunrise Time (Local):", primaryTime.toLocaleString());
+            console.log("Converted Sunset Time (Local):", secondaryTime.toLocaleString());
+  
+            // Check for DST and adjust accordingly
+            const now = new Date();
+            const currentTimezoneOffset = now.getTimezoneOffset(); // Get local timezone offset in minutes
+            const standardTimezoneOffset = new Date(now.getFullYear(), 0, 1).getTimezoneOffset(); // Standard timezone offset for the year
+  
+            const isDST = currentTimezoneOffset < standardTimezoneOffset; // If current offset is less than standard, DST is active
+            if (isDST) {
+              primaryTime.setHours(primaryTime.getHours() - 1); // Subtract 1 hour for DST
+              secondaryTime.setHours(secondaryTime.getHours() - 1); // Subtract 1 hour for DST
+              console.log("DST is active. Adjusting times by -1 hour.");
+            }
+  
+            // Map the sun's position along the path
+            const localHours = now.getHours();
+            const localMinutes = now.getMinutes();
+            const localSeconds = now.getSeconds();
+            const secondsSinceStartOfDay = localHours * 3600 + localMinutes * 60 + localSeconds;
+            const fractionOfDay = secondsSinceStartOfDay / 86400; // 86400 seconds in a day
+  
+            // Update local time display
+            document.getElementById("localTime").innerText = `Local time: ${now.toLocaleTimeString()}`;
+  
+            // Map the sun's position along the path
+            const pathElement = document.getElementById("sun-path");
+            const pathLength = pathElement.getTotalLength();
+            const sunPosition = fractionOfDay * pathLength;
+  
+            // Get the coordinates along the path
+            const sunCoordinates = pathElement.getPointAtLength(sunPosition);
+            const sunGlow = document.getElementById("sun-glow");
+            sunGlow.setAttribute("cx", sunCoordinates.x);
+            sunGlow.setAttribute("cy", sunCoordinates.y);
+  
+            // Calculate sunrise and sunset times in seconds since the start of the day
+            const sunriseTime = data.sys.sunrise * 1000 + timezoneOffset * 1000;
+            const sunsetTime = data.sys.sunset * 1000 + timezoneOffset * 1000;
+  
+            const sunriseDate = new Date(sunriseTime);
+            const sunsetDate = new Date(sunsetTime);
+  
+            // Convert sunrise and sunset times to fractions of the day
+            const sunriseFraction = (sunriseDate.getHours() * 3600 + sunriseDate.getMinutes() * 60 + sunriseDate.getSeconds()) / 86400;
+            const sunsetFraction = (sunsetDate.getHours() * 3600 + sunsetDate.getMinutes() * 60 + sunsetDate.getSeconds()) / 86400;
+  
+            // Map sunrise and sunset times to positions on the path
+            let sunrisePosition = sunriseFraction * pathLength;
+            let sunsetPosition = sunsetFraction * pathLength;
+  
+            // Get the coordinates for the sunrise and sunset markers
+            const sunriseCoordinates = pathElement.getPointAtLength(sunrisePosition);
+            const sunsetCoordinates = pathElement.getPointAtLength(sunsetPosition);
+  
+            // Position the markers
+            document.getElementById("sunrisemarker").setAttribute("cx", sunriseCoordinates.x);
+            document.getElementById("sunrisemarker").setAttribute("cy", sunriseCoordinates.y);
+            document.getElementById("sunsetmarker").setAttribute("cx", sunsetCoordinates.x);
+            document.getElementById("sunsetmarker").setAttribute("cy", sunsetCoordinates.y);
+  
+            const primaryTimeString = primaryTime.toLocaleTimeString();
+            const secondaryTimeString = secondaryTime.toLocaleTimeString();
+  
+            const daylightHours = (data.sys.sunset - data.sys.sunrise) / 60;
+            const hours = Math.floor(daylightHours / 60);
+            const minutes = Math.round(daylightHours % 60);
+            document.getElementById("daylightHours").innerText = `Total daylight hours: ${hours}hrs ${minutes}min`;
+  
+            // Update sunrise and sunset times based on current time
+            if (new Date() < primaryTime) {
+              document.getElementById("primaryTimeString").innerHTML = `<img src="sunup.svg" width="24" height="24" alt="Sunrise"> ${primaryTimeString}`;
+              document.getElementById("secondaryTimeString").innerHTML = `<img src="sundown.svg" width="24" height="24" alt="Sunset"> ${secondaryTimeString}`;
+            } else if (new Date() >= primaryTime) {
+              document.getElementById("primaryTimeString").innerHTML = `<img src="sundown.svg" width="24" height="24" alt="Sunrise"> ${secondaryTimeString}`;
+              document.getElementById("secondaryTimeString").innerHTML = `<img src="sunup.svg" width="24" height="24" alt="Sunset"> ${primaryTimeString}`;
+            }
+          })
+          .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to retrieve weather data. Please check the city name, country code, and API key.");
+          });
+      }
+  
+      window.onload = fetchSunData;
+  
+      function updateLocalTime() {
+        const now = new Date();
+        document.getElementById("currentLocalTime").innerText = `Your local time: ${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+      }
+  
+      setInterval(updateLocalTime, 1000);
+    });
+  </script>
+  
+
+</body>
+</html>

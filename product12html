@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	<link rel="stylesheet" href="https://npmcdn.com/flickity@2/dist/flickity.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<style>
+	/* external css: flickity.css */
+
+* { box-sizing: border-box; }
+
+body { font-family: sans-serif; margin-top:30px;}
+
+.product {
+  background: #fff;
+  margin-bottom: 40px;
+  height:100%;
+}
+
+.carousel-colr {
+  width: 100%;
+  height: auto;
+  margin-right: 10px;
+  background: #fff;
+  border:1px solid white;
+  cursor:pointer;
+}
+
+/* colr number */
+.carousel-colr:before {
+  display: block;
+}
+
+.carousel-nav .carousel-colr {
+  height: 40px;
+  width: 40px;
+}
+
+.carousel-nav .carousel-colr:before {
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.carousel-nav .carousel-colr.is-nav-selected {
+  background: #ED2;
+  border:none
+}
+
+
+	</style>
+</head>
+
+<body>
+	<div class="container">
+  <div class="row">
+    <div class="" style="padding-left:15px;">
+      <select><option>Size</option></select>
+      <select><option>Language</option></select>
+    </div>
+    <div class="col-sm-6">
+<div class="product carousel-nav"
+  data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false, "prevNextButtons": false, "draggable": false, "cellAlign": "left" }'>
+  <div class="carousel-colr" style="background:#0D0C0B"></div>
+  <div class="carousel-colr" style="background:#AA8F56"></div>
+  <div class="carousel-colr" style="background:#C3C3C3"></div>
+  <div class="carousel-colr" style="background:#EA0000"></div>
+  <div class="carousel-colr" style="background:#008BD9"></div>
+</div>
+</div>
+ 
+</div>
+  <div class="row">
+    <div class="col-lg-12">
+<div class="product carousel-main" data-flickity='{"prevNextButtons": false, "pageDots": false}'>
+  <div class="carousel-colr">
+    <div class="container">
+      <div class="row">
+    <div class="col-md-6"><img src="Classic Red Eng.png" width="400" height="400" alt=""/></div>
+    <div class="col-md-6">
+      <h3>Black</h3>
+      <p>Consists of a handcrafted white housing of mineral composite and electronic components. Each piece is numbered and comes with a signed certificate of authenticity, an operator’s manual, hanging bracket, and art handling gloves.</p>
+      <p>DIMENSIONS: 620 x 620 x 30mm</p>
+      <h3>£1,450</h3>
+      <p>Exclusive of shipping, taxes and duties (if applicable).
+Ships in 12 weeks.</p>
+		<div id="smart-button-container">
+        <div id="paypal-button-container"></div>
+		</div>
+		
+    </div>
+    </div>
+      </div>
+  </div>
+  <div class="carousel-colr">
+    <div class="container">
+      <div class="row">
+    <div class="col-md-6"><img src="Classic Red Eng.png" width="400" height="400" alt=""/></div>
+    <div class="col-md-6">
+      <h3>Yellow Ochre</h3>
+      <p>Consists of a handcrafted white housing of mineral composite and electronic components. Each piece is numbered and comes with a signed certificate of authenticity, an operator’s manual, hanging bracket, and art handling gloves.</p>
+      <p>DIMENSIONS: 620 x 620 x 30mm</p>
+      <h3>£1,450</h3>
+      <p>Exclusive of shipping, taxes and duties (if applicable).
+Ships in 12 weeks.</p>
+    </div>
+    </div>
+      </div>
+  </div>
+  <div class="carousel-colr">
+    <div class="container">
+      <div class="row">
+    <div class="col-md-6"><img src="Classic Red Eng.png" width="400" height="400" alt=""/></div>
+    <div class="col-md-6">
+      <h3>Silver</h3>
+      <p>Consists of a handcrafted white housing of mineral composite and electronic components. Each piece is numbered and comes with a signed certificate of authenticity, an operator’s manual, hanging bracket, and art handling gloves.</p>
+      <p>DIMENSIONS: 620 x 620 x 30mm</p>
+      <h3>£1,450</h3>
+      <p>Exclusive of shipping, taxes and duties (if applicable).
+Ships in 12 weeks.</p>
+    </div>
+    </div>
+      </div>
+  </div>
+  <div class="carousel-colr">
+    <div class="container">
+      <div class="row">
+    <div class="col-md-6"><img src="Classic Red Eng.png" width="400" height="400" alt=""/></div>
+    <div class="col-md-6">
+      <h3>Red</h3>
+      <p>Consists of a handcrafted white housing of mineral composite and electronic components. Each piece is numbered and comes with a signed certificate of authenticity, an operator’s manual, hanging bracket, and art handling gloves.</p>
+      <p>DIMENSIONS: 620 x 620 x 30mm</p>
+      <h3>£1,450</h3>
+      <p>Exclusive of shipping, taxes and duties (if applicable).
+Ships in 12 weeks.</p>
+    </div>
+    </div>
+      </div>
+  </div>
+  <div class="carousel-colr">
+    <div class="container">
+      <div class="row">
+    <div class="col-md-6"><img src="Classic Red Eng.png" width="400" height="400" alt=""/></div>
+    <div class="col-md-6">
+      <h3>Blue</h3>
+      <p>Consists of a handcrafted white housing of mineral composite and electronic components. Each piece is numbered and comes with a signed certificate of authenticity, an operator’s manual, hanging bracket, and art handling gloves.</p>
+      <p>DIMENSIONS: 620 x 620 x 30mm</p>
+      <h3>£1,450</h3>
+      <p>Exclusive of shipping, taxes and duties (if applicable).
+Ships in 12 weeks.</p>
+    </div>
+    </div>
+      </div>
+  </div>
+</div>
+</div>
+    </div>
+    </div>
+  <script src="https://www.paypal.com/sdk/js?client-id=AfdxZawhsW8-AIYHYizk5aby4mjrRGaHiGtXB8y_evgmsKYqWhH8_utWTzY5bxH-sijmtHh3TNNvHmYb&enable-funding=venmo&currency=GBP" data-sdk-integration-source="button-factory"></script>
+	<script src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js"></script>
+	<script src="https://unpkg.com/flickity-fade@1/flickity-fade.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'paypal',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"Some description goes here..","amount":{"currency_code":"GBP","value":51.2,"breakdown":{"item_total":{"currency_code":"GBP","value":1},"shipping":{"currency_code":"GBP","value":50},"tax_total":{"currency_code":"GBP","value":0.2}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            // Show a success message within this page, e.g.
+            const element = document.getElementById('paypal-button-container');
+            element.innerHTML = '';
+            element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+            // Or go to another URL:  actions.redirect('thank_you.html');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#paypal-button-container');
+    }
+    initPayPalButton();
+  </script>
+</body>
+</html>

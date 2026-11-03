@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<select name="location" class="dependent-demo2">
+  <option>-- Please Select --</option>
+  <option value="238" price="1450">London || North || Enfield</option>
+  <option value="239">London || North || Barnet</option>
+  <option value="240">London || South || Croydon</option>
+  <option value="241">London || South || Bromley</option>
+  <option value="242">London || South || Sutton</option>
+  <option value="243">Bristol || St Pauls</option>
+  <option value="244">Bristol || Horfield</option>
+  <option value="245">Bristol || Bedminster</option>
+  <option value="246">Bournemouth</option>
+</select>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="dd.js"></script>
+<script>
+	$(function(){
+  $('.dependent-demo2').dependentSelects({
+    separator: ' || ',
+    placeholderOption: '-- Please Select --'
+  });        
+})
+</script>
+</body>
+</html>

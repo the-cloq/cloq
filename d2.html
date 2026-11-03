@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Webslesson Tutorialx</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+ </head>
+<style>
+.subcat option{
+  display:none;
+}
+
+.subcat option.label{
+  display:block;
+}
+
+/* useless template */
+
+div{
+  margin-bottom:10px;
+  float:left;
+  width:100%;
+}
+label{
+  float:left;
+  width:200px;
+  margin-left:20px
+}
+p{
+  padding:5px 20px;
+  background-color:#f1f1f1;
+  float:left;
+  border:solid 1px #ccc;
+  color:#333;
+  text-transform:uppercase;
+  margin: 20px 0 30px;
+}
+body{
+  font-family:arial;
+  font-size:14px;
+}	
+</style>
+ <body>
+<h1>Made your PC:</h1>
+
+<div>
+  <label>Processeor: </label><select id="processor" name="processor">
+  <option class="label" value>Select Processor</option>
+  <!-- Home Ware -->
+  <option value="P1">Processor 1</option>
+  <option value="P2">Processor 2</option>
+  <option value="P3">Processor 3</option>
+  <option value="P4">Processor 4</option>
+
+  </select>
+</div>
+
+<p><strong>Only compatible components will show.</strong></p>
+<div>
+  <label>Select motherboard: </label><select id="motherboard" name="motherboard" class="subcat" disabled="disabled">
+  <option class="label" value>Select Motherboard</option>
+  <!-- Home Ware -->
+  <option rel="P1 P2" value="AS1">ASUS RAMPAGE V EXTREME</option>
+  <option rel="P2 P3" value="AS2">ASUS ATX DDR3 2600 LGA</option>
+  <option rel="P1 P3 P4" value="GB1">Gigabyte AM3+</option>
+  <option rel="P2 P4" value="MSI1">MSI ATX DDR3 2600 LGA 1150</option>
+
+  </select>
+</div>
+<div>
+  <label>Select RAM: </label> <select disabled="disabled" class="subcat" id="RAM" name="RAM">
+  <option class="label" value>RAM Memory</option>
+  <option rel="AS1 AS2 GB1" value="KI1">Kingston Value RAM</option>
+  <option rel="AS1 AS2 MSI1" value="P5KPL">P5KPL-AM SE</option>
+  <option rel="MSI1 GB1" value="960GM">960GM-VGS3 FX </option>
+  </select>
+</div>
+
+<div>
+  <label>Select Video Board: </label> <select disabled="disabled" class="subcat" id="video-card" name="video-card">
+  <option class="label" value>Video Card</option>
+  <option rel="MSI1 AS2" value="EVGA8400">EVGA GeForce 8400 GS</option>
+  <option rel="AS1" value="XFXAMD">XFX AMD Radeon HD 5450</option>
+  <option rel="MSI1 GB1" value="GTX750Ti">EVGA GeForce GTX 750Ti SC</option>
+  </select>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+function updateSelects(obj1, obj2) {
+    var _rel = $(obj1).val();
+    obj2.find("option").attr("style","");
+    obj2.val("");
+    if(!_rel) return obj2.prop("disabled",true);
+    obj2.find("[rel~='"+_rel+"']").show();
+    obj2.prop("disabled",false);
+}
+</script>
+ </body>
+</html>

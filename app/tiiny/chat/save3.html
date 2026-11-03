@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Barlow&display=swap" rel="stylesheet">
+  <style>
+*,
+.box,
+:after,
+:before {
+box-sizing: border-box
+}
+
+body {
+height: 100%;
+font-family: Inter, Tahoma, Sans-Serif;
+margin: 50px;
+background: #111319;
+letter-spacing: .5;
+-ms-overflow-style: none;
+scrollbar-width: none;
+overflow-y: scroll;
+color: white;
+text-align: center;
+margin: 0;
+padding: 0;
+margin-top:50px;
+}
+
+body:after {
+content: "";
+position: fixed;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+z-index: -1;
+display: block;
+background: radial-gradient(circle at 31% 34%, rgba(17, 82, 102, 1), rgba(17, 82, 102, 0) 50%), radial-gradient(circle at 10% 10%, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 50%), radial-gradient(circle at 90% 10%, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0) 50%), radial-gradient(circle at 81% 93%, rgb(24 65 85), rgba(20, 13, 44, 0) 50%), radial-gradient(circle at 1% 99%, rgb(11 101 129), rgba(93, 0, 96, 0) 50%)
+}
+    #sunPath {
+      display: block;
+      margin: 20px auto;
+      margin-bottom:15px;
+      width: 100%;
+      max-width: 335px;
+    }
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    input[type="text"], #submit-location {
+      margin: 10px 0;
+      padding: 10px;
+      width: 250px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: #222;
+      color: white;
+    }
+    #submit-location {
+      
+      cursor: pointer;
+    }
+    
+    #localTime { 
+        font-size: 18px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+    .box-large {
+      display: flex;
+      width: 335px;
+      background-color: #ffffff0a;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 20px 0;
+      border-radius: 5px;
+      border-top: 1px solid #ffffff1c;
+      overflow: hidden;
+    }
+    .box-large h4, .box-large h5 {
+      font-family: Barlow, serif;
+      font-size: 40px;
+      font-weight: 400;
+      color: #75FBFD;
+      margin:0;
+    }
+    .box-large svg {
+overflow: visible;
+width: 100%;
+}
+.wrap {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:20px;
+}
+
+#daylightHours {
+color: #ffffff;
+text-align: left;
+width:100%;
+margin-top: 20px;
+margin-bottom:0;
+padding-left:20px;
+font-size:14px;
+}
+#daylightHours span {
+color: #ffffff94;
+}
+
+.box-large h4 {
+font-size:80px;
+font-weight:200;
+text-align:center;
+line-height:0.8;
+}
+
+.box-large h5 {
+font-size:40px;
+font-weight:400;
+text-align: left;
+}
+.box-large h5 span{
+
+}
+
+.highlight {
+    font-size: 20px;
+    font-weight: 400;
+    color: #fff;
+    display: block;
+    text-align: left;
+
+}
+.top_container {
+    display:flex;
+    align-items:center;
+    width:100%;
+    justify-content: space-between;
+    padding:0 20px;
+}
+.top_container span {
+    padding-bottom:10px;
+}
+.box-large h3 {
+padding-left:20px;
+text-transform: uppercase;
+font-weight:500;
+letter-spacing: 1px;
+font-size: 14px;
+margin: 0;
+padding-bottom:30px;
+}
+
+.flip-icon {
+display: inline-flex;
+position: absolute;
+top: 20px;
+right: 20px;
+color: #fff;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M17.1642 5.16039H3.54639' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M13.068 1.08273L17.1647 5.1605L13.068 9.23828' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M0.832886 15.0889H14.4507' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M4.92894 19.1665L0.832275 15.0887L4.92894 11.0109' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+background-repeat: no-repeat no-repeat;
+background-position: center center;
+background-size: cover;
+width:20px;
+height:20px;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.flip-icon:hover {
+/*background-color: #3700b3;*/
+}
+
+.flip-icon i {
+font-size: 16px;
+}
+
+.card-container {
+width: 335px;
+perspective: 1000px; /* Enables 3D effect */
+}
+
+.card {
+width: 100%;
+height: 150px;
+position: relative;
+transform-style: preserve-3d;
+transition: transform 0.6s;
+}
+
+.card.flip {
+transform: rotateY(180deg);
+}
+
+.card .side {
+position: absolute;
+width: 100%;
+height: 100%;
+backface-visibility: hidden;
+background: #ffffff0a;
+border-radius: 5px;
+padding: 20px;
+box-sizing: border-box;
+display: flex;
+gap:15px;
+flex-direction: column;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+border-top: 1px solid #ffffff2e
+}
+
+.card .front {
+}
+
+.card .back {
+transform: rotateY(180deg);
+text-align: center;
+}
+
+.card h3 {
+font-weight: 500;
+padding-bottom: 20px;
+text-transform: uppercase;
+text-align: center;
+font-size:14px;
+letter-spacing:1px;
+margin:0;
+text-align:left;
+}
+
+.card .back input {
+font-size:16px;
+padding: 10px 0;
+}
+
+.card .front input {
+border-radius:0;
+padding: 10px 0;
+}
+#submit-location {
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M2 12H22' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat no-repeat;
+    background-position: center center;
+    background-size: cover;
+    width:24px;
+    height:24px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: transparent;
+    border-radius: 0;
+    border: 0;
+    outline: none;
+    transition: opacity 0.3s;
+    }
+    .input-row {
+display: flex;
+gap: 20px;
+width: 100%;
+}
+
+.input-row input {
+flex: 1;
+}
+input[type=text] {
+    width: 100%;
+    padding: 15px 0;
+    background: 0 0;
+    outline: 0;
+    border: none;
+    /* color: var(--bronze); */
+    font-size: 22px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #00000080;
+
+}
+
+input[type=text]:focus {
+border-bottom: 1px solid var(--bronze);
+color: #fff
+}
+
+#secondaryTimeString {
+    padding-left:20px;
+}
+#timezoneOffset {
+display: block;text-align: right;color:#878B9A;
+}
+  </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="card-container">
+            <div class="card" id="flipCard">
+              <div class="side front">
+                <h3>Location</h3>
+                <div class="input-row" style="flex-direction:column">
+                  <div style="display:flex; align-items:center; gap:20px; width:100%;">
+                    <input type="text" id="location" name="cityName" placeholder="City, Countrycode" onblur="this.value=removeSpaceAfterComma(this.value);" value="Mission Beach,AU">
+                    <div id="submit-location"></div>
+                  </div>
+                </div>
+                <div class="flip-icon" onclick="flipCard()" role="button" tabindex="0"></div>
+              </div>
+              <div class="side back">
+                <h3>API Key</h3>
+                <input type="text" id="apikey" name="APIKEY" placeholder="32 Character API Key" value="3f572b62fea31c192fae70757e9de676">
+                <div class="flip-icon" onclick="flipCard()" role="button" tabindex="0"></div>
+              </div>
+            </div>
+          </div>
+  <div id="solar" class="box-large">
+    <h3>Solar Terminator</h3>
+    <div class="top_container">
+    <h4 id="primaryTimeString"></h4>
+    <div style="display:flex;flex-direction: column;margin-top: 30px;">
+    <div id="localTime"></div>
+    <div id="timezoneOffset"></div>
+</div>
+</div>
+    <svg id="sunPath" xmlns="http://www.w3.org/2000/svg" width="335" height="73" viewBox="0 0 335 73" fill="none">
+      <path id="sun-path" d="M0 69.9C56.2 69.9 111.3 3 167.5 3C227.2 3 274.4 69.9 335 69.9" stroke="white" stroke-opacity="0.2" stroke-width="5"></path>
+      <circle id="sun-glow" r="10" fill="#FFC300"></circle>
+      <circle id="sunrisemarker" r="4" fill="#FFD700" opacity="0.8"></circle>
+      <circle id="sunsetmarker" r="4" fill="#FF6347" opacity="0.8"></circle>
+    </svg>
+    <h5 id="secondaryTimeString"></h5>
+    <p id="daylightHours"></p>
+  </div>
+</div>
+  <!--<p id="currentLocalTime">Your local time:</p>-->
+
+  <script>
+     document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById("submit-location").addEventListener("click", fetchSunData);
+
+  //let timezoneOffset = 0;
+  //let isDST = false;
+  let pathElement;
+  let pathLength;
+  let cachedData = {};  // Cache variable to store previously fetched data
+
+  function updateSunPosition() {
+  const nowUTC = new Date();
+  let nowLocal = new Date(nowUTC.getTime() + timezoneOffset);
+  if (isDST) nowLocal = new Date(nowLocal.getTime() - 3600000);
+
+  if (sunriseLocal && sunsetLocal) {  // Ensure values exist before updating background
+    updateBackgroundColor(nowLocal, sunriseLocal, sunsetLocal);
+  }
+}
+
+function fetchSunData() {
+  const location = document.getElementById("location").value.trim();
+  const apiKey = document.getElementById("apikey").value.trim();
+
+  // Validate the input before proceeding with the API call
+  if (!location || !apiKey) {
+    alert("Please provide a valid location and API key.");
+    return;
+  }
+
+  // Check if the location data is already cached
+  if (cachedData[location]) {
+    // Use cached data if available
+    updateSunData(cachedData[location]);
+    console.log("Using cached data for location:", location);
+    return;
+  }
+
+  // Construct the API URL
+  const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}`;
+
+  // Proceed with the API request
+  fetch(apiURL)
+    .then(response => response.json())
+    .then(data => {
+      if (!data.sys) {
+        // Handle invalid location or API response
+        alert("Invalid location. Please try again.");
+        return;
+      }
+
+      // Cache the data for the location
+      cachedData[location] = data;
+      updateSunData(data);  // Update the sun data based on the API response
+    })
+    .catch(error => {
+      console.error("Error fetching sun data:", error);
+      alert("Error fetching data. Please try again later.");
+    });
+}
+
+function updateSunData(data) {
+  // Extract relevant information from the API data
+  timezoneOffset = data.timezone * 1000;  // Timezone offset in milliseconds
+  pathElement = document.getElementById("sun-path");
+  pathLength = pathElement.getTotalLength();
+
+  const nowUTC = new Date();
+  let nowLocal = new Date(nowUTC.getTime() + timezoneOffset);
+
+  const janOffset = new Date(nowLocal.getFullYear(), 0, 1).getTimezoneOffset();
+  const julOffset = new Date(nowLocal.getFullYear(), 6, 1).getTimezoneOffset();
+  isDST = nowLocal.getTimezoneOffset() < Math.max(janOffset, julOffset);
+  if (isDST) nowLocal = new Date(nowLocal.getTime() - 3600000);  // Adjust for DST
+
+  document.getElementById("localTime").innerHTML = `<img src="time.svg"> ${nowLocal.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+  const daylightHours = (data.sys.sunset - data.sys.sunrise) / 60;
+  const hours = Math.floor(daylightHours / 60);
+  const minutes = Math.round(daylightHours % 60);
+  document.getElementById("daylightHours").innerHTML = `<span>Daylight hours today:</span> ${hours}hrs ${minutes}min`;
+
+  // Calculate sunrise and sunset times
+  const sunriseUTC = new Date(data.sys.sunrise * 1000);
+  const sunsetUTC = new Date(data.sys.sunset * 1000);
+  let sunriseLocal = new Date(sunriseUTC.getTime() + timezoneOffset);
+  let sunsetLocal = new Date(sunsetUTC.getTime() + timezoneOffset);
+
+  if (isDST) {
+    sunriseLocal = new Date(sunriseLocal.getTime() - 3600000); // Adjust for DST
+    sunsetLocal = new Date(sunsetLocal.getTime() - 3600000); // Adjust for DST
+  }
+
+  // Add twilight (20 minutes before and after sunrise/sunset)
+  const twilightBefore = 20 * 60 * 1000; // 20 minutes in milliseconds
+  const twilightAfter = 20 * 60 * 1000;  // 20 minutes in milliseconds
+
+  const twilightStart = new Date(sunriseLocal.getTime() - twilightBefore);
+  const twilightEnd = new Date(sunsetLocal.getTime() + twilightAfter);
+
+  updateBackgroundColor(new Date(), sunriseLocal, sunsetLocal);
+
+  document.getElementById("primaryTimeString").innerHTML = `<span class="highlight">Sunset</span>${sunsetLocal.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  document.getElementById("secondaryTimeString").innerHTML = `<span class="highlight">Sunrise Tomorrow</span>${sunriseLocal.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+
+  // Update sunrise and sunset times based on current time
+  if (nowLocal < sunriseLocal) {
+    document.getElementById("primaryTimeString").innerHTML = `<span class="highlight">Sunrise</span>${sunriseLocal.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    document.getElementById("secondaryTimeString").innerHTML = `<span class="highlight">Sunset</span>${sunsetLocal.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  } else if (nowLocal >= sunsetLocal) {
+    // Add 2 minutes (120,000 ms) to sunrise and sunset times only here
+    const sunriseTomorrow = new Date(sunriseLocal.getTime() + 2 * 60000); // Add 2 minutes
+    const sunsetTomorrow = new Date(sunsetLocal.getTime() + 2 * 60000);   // Add 2 minutes
+
+    document.getElementById("primaryTimeString").innerHTML = `<span class="highlight">Sunrise Tomorrow</span>${sunriseTomorrow.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    document.getElementById("secondaryTimeString").innerHTML = `<span class="highlight">Sunset Tomorrow</span>${sunsetTomorrow.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  }
+
+  // Update sunrise and sunset markers
+  updateMarker("sunrisemarker", sunriseLocal);
+  updateMarker("sunsetmarker", sunsetLocal);
+  updateBackgroundColor(nowLocal, twilightStart, twilightEnd);
+  updateSunPosition();
+
+  // Check for BST and CEST (show timezone offset accordingly)
+  if (isDST) {
+    if (data.timezone === 3600) {
+      // BST (London, UK) -> Hide timezone offset
+      document.getElementById("timezoneOffset").style.display = "none";  // Hide for BST
+    } else if (data.timezone === 7200) {
+      // CEST (Paris, France) -> Show timezone offset as +1 hr
+      document.getElementById("timezoneOffset").style.display = "block";  // Show for CEST
+      document.getElementById("timezoneOffset").innerHTML = `+1`;  // Set display as +1 hrs
+    } else {
+      document.getElementById("timezoneOffset").style.display = "block";  // Show for other timezones
+      displayTimezoneOffset(data.timezone);
+    }
+  } else {
+    document.getElementById("timezoneOffset").style.display = "block"; // Show for non-DST
+    displayTimezoneOffset(data.timezone);
+  }
+
+  setInterval(updateSunPosition, 30000);
+}
+
+function displayTimezoneOffset(offsetInSeconds) {
+  // Convert seconds to hours and minutes
+  const offsetInHours = offsetInSeconds / 3600;
+  const sign = offsetInHours >= 0 ? '+' : '-';
+  const offsetFormatted = sign + Math.abs(offsetInHours); // For example, +6 or -4
+
+  document.getElementById("timezoneOffset").innerHTML = `${offsetFormatted}`; //Timezone Offset
+}
+
+
+  function updateBackgroundColor(nowLocal, twilightStart, twilightEnd) {
+    const solarBox = document.getElementById("solar");
+    const sunGlow = document.getElementById("sun-glow");
+    
+    console.log("Now:", nowLocal.toLocaleTimeString());
+    console.log("Twilight Start:", twilightStart.toLocaleTimeString());
+    console.log("Twilight End:", twilightEnd.toLocaleTimeString());
+
+    // Check if now is during twilight or nighttime
+    if (nowLocal < twilightStart || nowLocal >= twilightEnd) {
+        solarBox.style.backgroundColor = "#00000069";  // Nighttime
+        sunGlow.setAttribute("fill", "#a6a6a6");   // Make sun gray during twilight
+    } else {
+        solarBox.style.backgroundColor = "";       // Daytime
+        sunGlow.setAttribute("fill", "yellow");    // Restore sun color in daytime
+    }
+
+}
+  function updateSunPosition() {
+    const nowUTC = new Date();
+    let nowLocal = new Date(nowUTC.getTime() + timezoneOffset);
+    if (isDST) nowLocal = new Date(nowLocal.getTime() - 3600000);
+
+    const secondsSinceStartOfDay = nowLocal.getHours() * 3600 + nowLocal.getMinutes() * 60 + nowLocal.getSeconds();
+    const fractionOfDay = secondsSinceStartOfDay / 86400;
+    const sunPosition = fractionOfDay * pathLength;
+    const sunCoordinates = pathElement.getPointAtLength(sunPosition);
+
+    document.getElementById("sun-glow").setAttribute("cx", sunCoordinates.x);
+    document.getElementById("sun-glow").setAttribute("cy", sunCoordinates.y);
+    
+  }
+
+  function updateMarker(id, time) {
+    const fraction = (time.getHours() * 3600 + time.getMinutes() * 60) / 86400;
+    const markerPosition = fraction * pathLength;
+    const markerCoordinates = pathElement.getPointAtLength(markerPosition);
+
+    document.getElementById(id).setAttribute("cx", markerCoordinates.x);
+    document.getElementById(id).setAttribute("cy", markerCoordinates.y);
+  }
+
+  window.onload = fetchSunData;
+  setInterval(() => {
+    //document.getElementById("currentLocalTime").innerText = `Your local time: ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  }, 1000);
+
+});
+
+// Function to flip the card
+function flipCard() {
+    const card = document.getElementById('flipCard');
+    card.classList.toggle('flip');
+}
+
+    </script>
+    
+</body>
+</html>

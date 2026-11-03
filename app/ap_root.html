@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://prjmjennings.co.uk/assets/cq/app/ap_root.css">
+</head>
+<body>
+  <form method="post">
+    <div class="container">
+      <h1>Choose your WiFi Network</h1>
+      <p>CLOQ needs to access the internet. Choose the WiFi Network you want CLOQ to connect to. CLOQ will then reset and display your local IP address on the matrix. If you miss it, reboot CLOQ and access CLOQ Settings via the IP address.</p>
+    </div>
+    
+    <div class="container">
+      <ul>{{wifi_ssid_options}}</ul>
+      <div class="material-textfield coral">
+        <input type="password" name="pass1" maxlength="32" required>
+        <label data-content="WiFi Network Password">WiFi Network Password</label>
+      </div>
+    </div>
+    
+    <div class="container">
+      <button name="ok" type="submit" value="ok" class="button mr-10">Let's go!</button>
+    </div>
+  </form>
+</body>
+</html>

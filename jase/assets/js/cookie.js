@@ -1,0 +1,3 @@
+function loadPanelState(panel) {const state = localStorage.getItem(panel.id);panel.classList.toggle("active", state === "true");}function savePanelState(panel) {const key = panel.id;const value = panel.classList.contains("active");localStorage.setItem(key, value);
+}function panelClickHandler(evt) {const panel = evt.target;panel.classList.toggle("active");savePanelState(panel);
+}var coll = document.querySelectorAll(".collapsible");coll.forEach(function addPanelHandler(panel) {panel.addEventListener("click", panelClickHandler);loadPanelState(panel);});

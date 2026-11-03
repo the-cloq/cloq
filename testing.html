@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+        body {
+            margin:20px;
+        }
+        .t-switch {
+            margin-top: 25px;
+        }
+        .t-switch input {
+            display:inline;
+        }
+        .t-switch label {
+            font-size: 18px;
+            color:#35CECA;
+            margin-left: 40px;
+            display:inline;
+        }
+        .t-switch p {
+            font-size:15px;
+            padding: 25px 0px 5px;
+            margin:0;
+            line-height:170%;
+            color: #698199;
+            text-align: left;
+        }
+        .t-switch input[type="checkbox"] {
+            visibility: hidden;
+            cursor: pointer;
+            margin: 5px 2px;
+        }
+        .t-switch input[type="checkbox"]:checked {
+            content: "ON";
+            background: #12a5a1;
+        }
+        .t-switch input[type="checkbox"]:after {
+            font-size: 15px;
+            display: block;
+            content: "OFF";
+            visibility: visible;
+            height: 30px;
+            line-height: 30px;
+            width: 50px;
+            text-align: center;
+            border-radius: 4px;
+            background: #0c1113;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .t-switch input[type="checkbox"]:checked:after {
+            content: "ON";
+            background: #12a5a1;
+        }
+    </style>
+  </head>
+<body>
+<div class="t-switch">
+    <input type="hidden" name="ambience" value="1">
+    <input type="checkbox" name="ambience" onclick="this.previousSibling.value=1-this.previousSibling.value" checked="">
+    <label for="ambience">Display Ambience</label>
+    <p>Choose to show or hide the ambient temperature in CLOQ Mode.</p>
+</div>
+</body>
+</html>
+<!--
+position:relative;margin-top: 25px;"
+-->

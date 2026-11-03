@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sun Path Visualization</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #sunPath {
+      display: block;
+      margin: 20px auto;
+      width: 100%;
+      max-width: 335px;
+    }
+    .input-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      margin: 10px 0;
+      padding: 10px;
+      width: 250px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: #222;
+      color: white;
+    }
+    #submit-location {
+      background-color: #007bff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      color: white;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #submit-location:hover {
+      background-color: #0056b3;
+    }
+    #localTime {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #FFD700;
+    }
+    .toggle-dst {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: white;
+    }
+    .toggle-dst input {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sun Path Visualization</h1>
+  
+  <!-- SVG for sun path and markers -->
+  <svg id="sunPath" xmlns="http://www.w3.org/2000/svg" width="335" height="73" viewBox="0 0 335 73" fill="none">
+    <path id="sun-path" d="M0 69.8975C56.1994 69.8975 111.319 3 167.541 3C227.168 3 274.438 69.8975 335 69.8975" stroke="white" stroke-opacity="0.2" stroke-width="5"></path>
+    <circle id="sun-glow" r="10" fill="#FFC300"></circle>
+    <circle id="sunrisemarker" r="4" fill="#FFD700" opacity="0.8"></circle>
+    <circle id="sunsetmarker" r="4" fill="#FF6347" opacity="0.8"></circle>
+  </svg>
+
+  <!-- Input Fields for Location and API Key -->
+  <div class="input-row">
+    <input type="text" id="location" name="cityName" placeholder="City, Countrycode" value="Berlin,DE">
+    <input type="text" id="apikey" name="APIKEY" placeholder="32 Character API Key" value="YOUR_API_KEY">
+    <div id="submit-location">Submit Location</div>
+  </div>
+  
+  <!-- Local Time Display -->
+  <div class="toggle-item g40">
+    <p id="localTime">Local time: --:--</p>
+  </div>
+
+  <!-- DST Toggle Switch (optional for manual control) -->
+  <div class="toggle-dst">
+    <label for="dstToggle">DST (Summer Time):</label>
+    <input type="hidden" id="dstToggle" />
+  </div>
+
+  <script>
+    document.getElementById("submit-location").addEventListener("click", function () {
+      const location = document.getElementById("location").value.trim();
+      const apiKey = document.getElementById("apikey").value.trim();
+
+      if (!location || !apiKey) {
+        alert("Please provide a valid location and API key.");
+        return;
+      }
+
+      const [cityName, countryCode] = location.split(",").map(str => str.trim());
+      const apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${apiKey}`;
+
+      fetch(apiURL)
+        .then(response => response.json())
+        .then(data => {
+          if (data.cod !== 200) {
+            alert(`Failed to retrieve weather data: ${data.message}`);
+            return;
+          }
+
+          // Retrieve the necessary data
+          const timezoneOffset = data.timezone * 1000; // Convert to milliseconds
+          const nowUTC = new Date();
+          let nowLocal = new Date(nowUTC.getTime() + timezoneOffset);
+
+          // Use the current date to check if DST is in effect
+          const currentDate = new Date();
+          const standardTimezoneOffset = new Date(currentDate.getFullYear(), 0, 1).getTimezoneOffset();
+          const currentTimezoneOffset = currentDate.getTimezoneOffset();
+
+          // Check if the timezone offset differs from the standard time (i.e., DST is in effect)
+          const isDST = currentTimezoneOffset < standardTimezoneOffset;
+
+          // Optionally use the toggle for manual control of DST
+          if (document.getElementById("dstToggle").checked || isDST) {
+            nowLocal.setHours(nowLocal.getHours() - 1); // Subtract 1 hour for DST
+          }
+
+          const localHours = nowLocal.getHours();
+          const localMinutes = nowLocal.getMinutes();
+          const localSeconds = nowLocal.getSeconds();
+          const secondsSinceStartOfDay = localHours * 3600 + localMinutes * 60 + localSeconds;
+          const fractionOfDay = secondsSinceStartOfDay / 86400; // 86400 seconds in a day
+
+          // Update local time display
+          document.getElementById("localTime").innerText = `Local time: ${nowLocal.toLocaleTimeString()}`;
+
+          // Map the sun's position along the path
+          const pathElement = document.getElementById("sun-path");
+          const pathLength = pathElement.getTotalLength();
+          const sunPosition = fractionOfDay * pathLength;
+
+          // Get the coordinates along the path
+          const sunCoordinates = pathElement.getPointAtLength(sunPosition);
+          const sunGlow = document.getElementById("sun-glow");
+          sunGlow.setAttribute("cx", sunCoordinates.x);
+          sunGlow.setAttribute("cy", sunCoordinates.y);
+
+          // Calculate sunrise and sunset times in seconds since the start of the day
+          const sunriseTime = data.sys.sunrise * 1000 + timezoneOffset;
+          const sunsetTime = data.sys.sunset * 1000 + timezoneOffset;
+
+          const sunriseDate = new Date(sunriseTime);
+          const sunsetDate = new Date(sunsetTime);
+
+          // Convert sunrise and sunset times to fractions of the day
+          const sunriseFraction = (sunriseDate.getHours() * 3600 + sunriseDate.getMinutes() * 60 + sunriseDate.getSeconds()) / 86400;
+          const sunsetFraction = (sunsetDate.getHours() * 3600 + sunsetDate.getMinutes() * 60 + sunsetDate.getSeconds()) / 86400;
+
+          // Map sunrise and sunset times to positions on the path
+          let sunrisePosition = sunriseFraction * pathLength;
+          let sunsetPosition = sunsetFraction * pathLength;
+
+          // Adjust the markers for DST if applicable
+          if (isDST || document.getElementById("dstToggle").checked) {
+            const adjustment = pathLength / 24; // Subtract 1 hour from position (since DST is +1 hour)
+            sunrisePosition -= adjustment;
+            sunsetPosition -= adjustment;
+          }
+
+          // Get the coordinates for the sunrise and sunset markers
+          const sunriseCoordinates = pathElement.getPointAtLength(sunrisePosition);
+          const sunsetCoordinates = pathElement.getPointAtLength(sunsetPosition);
+
+          // Position the markers
+          document.getElementById("sunrisemarker").setAttribute("cx", sunriseCoordinates.x);
+          document.getElementById("sunrisemarker").setAttribute("cy", sunriseCoordinates.y);
+          document.getElementById("sunsetmarker").setAttribute("cx", sunsetCoordinates.x);
+          document.getElementById("sunsetmarker").setAttribute("cy", sunsetCoordinates.y);
+        })
+        .catch(error => {
+          console.error("Error fetching weather data:", error);
+          alert("Failed to retrieve weather data.");
+        });
+    });
+  </script>
+
+</body>
+</html>

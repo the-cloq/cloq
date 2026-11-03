@@ -1,0 +1,500 @@
+<html coupert-item="9AF8D9A4E502F3784AD24272D81F0381">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.1.2/css/swiper.min.css">
+    <link rel="stylesheet" href="https://prjmjennings.co.uk/assets/cq/app/cloq.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://prjmjennings.co.uk/assets/cq/app/fav/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://prjmjennings.co.uk/assets/cq/app/fav/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://prjmjennings.co.uk/assets/cq/app/fav/favicon-16x16.png">
+    <link rel="mask-icon" href="https://prjmjennings.co.uk/assets/cq/app/fav/safari-pinned-tab.svg" color="#020b16">
+    <link rel="manifest" href="data:application/manifest+json,{&quot;display&quot;:&quot;standalone&quot;,&quot;short_name&quot;:&quot;CLOQ&quot;,&quot;orientation&quot;:&quot;portrait&quot;}">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#0e1822">
+    <style>
+      #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #0e1822;
+        z-index: 99;
+      }
+
+      .status {
+        margin: 300px auto;
+        transform: translateZ(0);
+      }
+
+      .status:before,
+      .status:after {
+        content: '';
+        position: absolute;
+        top: 0;
+      }
+
+      .status:before,
+      .status:after,
+      .status {
+        border-radius: 10%;
+        width: 2em;
+        height: 2em;
+        animation: animation 1.2s infinite ease-in-out;
+      }
+
+      .status {
+        animation-delay: -0.16s;
+      }
+
+      .status:before {
+        left: -3.5em;
+        animation-delay: -0.32s;
+      }
+
+      .status:after {
+        left: 3.5em;
+      }
+
+      @keyframes animation {
+
+        0%,
+        80%,
+        100% {
+          box-shadow: 0 2em 0 -1em #29AEAE;
+        }
+
+        40% {
+          box-shadow: 0 2em 0 0 #29AEAE;
+        }
+      }
+
+      .loader {
+        display: none;
+        top: 50%;
+        left: 42%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+    <style>
+      ::placeholder {
+        color: #5c5c5c;
+        opacity: 1
+      }
+
+      ::-ms-input-placeholder {
+        color: #5c5c5c;
+      }
+
+      .app_header {
+        justify-content: space-between
+      }
+
+      .noUi-base .noUi-handle {
+        border-radius: 14px;
+        width: 28px;
+        height: 28px;
+        box-shadow: none;
+        border: 3px solid #0e1822;
+        box-shadow: none;
+        margin-top: -3px
+      }
+
+      .noUi-handle:after,
+      .noUi-handle:before {
+        background: none
+      }
+
+      .noUi-background {
+        box-shadow: none;
+        background: #1a3a3f
+      }
+
+      .noUi-horizontal {
+        height: 10px;
+        box-shadow: none
+      }
+
+      .noUi-target {
+        border-radius: 5px;
+        border: none;
+        box-shadow: none
+      }
+
+      .noUi-tooltip {
+        display: block;
+        position: absolute;
+        border: none;
+        border-radius: 3px;
+        background: #197373;
+        color: #fff;
+        padding: 7px;
+        text-align: center;
+        white-space: nowrap;
+        font-size: 16px;
+        margin-bottom: 12px
+      }
+    </style>
+  </head>
+  <body style="overflow: visible;">
+    <div id="preloader" style="display: none;">
+      <div class="status" style="display: none;">&nbsp;</div>
+    </div>
+    <form method="post" id="settings">
+      <div id="waves">
+        <div class="topnav">
+          <div class="app_header">
+            <div class="logo">
+              <img src="https://prjmjennings.co.uk/assets/cq/app/svg/cloq_logo.svg" alt="CLOQ">
+            </div>
+            <div class="button">
+              <button name="ok" type="submit" value="ok" ontouchstart="" class="button">
+                <img src="https://prjmjennings.co.uk/assets/cq/app/svg/sendbutton.svg" alt="Update">
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="basenav">
+          <div class="inside">
+            <div class="tab_heading col" aria-controls="panel1" aria-selected="true">Colours</div>
+            <div class="tab_heading lumins" aria-controls="panel2" aria-selected="false">Lumins</div>
+            <div class="tab_heading motion" aria-controls="panel3" aria-selected="false">Motion</div>
+            <div class="tab_heading weather" aria-controls="panel4" aria-selected="false">Weather</div>
+            <div class="tab_heading wifi" aria-controls="panel5" aria-selected="false">Zone</div>
+          </div>
+        </div>
+        <div id="panel1" class="tab_panel" aria-hidden="false">
+          <div class="container mb-20" style="margin-top:80px; padding-top:30px;">
+            <img class="wc_icon" src="https://prjmjennings.co.uk/assets/cq/app/svg/color.svg">
+            <h2>Colours</h2>
+            <div class="swiper-container swiper-container-horizontal">
+              <div class="swiper-pagination swiper-pagination-clickable">
+                <span class="swiper-pagination-bullet swiper-pagination-bullet-active">Hours &amp; Minutes</span>
+                <span class="swiper-pagination-bullet">Seconds</span>
+                <div class="active-mark "></div>
+              </div>
+              <div class="swiper-wrapper">
+                <div class="swiper-slide swiper-slide-active" style="width: 560px;">
+                  <ul>
+                    <li>
+                      <input type="radio" id="white" name="color" value="white">
+                      <label for="white"></label>
+                      <div class="check white white__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="cyan" name="color" value="cyan">
+                      <label for="cyan"></label>
+                      <div class="check cyan cyan__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="green" name="color" value="green">
+                      <label for="green"></label>
+                      <div class="check green green__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="pink" name="color" value="pink">
+                      <label for="pink"></label>
+                      <div class="check pink pink__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="orange" name="color" value="orange" checked="">
+                      <label for="orange"></label>
+                      <div class="check orange orange__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="red" name="color" value="red">
+                      <label for="red"></label>
+                      <div class="check red red__"></div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="swiper-slide swiper-slide-next" style="width: 560px;">
+                  <ul>
+                    <li>
+                      <input type="radio" id="white_s" name="scolor" value="white">
+                      <label for="white_s"></label>
+                      <div class="check white white__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="cyan_s" name="scolor" value="cyan">
+                      <label for="cyan_s"></label>
+                      <div class="check cyan cyan__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="green_s" name="scolor" value="green">
+                      <label for="green_s"></label>
+                      <div class="check green green__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="pink_s" name="scolor" value="pink">
+                      <label for="pink_s"></label>
+                      <div class="check pink pink__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="orange_s" name="scolor" value="orange" checked="">
+                      <label for="orange_s"></label>
+                      <div class="check orange orange__"></div>
+                    </li>
+                    <li>
+                      <input type="radio" id="red_s" name="scolor" value="red">
+                      <label for="red_s"></label>
+                      <div class="check red red__"></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="switch" style="position:relative; margin-top:40px;">
+              <input type="hidden" name="seconds_status" value="1">
+              <input type="checkbox" name="seconds_status" onclick="this.previousSibling.value=1-this.previousSibling.value" checked="">
+              <label for="seconds_status"></label>
+              <p style="position:absolute; display: inline; margin:0; left: 70px; top: 3px; color:#35CECA;">Display Seconds</p>
+              <p style="font-size:15px; padding: 19px 0px 5px; padding-top:25px;margin:0; line-height:170%; color: #809ca2;">If this is set to OFF, CLOQ will not display seconds.</p>
+            </div>
+          </div>
+        </div>
+        <div id="panel2" class="tab_panel" aria-hidden="true">
+          <div class="container mb-20" style="margin-top:80px; padding-top:30px;">
+            <img class="wc_icon" src="https://prjmjennings.co.uk/assets/cq/app/svg/brightness.svg">
+            <h2>Auto Brightness</h2>
+            <p>CLOQ senses the presence or absence of light, and adjusts brightness accordingly.</p>
+            <h5>Refine brightness</h5>
+            <div class="range-slider">
+              <input class="range-slider__range" name="brightness" type="range" value="30" min="10" max="50">
+              <span class="range-slider__value">30</span>
+              <div class="brightness-sweetspot"></div>
+            </div>
+            <p style="margin:0; padding-top:10px; font-size:15px; line-height:170%; color: #ffffff;">Adjust the global brightness to suit the ambience of your living space.</p>
+            <div class="switch" style="position:relative; margin-top:40px;">
+              <input type="hidden" name="ldrSensor_status" value="1">
+              <input type="checkbox" name="ldrSensor_status" onclick="this.previousSibling.value=1-this.previousSibling.value" checked="">
+              <label for="ldrSensor_status"></label>
+              <p style="position:absolute; display: inline; margin:0; left: 70px; top: 3px; color:#35CECA;">Auto Brightness Sensor</p>
+              <p style="font-size:15px; padding: 19px 0px 5px; padding-top:25px;margin:0; line-height:170%; color: #809ca2;">If the Auto Brightness Sensor is set to OFF, CLOQ will not adjust brightness automatically.</p>
+            </div>
+          </div>
+        </div>
+        <div id="panel3" class="tab_panel" aria-hidden="true">
+          <div class="container mb-20" style="margin-bottom:100px; margin-top:80px; padding-top:30px;">
+            <img class="wc_icon" src="https://prjmjennings.co.uk/assets/cq/app/svg/msensor.svg">
+            <h2>Motion Sensor</h2>
+            <p>The sensor checks for movement every 1 - 60 minutes. If movement isn't detected, CLOQs' display reverts to standby mode but remains active.</p>
+            <h5>Refine sensor</h5>
+            <div class="range-slider __rs2">
+              <input class="range-slider__range __2" name="sensor_timer" type="range" value="1" min="1" max="60">
+              <span class="range-slider__value __v2">1</span>
+              <div class="motion-sensor-sweetspot"></div>
+            </div>
+            <p style="margin:0; padding-top:10px; font-size:15px; line-height:170%; color: #ffffff;">The lower the setting, the less energy CLOQ consumes.</p>
+            <div class="switch" style="position:relative; margin-top:40px;">
+              <input type="hidden" name="motionSensor" value="1">
+              <input type="checkbox" name="motionSensor" onclick="this.previousSibling.value=1-this.previousSibling.value" checked="">
+              <label for="motionSensor"></label>
+              <p style="position:absolute; display: inline; margin:0;left: 70px; top: 3px; color:#35CECA;">Motion Sensor</p>
+              <p style="font-size:15px; padding: 19px 0px 5px; padding-top:25px;margin:0; line-height:170%; color: #809ca2;">If the Motion Sensor is set to OFF, CLOQ will remain lit at all times.</p>
+            </div>
+          </div>
+        </div>
+        <div id="panel4" class="tab_panel" aria-hidden="true">
+          <div class="container mb-20" style="margin-bottom:100px; margin-top:80px; padding-top:30px;">
+            <img class="wc_icon" src="https://prjmjennings.co.uk/assets/cq/app/svg/weather.svg">
+            <h2>Weather Data Service</h2>
+            <p>CLOQ uses the free Open Weather Map Service to display the current temperature and weather conditions.</p>
+            <div class="material-textfield coral mb-20">
+              <input type="text" id="APIKEY" name="APIKEY" onblur="this.value=removeSpaces(this.value);" maxlength="32" value="3f572b62fea31c192fae70757e9de676">
+              <label data-content="API KEY">API KEY</label>
+            </div>
+            <div class="material-textfield coral mb-20">
+              <input type="text" id="cityName" name="cityName" placeholder="e.g. London,UK" onblur="this.value=removeSpaces(this.value);" maxlength="32" value="Chesham,GB">
+              <label data-content="City Name">City Name</label>
+            </div>
+            <div id="with_label">
+              <h5>Temperature Scale</h5>
+              <div class="radio_container" style="margin:25px auto;">
+                <input type="radio" id="cel" name="Temp_mode" value="cel" checked="">
+                <label for="cel">Celcius</label>
+                <input type="radio" id="fah" name="Temp_mode" value="fah">
+                <label for="fah">Fahrenheit</label>
+              </div>
+            </div>
+            <div class="slider-wrapper">
+              <h5 style="margin-bottom:80px">Ambient Temperature</h5>
+              <div class="p-l-r" id="multi" style="margin-bottom:40px; margin-top:80px;"></div>
+              <input type="hidden" name="cool" id="cool" value="5">
+              <input type="hidden" name="warm" id="warm" value="17">
+              <input type="hidden" name="hot" id="hot" value="27">
+              <div id="temp-slider" class="m-b-20 noUi-target noUi-ltr noUi-horizontal noUi-txt-dir-ltr">
+                <div class="noUi-base">
+                  <div class="noUi-connects">
+                    <div class="noUi-connect c-1-color" style="transform: translate(0%, 0px) scale(0.125, 1);"></div>
+                    <div class="noUi-connect c-2-color" style="transform: translate(12.5%, 0px) scale(0.3, 1);"></div>
+                    <div class="noUi-connect c-3-color" style="transform: translate(42.5%, 0px) scale(0.25, 1);"></div>
+                    <div class="noUi-connect c-4-color" style="transform: translate(67.5%, 0px) scale(0.325, 1);"></div>
+                  </div>
+                  <div class="noUi-origin" style="transform: translate(-87.5%, 0px); z-index: 6;">
+                    <div class="noUi-handle noUi-handle-lower c-2-color" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="17.0" aria-valuenow="5.0" aria-valuetext="5">
+                      <div class="noUi-touch-area"></div>
+                      <div class="noUi-tooltip">5</div>
+                    </div>
+                  </div>
+                  <div class="noUi-origin" style="transform: translate(-57.5%, 0px); z-index: 7;">
+                    <div class="noUi-handle c-3-color" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="5.0" aria-valuemax="27.0" aria-valuenow="17.0" aria-valuetext="17">
+                      <div class="noUi-touch-area"></div>
+                      <div class="noUi-tooltip">17</div>
+                    </div>
+                  </div>
+                  <div class="noUi-origin" style="transform: translate(-32.5%, 0px); z-index: 4;">
+                    <div class="noUi-handle noUi-handle-upper c-4-color" data-handle="2" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="17.0" aria-valuemax="40.0" aria-valuenow="27.0" aria-valuetext="27">
+                      <div class="noUi-touch-area"></div>
+                      <div class="noUi-tooltip">27</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p style="margin:0; font-size:15px; line-height:170%; color: #ffffff;">Adjust the outside degrees (Celcius) that favour your <span class="c-cool">COOL</span>, <span class="c-warm">WARM</span> and <span class="c-hot">HOT</span> temperature comfort levels. Anything to the left of COOL denotes being COLD. </p>
+            <h5 style="margin-bottom:20px margin-top:20px;">Displays</h5>
+            <div class="switch" style="position:relative;margin-top: 25px;">
+              <input type="hidden" name="ambience" value="1">
+              <input type="checkbox" name="ambience" onclick="this.previousSibling.value=1-this.previousSibling.value" checked="">
+              <label for="ambience"></label>
+              <p style="position:absolute; display: inline; margin:0;margin-top: 0;left: 70px; top: 3px; color:#35CECA;">Display Ambience</p>
+              <p style="font-size:15px; padding: 19px 0px 5px; padding-top:25px; margin:0; line-height:170%; color: #809ca2;">Choose to show or hide the ambient temperature in CLOQ Mode.</p>
+            </div>
+            <div class="switch" style="position:relative;margin-top: 25px;">
+              <input type="hidden" name="show_weather" value="1">
+              <input type="checkbox" name="show_weather" onclick="this.previousSibling.value=1-this.previousSibling.value" checked="">
+              <label for="show_weather"></label>
+              <p style="position:absolute; display: inline; margin:0;left: 70px; top:3px;color:#35CECA;">Display Weather</p>
+              <p style="font-size:15px; padding: 19px 0px 5px; padding-top:25px; margin:0; line-height:170%; color: #809ca2;">Choose to show or hide the weather conditions in Weather Mode.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="panel5" class="tab_panel" aria-hidden="true">
+        <div class="container mb-20" style="margin-top:80px; padding-top:30px;">
+          <img class="wc_icon" src="https://prjmjennings.co.uk/assets/cq/app/svg/sunrise.svg">
+          <h2>My CLOQ</h2>
+          <div class="model_row">
+            <div class="model">
+              <img src="https://prjmjennings.co.uk/assets/cq/app/img/grandeNoir.png" alt="Grande Noir">
+            </div>
+          </div>
+          <div class="stat_row">
+            <div class="stat_name">
+              <p>Model </p>
+            </div>
+            <div class="stat">
+              <p>Grande Noir</p>
+            </div>
+          </div>
+          <div class="stat_row">
+            <div class="stat_name">
+              <p>Size </p>
+            </div>
+            <div class="stat">
+              <p>900 x 900 x 30 mm</p>
+            </div>
+          </div>
+          <div class="stat_row">
+            <div class="stat_name">
+              <p>Install Date </p>
+            </div>
+            <div class="stat">
+              <p>10 May 2024</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <script>
+      if (window.safari) {
+        history.pushState(null, null, location.href);
+        window.onpopstate = function(event) {
+          history.go(1);
+        };
+      }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+      $(window).on("load", (function() {
+        $(".status").fadeOut(), $("#preloader").delay(350).fadeOut("slow"), $("body").delay(550).css({
+          overflow: "visible"
+        })
+      }));
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.1.2/js/swiper.min.js"></script>
+    <script>
+      function rangeSlider() {
+        let slider = document.querySelectorAll('.range-slider');
+        let range = document.querySelectorAll('.range-slider__range');
+        let value = document.querySelectorAll('.range-slider__value');
+        slider.forEach((currentSlider) => {
+          value.forEach((currentValue) => {
+            let val = currentValue.previousElementSibling.getAttribute('value');
+            currentValue.innerText = val
+          });
+          range.forEach((elem) => {
+            elem.addEventListener('input', (eventArgs) => {
+              elem.nextElementSibling.innerText = eventArgs.target.value
+            })
+          })
+        })
+      }
+      rangeSlider();
+      var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            slidesPerView: 1,
+            paginationClickable: true,
+            loop: false,
+            paginationBulletRender: function(index, className) {
+                var tabsName = ['Hours & Minutes', 'Seconds'];
+                if (index === (tabsName.length - 1)) {
+                  return ' < span class = "' + className + '" > '+ tabsName[index] + ' < /span>'+ ' < div class = "active-mark " > < /div>';}return ' < span class = "' + className + '" > ' + tabsName[index] + ' < /span>';}});
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.js"></script>
+    <script>
+      var tempSlider = document.getElementById('temp-slider');
+      var cool = document.getElementById('cool');
+      var warm = document.getElementById('warm');
+      var hot = document.getElementById('hot');
+      var inputs = [cool, warm, hot];
+      var c = cool.value;
+      var w = warm.value;
+      var h = hot.value;
+      noUiSlider.create(tempSlider, {
+        start: [c, w, h],
+        connect: [true, true, true, true],
+        tooltips: true,
+        format: wNumb({
+          decimals: 0
+        }),
+        range: {
+          min: 0,
+          max: 40
+        }
+      });
+      var connect = tempSlider.querySelectorAll('.noUi-connect');
+      var classes = ['c-1-color', 'c-2-color', 'c-3-color', 'c-4-color'];
+      for (var i = 0; i < connect.length; i++) {
+        connect[i].classList.add(classes[i]);
+      }
+      var blob = tempSlider.querySelectorAll('.noUi-handle');
+      var classes = ['c-2-color', 'c-3-color', 'c-4-color'];
+      for (var i = 0; i < blob.length; i++) {
+        blob[i].classList.add(classes[i]);
+      };
+      tempSlider.noUiSlider.on('change', function(values, handle) {
+        if (values[handle] < 2) {
+          tempSlider.noUiSlider.set(2);
+        }
+      });
+      tempSlider.noUiSlider.on('update', function(values, handle) {
+        inputs[handle].value = values[handle];
+      });
+    </script>
+    <script src="https://prjmjennings.co.uk/assets/cq/app/js/tabs.js"></script>
+  </body>
+</html>

@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+	<title></title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:wght@100..900&display=swap');
+  html, body {
+    background:#f7f7f7;
+    margin: 0; 
+    height: 100%; 
+    font-family: "Inter", sans-serif;
+    overflow: scroll;
+  }
+.modal {
+  padding:0;
+  margin:0;
+  overflow-x: hidden; 
+  overflow-y: auto;
+  background: #f7f7f7;
+}
+.base {
+    box-sizing: border-box;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-direction: column;
+    padding: 15px;
+    background:#f7f7f7BF;
+    backdrop-filter: blur(10px);
+}
+.pagination {
+  display: flex;
+  width:100%;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.pag_dot {
+  display: flex;
+  width: 8px;
+  height: 8px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background: rgba(175, 196, 207, 0.50);
+}
+.header {
+  display:flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  top:0;
+  height:60px;
+  gap:15px;
+  width:100%;
+  background:#f7f7f7BF;
+  margin-right:100px;
+  backdrop-filter: blur(10px);
+  z-index:99999999999;
+}
+.device_icon, .tool_icon {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width:40px;
+  height:40px;
+  border-radius:20px;
+  transition: background-color 0.2s ease-in-out;
+}
+.arrow {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:50px;
+  height:50px;
+  border-radius:25px;
+  background:#fff;
+  z-index:1000;
+
+}
+#screen-nav {
+  transition: opacity 0.3s ease-out;
+}
+.close {
+  display:flex;
+  align-items: center;
+  width:40px;
+  height:40px;
+  border-radius:20px;
+  margin-left:15px;
+  padding-bottom:5px;
+}
+.inactive {
+  opacity: 0;
+}
+.leftbar {
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index:1000;
+    left:5px;
+    padding:10px;
+    min-width:60px;
+    height:100%;
+    gap:20px;
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+.rightbar {
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index:1000;
+    right:5px;
+    padding:10px;
+    min-width:60px;
+    height:100%;
+    gap:20px;
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+
+.header:hover + .screen-nav .leftbar, .header:hover + .screen-nav .rightbar, .header:hover + .screen-nav .widget { 
+    opacity: 0;
+}
+
+  .tablet, .landscape, .desk {
+  display:none;
+}
+.toolbox {
+  display:none;
+}
+.dot {
+    width:8px;
+    height:8px;
+    border-radius:4px;
+    background: rgb(164 196 207 / 0.5);
+}
+.__active {
+    background: #000;
+}
+.dot_row {
+  display:flex;
+  align-items: center;
+  height:20px;
+  background:#f7f7f7;
+  gap:10px;
+  padding:5px 0;
+  width:100%;
+}
+.main {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background:#f7f7f7;
+  margin-top: 70px;
+}
+.iframe {
+  border: 8px solid rgba(0, 0, 0, 0.05);
+  border-radius:40px;
+  position: sticky;
+  top: 80px;
+  margin:0;
+  width: 335px;
+  height: 725px;
+  /*box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.25);*/
+  transition: scale 0.3s;
+}
+@media (min-width: 1000px) {
+.iframe {
+  width: 768px;
+  height: 1024px;
+}
+}
+@media (min-width: 1200px) {
+.iframe {
+  width: 1024px;
+  height: 738px;
+}
+.landscape {
+  display:flex;
+}
+}
+@media (min-width: 1366px) {
+.iframe {
+  width: 1280px;
+  height: 720px;
+  border-radius:20px;
+}
+.desk {
+  display:flex;
+  border: none;
+}
+}
+.mob {
+  display:flex;
+  border: none; 
+}
+.nav {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap:15px;
+  border-bottom:1px solid #00000033;
+}
+.widget {
+    display:none;
+    position:fixed;
+    top: calc(50% + 40px);
+    left:250px;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+    z-index:500;
+    opacity: 1;
+    width:200px;
+    transition: all 0.3s linear;
+}
+.widget p {
+    color: #222;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 150%;
+    margin:0;
+}
+@media (min-width:768px) {
+  .nav {
+  display: flex;
+}
+}
+
+@media (min-width: 1000px) {
+  .mob, .tablet {
+  display:flex;
+  border: none;
+}
+}
+@media (min-width:1000px) {
+  .toolbox {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-direction: row;
+}
+  .arrow {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  min-width:50px;
+  min-height:50px;
+  border-radius:25px;
+  background:#fff;
+  cursor:pointer;
+}
+.nope {
+  display:none;
+}
+
+.mob, .tablet {
+  display:flex;
+  border: none;
+}
+}
+.reverse {
+  rotate:180deg;
+  cursor:default;
+}
+.active {
+    border: 1px solid #0091FA;
+}
+.tool_icon:hover {
+  background: #0000000A;
+  cursor:pointer;
+}
+.device_icon:not(.active):hover {
+  background: #0000000A;
+  cursor:pointer;
+}
+.device_icon.active .icon path, .device_icon.active .icon rect, .device_icon:not(.active):hover .icon path, .device_icon:not(.active):hover .icon rect, .tool_icon:hover .icon path, .arrow:hover .icon path {
+  stroke: #000;
+}
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+  position: relative;
+}
+
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  font-size: 13px;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  z-index: 1001;
+}
+[tooltip]::after {
+  content: attr(tooltip);
+  text-align: center;
+  
+  /* 
+    Let the content set the size of the tooltips 
+    but this will also keep them from being obnoxious
+    */
+  max-width: 200px;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  background: #333;
+  color: #fff;
+  z-index: 1000;
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */ 
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+.scale-75 {
+    scale: 0.75;
+}
+.reposition {
+    top: -40px;
+}
+
+.buttons {
+  display:flex;
+  justify-content: center;
+  gap:15px;
+  font-size: 14px;
+}
+.buttons input {
+  position: absolute;
+  left: -100vw;
+}
+.buttons label {
+  position: relative;
+  padding: 5px 20px;
+  border-radius: 20px;
+  color: #222;
+  display: inline-block;
+  background: #fff;
+  box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.10);
+  transition: all 0.25s;
+}
+.buttons label:hover {
+  cursor: pointer;
+  box-shadow: none;
+  background:#0000000A;
+}
+.buttons input:checked + label {
+  background: #fff;
+  box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.30);
+}
+.tab {
+  display: flex;
+  padding: 8px 15px;
+  align-items: center;
+  gap: 10px;
+  border-radius:20px;
+  margin-bottom:5px;
+  position:relative;
+  bottom:0px;
+  transition: all 0.25s;
+}
+.tab p {
+  font-size:14px;
+  color:#222;
+  font-weight:300;
+  line-height:0;
+  padding:0;
+  margin:0;
+}
+.tab:hover {
+  background:#0000000a;
+  cursor:pointer;
+}
+.tab:hover .icon path, .tab.active_ .icon path {
+  stroke: #000 !important;
+}
+.tab.active_::after {
+  border-bottom: 1px solid #000;
+  content: '';
+  width:100%;
+  position:absolute;
+  bottom:-6px;
+  right:0px;
+  padding: 0;
+}
+.tab.active_:hover {
+  background:none;
+  cursor:default;
+}
+  </style>
+  <body id="body">
+    <div id="grid" class="modal">
+        <div class="header">
+            <div class="nav">
+                <div class="tab">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+              <path d="M20 14.5C21.1046 14.5 22 13.6046 22 12.5C22 11.3954 21.1046 10.5 20 10.5C18.8954 10.5 18 11.3954 18 12.5C18 13.6046 18.8954 14.5 20 14.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 6.5C21.1046 6.5 22 5.60457 22 4.5C22 3.39543 21.1046 2.5 20 2.5C18.8954 2.5 18 3.39543 18 4.5C18 5.60457 18.8954 6.5 20 6.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 22.5C21.1046 22.5 22 21.6046 22 20.5C22 19.3954 21.1046 18.5 20 18.5C18.8954 18.5 18 19.3954 18 20.5C18 21.6046 18.8954 22.5 20 22.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 14.5C5.10457 14.5 6 13.6046 6 12.5C6 11.3954 5.10457 10.5 4 10.5C2.89543 10.5 2 11.3954 2 12.5C2 13.6046 2.89543 14.5 4 14.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 12.5H18" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 4.5H14C12 4.5 11 5.5 11 7.5V17.5C11 19.5 12 20.5 14 20.5H18" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+                  <p>Workflow</p>
+                </div>
+                <div class="tab active_">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12.383 7.94358L16.9889 3.33766C18.2796 2.04694 20.3723 2.04694 21.663 3.33766C22.9537 4.62838 22.9537 6.72105 21.663 8.01177L17.0314 12.6434M7.68315 12.6434L3.44321 16.8833L2.61048 21.613C2.51545 22.1527 2.99493 22.6181 3.53156 22.507L8.11732 21.5574L12.383 17.2918M6.34135 8.28094L4.99004 9.63225M9.39462 9.6911L7.22076 11.865M10.7465 12.6872L9.39522 14.0385M13.8019 14.0973L11.6281 16.2712M15.1528 17.0934L13.8015 18.4448M18.2082 18.5036L16.0343 20.6775M4.01678 16.4117L8.66977 21.0647M18.5092 22.9452L22.6678 18.7865C22.9707 18.4837 22.9707 17.9926 22.6678 17.6897L6.76387 1.78576C6.46099 1.48287 5.96992 1.48287 5.66703 1.78576L1.50841 5.94438C1.20553 6.24726 1.20553 6.73833 1.50841 7.04121L17.4124 22.9452C17.7152 23.248 18.2063 23.248 18.5092 22.9452Z" stroke="#878B9A" stroke-width="1.5"/>
+              </svg>
+                  <p>Design</p>
+                </div>
+                <div class="tab">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M9.50978 4.73062L18.0698 9.01062C21.9098 10.9306 21.9098 14.0706 18.0698 15.9906L9.50978 20.2706C3.74978 23.1506 1.39978 20.7906 4.27978 15.0406L5.14978 13.3106C5.36978 12.8706 5.36978 12.1406 5.14978 11.7006L4.27978 9.96062C1.39978 4.21062 3.75978 1.85062 9.50978 4.73062Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5.43994 12.5H10.8399" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <p>Publish</p>
+                </div>
+                <div class="tab">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M22 7H16" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 7H2" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10 10.5C11.933 10.5 13.5 8.933 13.5 7C13.5 5.067 11.933 3.5 10 3.5C8.067 3.5 6.5 5.067 6.5 7C6.5 8.933 8.067 10.5 10 10.5Z" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 18H18" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 18H2" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M14 21.5C15.933 21.5 17.5 19.933 17.5 18C17.5 16.067 15.933 14.5 14 14.5C12.067 14.5 10.5 16.067 10.5 18C10.5 19.933 12.067 21.5 14 21.5Z" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <p>Assign a Network</p>
+                </div>
+                <div class="close"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                  <path d="M18 6.5L6 18.5" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M6 6.5L18 18.5" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg></div>
+              </div>
+        </div>
+        <div class="screen-nav">
+          <div class="leftbar">
+            <div class="arrow reverse left" style="opacity:.3"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20" fill="none">
+                <path d="M17.6445 0.89502L26.7495 10L17.6445 19.105" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M1.25 10H26.495" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+              </svg></div>
+          </div>
+          <div class="rightbar">
+              <div class="arrow right" tooltip="Next Screen" flow="left"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="28" height="20" viewBox="0 0 28 20" fill="none">
+                  <path d="M17.6445 0.89502L26.7495 10L17.6445 19.105" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M1.25 10H26.495" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg></div>
+          </div>
+        </div>
+        <div class="main">
+          <iframe id="device" class="iframe" src="https://jaseography.xyz/nomadix/captive-portal/portal-page.html" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="yes"></iframe>
+        </div>
+        
+        <div class="base">
+          <div class="pagination"><div class="dot __active"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="toolbox">
+          <div tooltip="Mobile" flow="up" class="device_icon mob" onclick="mobile()"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="26" viewBox="0 0 14 26" fill="none">
+              <rect x="0.869141" y="1.11328" width="12.2608" height="23.7738" rx="1.30935" stroke="#878B9A" stroke-width="1.5" />
+              <ellipse cx="7.00049" cy="22.1269" rx="0.625492" ry="0.70205" fill="#878B9A" />
+              <path d="M4.61328 3.73291H9.76165" stroke="#878B9A" stroke-width="1.02967" stroke-linecap="round" />
+            </svg></div>
+          <div tooltip="Tablet Portrait" flow="up" class="device_icon tablet" onclick="tablet()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24" fill="none">
+              <rect x="0.75" y="0.75" width="16.5" height="22.5" rx="1.30935" stroke="#878B9A" stroke-width="1.5" />
+            </svg></div>
+          <div tooltip="Tablet Landscape" flow="up" class="device_icon landscape" onclick="tablet_land()"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18" fill="none">
+              <rect x="1.70508" y="17.2495" width="16.4996" height="20.5907" rx="1.30935" transform="rotate(-90 1.70508 17.2495)" stroke="#878B9A" stroke-width="1.5" />
+            </svg></div>
+          <div tooltip="Desktop" flow="up" class="device_icon desk active" onclick="desktop()"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M19.1349 7.9175L19.1349 2.97635C19.1349 1.88477 18.25 0.999875 17.1584 0.999875L2.84074 0.999876C1.74916 0.999876 0.864256 1.88478 0.864257 2.97636L0.864257 11.6594C0.864257 12.751 1.74916 13.6359 2.84074 13.6359L8.42349 13.6359C9.51507 13.6359 10.4 14.5208 10.4 15.6124L10.4 17.0957" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+              <path d="M13.7764 18.9995H6.85942" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+            </div>
+        </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>	
+      <script>
+        $(document).ready(function(){
+            $('.device_icon').on('click', function(){
+                $('.device_icon').removeClass('active');
+                $(this).addClass('active');   
+            })
+        });
+
+        $(document).ready(function(){
+            $('#fitscreen').on('click', function(){
+                $('.iframe').addClass('scale-75');
+                $('.iframe').addClass('reposition');
+            })
+        });
+
+        $(document).ready(function(){
+            $('#fullsize').on('click', function(){
+                $('.iframe').removeClass('scale-75');
+                $('.iframe').removeClass('reposition');
+            })
+        });
+
+        $(document).ready(function(){
+            $('.device_icon').on('click', function(){
+                $('.iframe').removeClass('scale-75');
+                $('.iframe').removeClass('reposition');
+                $('#fitscreen').prop('checked', false);
+                $('#fullsize').prop('checked', true);
+            })
+        });
+
+        $(document).ready(function(){
+    $('.tab').on('click', function(){
+        $('.tab').removeClass('active_');
+        $(this).addClass('active_');
+    })
+});
+
+function desktop() {
+    document.getElementById('device').style.width = '1280px'
+    document.getElementById('device').style.height = '720px'
+
+  window.onresize = function() {
+  if (window.innerWidth <= 1440) {
+    document.getElementById('device').style.width = '1024px'
+    document.getElementById('device').style.height = '738px'
+  } else {
+    document.getElementById('device').style.width = '1280px'
+    document.getElementById('device').style.height = '720px'
+  }
+  if (window.innerWidth <= 1200) {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+  }
+  if (window.innerWidth <= 1000) {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+  }
+}
+}
+
+function tablet_land() {
+    document.getElementById('device').style.width = '1024px'
+    document.getElementById('device').style.height = '738px'
+
+  window.onresize = function() {
+  if (window.innerWidth <= 1200) {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+  } else {
+    document.getElementById('device').style.width = '1024px'
+    document.getElementById('device').style.height = '738px'
+  }
+
+  if (window.innerWidth <=1000) {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+  }
+}
+}
+
+function tablet() {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+    document.getElementById('device').style.marginBottom = '100px'
+
+  window.onresize = function() {
+  if (window.innerWidth <= 1000) {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+    document.getElementById('device').style.marginBottom = '0'
+  } else {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+    document.getElementById('device').style.marginBottom = '100px'
+  }
+}
+}
+
+function mobile() {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+
+  window.onresize = function() {
+  if (window.innerWidth >= 1000) {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+  }
+}
+}
+
+function openPopUp() {
+         let url = "https://jaseography.xyz/nomadix/captive-portal/cp.html";
+         let height = 720;
+         let width = 1280;
+         var left = ( screen.width - width ) / 2;
+         var top = ( screen.height - height ) / 2;
+         var newWindow = window.open( url, "center window", 'resizable = yes, width=' + width + ', height=' + height + ', top='+ top + ', left=' + left);
+      }
+
+      </script>
+  </body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable="no", initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+  margin:auto;
+  font-family: "Inter", sans-serif;
+  width:100%;
+  background: #000;
+  padding:0;
+  margin:0;
+  margin-top:50px;
+}
+body:after {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    display: block;
+    background: radial-gradient(circle at 31% 34%,#115266,rgba(17,82,102,0) 50%),radial-gradient(circle at 10% 10%,#000,rgba(0,0,0,0) 50%),radial-gradient(circle at 90% 10%,#000,rgba(0,0,0,0) 50%),radial-gradient(circle at 81% 93%,rgb(24 65 85),rgba(20,13,44,0) 50%),radial-gradient(circle at 1% 99%,rgb(11 101 129),rgba(93,0,96,0) 50%)
+}
+.bar-chart-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.current-uptime {
+  position: absolute;
+  top: 60px;
+  font-size: 18px;
+  z-index: 15;
+  color:#fff;
+}
+
+.current-uptime span {
+  color: #ffffff94;
+}
+
+.bar {
+  position: relative;
+  width: 35px;
+  background: linear-gradient(to top, #06a7a5, #06a7a5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin: 0 5px;
+  border-radius: 4px 4px 0 0;
+}
+
+.bar-today {
+  /*background: linear-gradient(to top, #6c5ce7, #a29bfe);*/
+  background: #6c5ce7;
+  /*box-shadow: 0 0 5px #FFD70080;*/
+}
+
+.touch-line {
+  position: absolute;
+  width: 2px;
+  background-color: #ffffff66;
+  top: 82px;
+  bottom: 62px;
+  z-index: 3;
+  display: none;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Increase the height of the bar container if necessary */
+.bar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 150px;  /* Adjust height */
+  position: relative;
+  touch-action: none;
+  margin-top: 40px;
+}
+.summary-uptime {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 35px;
+  font-size: 14px;
+  color: #ffffff94;
+}
+
+.uptime-left,
+.uptime-right {
+  flex: 1;
+  text-align: center;
+  color: #fff;
+}
+
+.uptime-left span,
+.uptime-right span {
+  color: #ffffff94;
+}
+
+.weekly-status {
+  margin-top:15px;
+  font-size: 16px;
+  text-align:center;
+  color: #fff;
+}
+
+
+h3 {
+  font-weight:500;
+  text-transform:uppercase;
+  text-align:centerfont-weight:500;
+  padding-bottom:20px;
+  font-size:14px;
+  margin:0;
+  color:#fff;
+}
+
+.box {
+  background-color:#ffffff0a;
+  border-radius:5px;
+  box-shadow:0 20px 10px 5px rgb(0 0 0 / 5%);
+  border-top:1px solid #ffffff1c;
+  display:flex;
+  flex-direction:column;
+  gap:40px;
+  padding:20px;
+  box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+    /* scroll-snap-align: start; */
+    box-sizing: border-box;
+
+}
+
+.floating-uptime-label .uptime-title {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.floating-uptime-label .uptime-value {
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+.static-uptime-label {
+  position: absolute;
+  top:40px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 17px;
+  color: #fff;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.static-uptime-label .uptime-title {
+  font-size: 14px;
+  opacity: 0.8;
+  
+}
+
+.static-uptime-label .uptime-value {
+  font-size: 17px;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+
+.static-uptime-label {
+  position: absolute;
+  top: 30px; /* moved up a bit more for extra spacing */
+  left:40px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column; /* Stack title and value */
+  align-items: flex-start;
+  /*background-color: #1e1e1e;*/
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+  color: #fff;
+ /* box-shadow: 0 2px 6px rgba(0,0,0,0.2);*/
+  transition: opacity 0.2s;
+}
+
+.bar-chart-wrapper {
+  position: relative;
+  /* Other styles */
+}
+
+.floating-uptime-label {
+  position: absolute;
+  top: 30px; /* Adjust as needed */
+  transform: translateX(0); /* Remove centering transform */
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #0000004d;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: opacity 0.2s;
+}
+
+.bar-label {
+  position: absolute;
+  bottom: -20px;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: #ffffff94;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="box">
+<div class="bar-chart-wrapper">
+  <h3>7 day light emission</h3>
+  <div class="bar-container"></div>
+  <div class="touch-line"></div>
+ 
+  <div class="static-uptime-label">
+    <span class="uptime-title">Today</span>
+    <span class="uptime-value">0h 0m</span>
+  </div>
+  
+  <div class="floating-uptime-label">
+  <div class="uptime-title">Today</div>
+  <div class="uptime-value">0h 0m</div>
+</div>
+  
+  <div class="summary-uptime">Total: 0h 0m Daily Avg: 0h 0m</div>
+  <div class="weekly-status">Energy saving: <span id="status-text">Excellent</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.bar-container');
+      const touchLine = document.querySelector('.touch-line');
+      const summaryUptime = document.querySelector('.summary-uptime');
+      const weeklyStatus = document.querySelector('.weekly-status');
+      const floatingLabel = document.querySelector('.floating-uptime-label');
+      const staticLabel = document.querySelector('.static-uptime-label');
+      const uptimeTitle = floatingLabel.querySelector('.uptime-title');
+      const uptimeValue = floatingLabel.querySelector('.uptime-value');
+      const staticTitle = staticLabel.querySelector('.uptime-title');
+      const staticValue = staticLabel.querySelector('.uptime-value');
+      const wrapper = document.querySelector('.bar-chart-wrapper');
+    
+      fetch('/uptime-data')
+        .then(response => response.json())
+        .then(data => {
+          const maxValue = Math.max(...data, 1); // Avoid div/0
+          const scaleMax = maxValue * 1.4;
+    
+          const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+          const today = new Date();
+          const dayLabels = [];
+    
+          for (let i = 6; i >= 0; i--) {
+            const date = new Date();
+            date.setDate(today.getDate() - i);
+            dayLabels.push(daysOfWeek[date.getDay()]);
+          }
+    
+          container.innerHTML = '';
+    
+          data.forEach((val, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            const percentHeight = (val / scaleMax) * 100;
+            bar.style.height = `${Math.max(1, percentHeight)}%`; // Minimum 1% height
+    
+            if (i === data.length - 1) {
+              bar.style.backgroundColor = '#6c5ce7';
+              bar.classList.add('bar-today');
+            } else {
+              bar.style.backgroundColor = '#a29bfe';
+            }
+    
+            bar.dataset.index = i;
+            bar.dataset.uptime = val;
+    
+            const label = document.createElement('div');
+            label.className = 'bar-label';
+            label.textContent = dayLabels[i];
+            bar.appendChild(label);
+            container.appendChild(bar);
+          });
+    
+          const todayUptime = data[data.length - 1];
+          const todayHours = Math.floor(todayUptime / 60);
+          const todayMinutes = todayUptime % 60;
+          staticTitle.textContent = 'Today';
+          staticValue.textContent = `${todayHours}h ${todayMinutes}m`;
+    
+          const totalUptime = data.reduce((acc, val) => acc + val, 0);
+          const averageUptime = totalUptime / data.length;
+          const totalHours = Math.floor(totalUptime / 60);
+          const totalMinutes = totalUptime % 60;
+          const averageHours = Math.floor(averageUptime / 60);
+          const averageMinutes = Math.round(averageUptime % 60);
+    
+          summaryUptime.innerHTML = `
+            <div class="uptime-left"><span>Total:</span> ${totalHours}h ${totalMinutes}m</div>
+            <div class="uptime-right"><span>Daily Avg:</span> ${averageHours}h ${averageMinutes}m</div>
+          `;
+    
+          let status = '';
+          if (averageUptime <= 90) status = 'Excellent';
+          else if (averageUptime <= 240) status = 'Good';
+          else status = 'Bad';
+    
+          const statusColors = {
+            Excellent: '#00FF00',
+            Good: '#FFD700',
+            Bad: '#FF0000'
+          };
+    
+          weeklyStatus.innerHTML = `Energy Saving: <span style="color: ${statusColors[status]}">${status}</span>`;
+    
+          function updateTouchLine(x) {
+            const bars = Array.from(container.querySelectorAll('.bar'));
+            const containerRect = container.getBoundingClientRect();
+            const wrapperRect = wrapper.getBoundingClientRect();
+            const relativeX = x - containerRect.left;
+            const clampedX = Math.max(0, Math.min(relativeX, container.offsetWidth));
+    
+            touchLine.style.left = `${clampedX}px`;
+            touchLine.style.display = 'block';
+    
+            const labelWidth = floatingLabel.offsetWidth;
+            const maxLeft = wrapper.offsetWidth - labelWidth;
+            let labelX = clampedX - labelWidth / 2;
+            labelX = Math.max(0, Math.min(labelX, maxLeft));
+            floatingLabel.style.left = `${labelX}px`;
+            floatingLabel.style.display = 'flex';
+            staticLabel.style.opacity = '0';
+    
+            let closestBar = null;
+            let minDistance = Infinity;
+            bars.forEach(bar => {
+              const barRect = bar.getBoundingClientRect();
+              const barCenter = barRect.left + barRect.width / 2;
+              const distance = Math.abs(barCenter - x);
+              if (distance < minDistance) {
+                minDistance = distance;
+                closestBar = bar;
+              }
+            });
+    
+            if (closestBar) {
+              const uptime = parseInt(closestBar.dataset.uptime, 10);
+              const hours = Math.floor(uptime / 60);
+              const minutes = uptime % 60;
+              const index = parseInt(closestBar.dataset.index, 10);
+              const isToday = index === data.length - 1;
+              uptimeTitle.textContent = isToday ? 'Today' : dayLabels[index];
+              uptimeValue.textContent = `${hours}h ${minutes}m`;
+            }
+          }
+    
+          function handleMove(event) {
+            let x = event.type.startsWith('touch') ? event.touches[0].clientX : event.clientX;
+            updateTouchLine(x);
+          }
+    
+          function handleEnd() {
+            touchLine.style.display = 'none';
+            floatingLabel.style.display = 'none';
+            staticLabel.style.opacity = '1';
+          }
+    
+          container.addEventListener('touchstart', handleMove);
+          container.addEventListener('touchmove', handleMove);
+          container.addEventListener('touchend', handleEnd);
+          container.addEventListener('mousemove', handleMove);
+          container.addEventListener('mouseleave', handleEnd);
+        });
+    });
+    </script>
+</body>
+</html>

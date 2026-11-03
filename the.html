@@ -1,0 +1,389 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+	<link rel="stylesheet" href="assets/css/main﹖v=0.3.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+	<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+@font-face {
+    font-family: 'DINRegularAlternate';
+    src: url('assets/fonts/din/DINRegularAlternate.eot');
+    src: url('assets/fonts/din/DINRegularAlternate.eot') format('embedded-opentype'),
+         url('assets/fonts/din/DINRegularAlternate.woff2') format('woff2'),
+         url('assets/fonts/din/DINRegularAlternate.woff') format('woff'),
+         url('assets/fonts/din/DINRegularAlternate.ttf') format('truetype'),
+         url('assets/fonts/din/DINRegularAlternate.svg#DINRegularAlternate') format('svg');
+}
+		
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'DINRegularAlternate';
+}
+
+.holder {
+  max-width: 36rem;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+}
+
+		.-bg {
+			background:#080808;
+		}
+.cloq {
+  align-self: center;
+  border-radius: 0.1rem;
+  padding: 2rem;
+  /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://i.pinimg.com/originals/52/ee/da/52eedaad69cbdc6ad6a7396b4165c2ec.jpg);
+  background-size: cover;*/
+  font-size: clamp(0.7rem, 0.325rem + 1.2vw, 1rem);
+  -webkit-box-shadow: 5px 5px 14px 3px #000000; 
+box-shadow: 5px 5px 14px 3px #000000;
+}
+
+.letters {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  justify-self: center;
+  align-self: center;
+}
+
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #1c1c1c;
+}
+
+.active {
+  color: white;
+  font-weight: 500;
+  font-size: clamp(0.7rem, 0.325rem + 1.2vw, 1rem);
+}
+
+.cyan {
+  color: cyan;
+  font-weight: 500;
+  font-size: clamp(0.7rem, 0.325rem + 1.2vw, 1rem);
+}
+
+.letter::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+	</style>
+</head>
+
+<body>
+	<section class="j-screenshot -bg">
+          <div class="j-screenshot-preview -lg">
+	<div class="holder">
+  <main class="cloq">
+    <article class="letters"></article>
+  </main>
+</div>
+	</div>
+        </section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Set the grid for the letters (16x16)
+const grid = [
+  'T','H','E','J','T','I','M','E','A','I','S','S','H','A','L','F',
+	'Q','U','A','R','T','E','R','T','W','E','N','T','Y','O','N','E',
+	'T','E','N','S','I','X','T','E','E','N','T','W','O','N','E','I',
+	'E','I','G','H','T','E','E','N','F','I','V','E','Z','E','R','O',
+	'S','E','V','E','N','T','E','E','N','I','N','E','T','E','E','N',
+	'F','O','U','R','T','E','E','N','T','H','I','R','T','E','E','N',
+	'T','W','E','L','V','E','L','E','V','E','N','T','H','R','E','E',
+	'M','I','N','U','T','E','S','X','P','A','S','T','O','W','O','R',
+	'T','W','O','N','E','L','E','V','E','N','I','N','E','T','E','N',
+	'S','E','V','E','N','T','H','R','E','E','T','W','E','L','V','E',
+	'F','O','U','R','F','I','V','E','I','G','H','T','S','I','X','N',
+	'O','C','L','O','C','K','X','M','I','D','N','I','G','H','T','2',
+	'N','O','O','N','I','A','N','D','X','O','X','O','X','O','X','O',
+	'C','O','L','D','C','O','O','L','W','A','R','M','H','O','T','2',
+	'S','U','N','C','L','O','U','D','R','A','I','N','S','N','O','W',
+	'0','1','2','3','4','5','0','1','2','3','4','5','6','7','8','9'];
+
+// Set start and end positions for the words
+const words = {
+  // Hours
+  1: [130, 132],
+  2: [128, 130],
+  3: [149, 153],
+  4: [160, 163],
+  5: [164, 167],
+  6: [172, 174],
+  7: [144, 148],
+  8: [167, 171],
+  9: [137, 140],
+  10: [141,143],
+  11: [132, 137],
+  12: [154, 159],
+  // Words
+  the: [0, 2],
+  time: [4, 7],
+  is: [9, 10],
+  one: [44, 46],
+  two: [42, 44],
+  three: [107, 111],
+  four: [80, 83],
+  five: [56, 59],
+  six: [35, 37],
+  seven: [64, 68],
+  eight: [48, 52],
+  nine: [72, 75],
+  ten: [32, 34],
+  eleven: [101, 106],
+  twelve: [96, 101],
+  thirteen: [88, 95],
+  fourteen: [80, 87],
+  quarter: [16, 22],
+  sixteen: [35, 41],
+  seventeen: [64, 72],
+  eighteen: [48, 55],
+  nineteen: [72, 79],
+  twenty: [23, 28],
+  twentyone: [23, 31],
+  half: [12, 15],
+  past: [120, 123],
+  to: [123, 124],
+  oclock: [176, 181],
+  minute: [112, 117],
+  minutes: [112, 118],
+  and: [197, 199],
+  cool: [212, 215],
+  warm: [216, 219],
+};
+
+const htmlLetters = document.querySelector('.letters');
+const letter = htmlLetters.childNodes;
+
+// Add letters into html
+grid.map((letter) => {
+  htmlLetters.insertAdjacentHTML('beforeend', `<div class='letter'>${letter}</div>`);
+});
+
+function setActive(word) {
+  for (i = word[0]; i <= word[1]; i++) {
+    if (i !== 12) letter[i].classList.add('active'); // Removes the X in 'A quarter'
+    if (i >= 212 & i <= 215) letter[i].classList.add('cyan');
+  }
+}
+
+function setWords() {
+  // Reset the words, so they don't stack up
+  letter.forEach((htmlLetter) => {
+    if (htmlLetter.classList.contains('active')) {
+      htmlLetter.classList.remove('active');
+    }
+  });
+
+  //setActive(words.the);
+  //setActive(words.time);
+  //setActive(words.is);
+  setActive(words.and);
+  setActive(words.cool);
+
+  const date = new Date();
+  let minute = date.getMinutes();
+  let hour = date.getHours();
+
+  // Set the minutes per 5 minutes
+  //const minuteDot = minute % 5;
+  minute = minute - (minute % 1);
+
+  // Set the hours to a 12 hour notation
+  hour = hour % 12;
+  hour = hour ? hour : 12; // If the hour is 0, set it to 12
+
+  // Set the word per 1 minute
+  switch (minute) {
+    case 1:
+    case 59:
+      setActive(words.one);
+      setActive(words.minute);
+      break;
+    case 2:
+    case 58:
+      setActive(words.two);
+      setActive(words.minutes);
+      break;
+    case 3:
+    case 57:
+      setActive(words.three);
+      setActive(words.minutes);
+      break;
+    case 4:
+    case 56:
+      setActive(words.four);
+      setActive(words.minutes);
+      break;
+    case 5:
+    case 55:
+      setActive(words.five);
+      break;
+    case 6:
+    case 54:
+      setActive(words.six);
+      setActive(words.minutes);
+      break;
+    case 7:
+    case 53:
+      setActive(words.seven);
+      setActive(words.minutes);
+      break;
+    case 8:
+    case 52:
+      setActive(words.eight);
+      setActive(words.minutes);
+      break;
+    case 9:
+    case 51:
+      setActive(words.nine);
+      setActive(words.minutes);
+      break;
+    case 10:
+    case 50:
+      setActive(words.ten);
+      break;
+    case 11:
+    case 49:
+      setActive(words.eleven);
+      setActive(words.minutes);
+      break;
+    case 12:
+    case 48:
+      setActive(words.twelve);
+      setActive(words.minutes);
+      break;
+    case 13:
+    case 47:
+      setActive(words.thirteen);
+      setActive(words.minutes);
+      break;
+    case 14:
+    case 46:
+      setActive(words.fourteen);
+      setActive(words.minutes);
+      break;
+    case 15:
+    case 45:
+      setActive(words.quarter);
+      break;
+    case 16:
+    case 44:
+      setActive(words.sixteen);
+      setActive(words.minutes);
+      break;
+    case 17:
+    case 43:
+      setActive(words.seventeen);
+      setActive(words.minutes);
+      break;
+    case 18:
+    case 42:
+      setActive(words.eighteen);
+      setActive(words.minutes);
+      break;
+    case 19:
+    case 41:
+      setActive(words.nineteen);
+      setActive(words.minutes);
+      break;
+    case 20:
+    case 40:
+      setActive(words.twenty);
+      break;
+    case 21:
+    case 39:
+      setActive(words.twentyone);
+      setActive(words.minutes);
+      break;
+    case 22:
+    case 38:
+      setActive(words.twenty);
+      setActive(words.two);
+      setActive(words.minutes);
+      break;
+    case 23:
+    case 37:
+      setActive(words.twenty);
+      setActive(words.three);
+      setActive(words.minutes);
+      break;
+    case 24:
+    case 36:
+      setActive(words.twenty);
+      setActive(words.four);
+      setActive(words.minutes);
+      break;
+    case 25:
+    case 35:
+      setActive(words.twenty);
+      setActive(words.five);
+      break;
+    case 26:
+    case 34:
+      setActive(words.twenty);
+      setActive(words.six);
+      setActive(words.minutes);
+      break;
+    case 27:
+    case 33:
+      setActive(words.twenty);
+      setActive(words.seven);
+      setActive(words.minutes);
+      break;
+    case 28:
+    case 32:
+      setActive(words.twenty);
+      setActive(words.eight);
+      setActive(words.minutes);
+      break;
+    case 29:
+    case 31:
+      setActive(words.twenty);
+      setActive(words.nine);
+      setActive(words.minutes);
+      break;
+    case 30:
+      setActive(words.half);
+    default:
+      setActive(words.oclock);
+      break;
+  }
+
+  // Set the minute indicator(s)
+  // if (minuteDot >= 1) setActive(words.dotOne);
+  // if (minuteDot >= 2) setActive(words.dotTwo);
+  // if (minuteDot >= 3) setActive(words.dotThree);
+ //  if (minuteDot >= 4) setActive(words.dotFour);
+
+  if (minute < 35) {
+    // Ignore past and to when it is exactly half and full
+    if (minute !== 0) setActive(words.past);
+  } else {
+    setActive(words.to);
+    hour = hour === 12 ? 1 : hour + 1; // If it is 11:40 you would see "twenty to twelve"
+  }
+
+  // Set hour word
+  setActive(words[hour]);
+}
+
+// Display the words
+setWords();
+setInterval(() => setWords(), 1000);
+
+	</script>
+</body>
+</html>

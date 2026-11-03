@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+	<title>CLOQ Classica</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+    <meta name="description" content="CLOQ: A piece of art in time">
+    <meta property="og:title" content="CLOQ">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="../assets/img/cover@2x.jpg">
+    <meta property="og:description" content="Tech Art Wordclock by CLOQ">
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/flickity-fade@2/flickity-fade.css">
+	<link rel="stylesheet" href="../assets/css/main﹖v=0.5.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../assets/css/additionals.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff"> 
+	<style>
+		.flickity-button{
+			background: #343a40;
+			color:#fff;
+		}
+		.flickity-button:hover {
+			background: #000;
+			color:#fff;
+		}
+		@media (min-width: 576px) {
+		#theRust, #theCopper, #theNoir, #theOchre, #theRouge, #theBlue, #theBrushed {
+			filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.7));
+		}
+		}
+  	@media (max-width: 576px) {
+    h2 {
+      font-size: 50px !important;
+      line-height: 120% !important;
+    }
+  }
+	</style>
+  </head>
+  <body> 
+	  <section class="cookie-bar"><br>
+  			<p>We use cookies to give you the best experience of our website. By browsing you agree to our use of cookies which are outlined in our <a class="j-outro-link-item" href="../privatepolicy.html" data-toggle="modal" data-target="#myModal">Private Policy</a>.&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-sm btn-light" href="#" id="cookie-understand">Accept</a>
+  </p>
+	</section>
+
+	 
+	  
+    <div class="j-loader j-loader_overlay -visible"></div>
+	  
+    <nav class="j-menu">
+      <div class="j-menu-logo">
+        <a aria-label="CLOQ" href="/">
+				<img src="../assets/svg/cloq.svg" width="170" height="25" alt="CLOQ"> 
+			</a>
+      </div>
+      <div class="j-menu-toggle">
+        <button class="j-btn j-btn_menu" aria-label="menu" data-cursor="-menu" data-cursor-stick=".j-btn_menu-box">
+          <span class="j-btn_menu-title" style="visibility:hidden;">shop</span>
+          <span class="j-btn_menu-box" data-magnetic="{&quot;x&quot;:&quot;0.08&quot;,&quot;y&quot;:&quot;0.08&quot;}">
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+      <div class="j-menu-box">
+        <div class="j-menu-backdrop"></div>
+        <div class="j-menu-content">
+          <div class="j-menu-body">
+            <div class="j-menu-container">
+              <div class="j-menu-grid">
+                  <div class="j-menu-grid-col -left">
+                  <div class="j-menu-title">CLOQ</div>
+                  <div id="lang-switch" class="j-menu-social" style="cursor: pointer;">
+                    <div class="j-menu-social-item">
+                      <em><a href="/contact/">
+                        <span data-text="Contact">Contact</span>
+						  </a>
+                      </em>
+					 </div>
+                  </div>
+                </div>
+                <div class="j-menu-grid-col -right">
+                  <div class="j-menu-title">Collections</div>
+                  <div class="j-menu-nav" role="navigation">
+					<div class="j-menu-nav-item">
+                      <a href="/classica/">
+                        <em>
+                          <span data-text="Classica">Classica</span>
+                        </em>
+                      </a>
+                    </div>
+					<div class="j-menu-nav-item">
+                      <a href="/grande/">
+                        <em>
+                          <span data-text="Grande">Grande</span>
+                        </em>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="j-menu-footer">
+            
+          </div>
+        </div>
+      </div>
+      <div class="j-menu-contact">
+        <a class="j-btn j-btn_contact" href="/contact/" data-cursor="-exclusion" aria-label="Get in touch">
+          <img src="../assets/svg/mail.svg" alt="" style="z-index:100;">
+        </a>
+      </div>
+    </nav>
+	  
+	  
+    <div class="j-view" data-controller="projectController" data-project="cloq" id="view-main">
+      <div class="j-layout" role="main" data-cursor="-cloq-turquoise">
+        <div class="j-navbar">
+          <div class="j-navbar-strip">
+            <div class="j-navbar-grid">
+              <div class="j-navbar-grid-col -left">
+                <div class="j-navbar-logo">
+                  <a aria-label="cloq" href="/">
+				<img src="../assets/svg/cloq.svg" width="170" height="25" alt="CLOQ"> 
+			</a>
+                </div>
+              </div>
+              <div class="j-navbar-grid-col -right">
+                <div class="j-navbar-toggle">
+                  <button class="j-btn j-btn_menu" aria-label="menu">
+					  <span class="j-btn_menu-title">shop</span>
+                    <span class="j-btn_menu-box" style="visibility:hidden">
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </button>
+					
+                </div>
+				  
+              </div>
+            </div>
+          </div>
+        </div>
+		  
+		  <header class="j-tophead section" data-color="#C07858">
+          <div class="j-tophead-content">
+            <div class="j-tophead-container">
+              <div class="j-tophead-header">
+				<h1>HANDCRAFTED TECH ART CLOCK</h1>
+              </div>
+              <div class="j-tophead-title">
+				<h2 class="big_headline"><strong>Pre-raphaelite, meet Tech.</strong></h2>
+              </div>
+				<div class="j-description-text">
+                <p>Encased in a gold gilded frame</p>
+              </div>
+            </div>
+          </div>
+        </header>
+		  
+<section class="j-screenshot">
+  <div class="j-screenshot-preview -lg">
+    <img src="../assets/img/gilded.jpg" alt>
+  </div>
+</section>
+	
+<section class="j-outro">
+          <div class="j-outro-content" data-cursor="-inverse">
+            <div class="j-outro-body">
+              <div class="j-outro-container">
+                <div class="j-outro-header">
+                  <h2>Interested in <span class="-cloq-turquoise">CLOQ?</span></h2>
+                </div>
+				<div class="j-outro-text">
+				 <p><a class="j-outro-link-item -medium-link text-white" style="font-size:28px;" href="/contact/">Tell me about it</a>
+          		  </p>
+                </div>
+              </div>
+            </div>
+            <div class="j-outro-footer">
+              <div class="j-outro-container">
+                <div class="j-outro-grid">
+                  <div class="j-outro-grid-col -left">
+                    <div class="j-outro-address">
+                      <address>
+                        <p>CLOQ Limited // Buckinghamshire, England. Company Number: 15729376.</p>
+                      </address>
+                    </div>
+					<div class="j-outro-link">
+                      <a class="j-outro-link-item" href="../privatepolicy.html" data-toggle="modal" data-target="#myModal">Private Policy</a>
+                    </div>
+					<div class="j-outro-link">
+                      <a class="j-outro-link-item" href="../faq.html" data-toggle="modal" data-target="#myModal">FAQ</a>
+                    </div>
+                  </div>
+				  
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div> 
+<script src="../assets/js/main.js" defer></script>	  
+<script src="../assets/js/flickity.pkgd.js"></script>
+<script src="https://unpkg.com/flickity-fade@1/flickity-fade.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+	
+<script>
+
+</script>
+<!-- Prevents vertical scrolling when swiping left and right on the carousel. [if !IE]-->
+	  <script>
+		  var tapArea, startX ;
+            tapArea = document.querySelectorAll('.slider, .time, .carousel, .product');
+            startX = 0;
+            for (var item of tapArea) {
+                item.ontouchstart = function(e) {
+                    startX = e.touches[0].clientX;
+                };
+                item.ontouchmove = function(e) {
+                    if (Math.abs(e.touches[0].clientX - startX) > 5 && e.cancelable ) {
+                        e.preventDefault();
+                    }
+                };
+            }
+	</script><!--<![endif]-->
+	
+    <noscript><link rel="stylesheet" href="../assets/css/noscript﹖v=4.5.21.css"></noscript>
+		
+	<script src="https://code.tidio.co/qtofxqnz7y5w7b26h6r2sr5pv9newa4n.js"></script>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AV_EkJwFqHufJd_1vynmKuG_Le0T48tcw80J8bb8Ez02fANjl4kA83JDYbXamI6tvO4KgXO5nPvasM_M&enable-funding=venmo&currency=GBP" data-sdk-integration-source="button-factory"></script>
+  <!-- Payment buttons -->
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Noir - English","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-noir-en');
+    }
+    initPayPalButton();
+  </script>
+    <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Noir - Norwegian","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-noir-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Yellow Ochre - English","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-ochre-en');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Yellow Ochre - Norwegian","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-ochre-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Brushed Steel - English","amount":{"currency_code":"GBP","value":2650}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-brushed-en');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Brushed Steel - Norwegian","amount":{"currency_code":"GBP","value":2650}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-brushed-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Rouge - English","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-rouge-en');
+    }
+    initPayPalButton();
+  </script>
+    <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Rouge - Norwegian","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-rouge-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Blue - English","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-blue-en');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Blue - Norwegian","amount":{"currency_code":"GBP","value":2950}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-blue-no');
+    }
+    initPayPalButton();
+  </script>
+		
+ <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Vintage Copper - English","amount":{"currency_code":"GBP","value":3450}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-copper-en');
+    }
+    initPayPalButton();
+  </script>
+		
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Vintage Copper - Norwegian","amount":{"currency_code":"GBP","value":3450}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-copper-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Classica Rust - English","amount":{"currency_code":"GBP","value":3150}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-rust-en');
+    }
+    initPayPalButton();
+  </script>
+		
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Rust - Norwegian","amount":{"currency_code":"GBP","value":3150}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-rust-no');
+    }
+    initPayPalButton();
+  </script>
+  <!-- End Payment buttons -->
+
+  
+	  
+<script>
+$('[data-target="#myModal"]').on('click', function (e) {
+    e.preventDefault();
+
+    var _linky = $(this).attr('href');
+    var _target = $(this).data('target'); 
+    var $target = $(_target);
+
+    if ($target.length > 0) {
+      
+        $target.find('iframe').attr('src', 'about:blank');
+
+        var _isRemote = false;
+        if (_linky.indexOf('http') > -1) {
+            _isRemote = true;
+        }
+
+        if (!_isRemote) {
+            if (_linky.indexOf('?') > -1) {
+                _linky += '&tmpl=component';
+            } else {
+                _linky += '?tmpl=component';
+            }
+        }
+      
+        $target.find('iframe').attr('src', _linky).load(function() {
+            $target.modal('show');
+        });
+    }
+});
+
+$('body').on('hidden.bs.modal', '.modal', function () {
+    $(this).removeData('bs.modal');
+});
+</script>
+<script>
+$('.product').flickity({
+  arrowShape: {
+  	x0: 10,
+  	x1: 60, y1: 50,
+  	x2: 65, y2: 45,
+  	x3: 20
+  }
+});	  
+</script>
+<script>
+$(function () {
+  $('.lang-1').hide();
+  $('.c1').show();
+    
+  $('#select').on("change",function () {
+    $('.lang-1').hide();
+    $('.c'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-noir').hide();
+  $('.noir1').show();
+    
+  $('#chooseNoir').on("change",function () {
+    $('.choose-noir').hide();
+    $('.noir'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-rouge').hide();
+  $('.rouge1').show();
+    
+  $('#chooseRouge').on("change",function () {
+    $('.choose-rouge').hide();
+    $('.rouge'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-ochre').hide();
+  $('.ochre1').show();
+    
+  $('#chooseOchre').on("change",function () {
+    $('.choose-ochre').hide();
+    $('.ochre'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-blue').hide();
+  $('.blue1').show();
+    
+  $('#chooseBlue').on("change",function () {
+    $('.choose-blue').hide();
+    $('.blue'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-grey').hide();
+  $('.grey1').show();
+    
+  $('#chooseGrey').on("change",function () {
+    $('.choose-grey').hide();
+    $('.grey'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-copper').hide();
+  $('.copper1').show();
+    
+  $('#chooseCopper').on("change",function () {
+    $('.choose-copper').hide();
+    $('.copper'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-rust').hide();
+  $('.rust1').show();
+    
+  $('#chooseRust').on("change",function () {
+    $('.choose-rust').hide();
+    $('.rust'+$(this).val()).show();
+  }).val("1");
+});	
+	
+$(function () {
+  $('.choose-brushed').hide();
+  $('.brushed1').show();
+    
+  $('#chooseBrushed').on("change",function () {
+    $('.choose-brushed').hide();
+    $('.brushed'+$(this).val()).show();
+  }).val("1");
+});	
+
+</script>
+<script>
+var chooseNoir = document.getElementById('chooseNoir');
+    var theNoir = document.getElementById('theNoir');
+    
+    chooseNoir.addEventListener('change', function() {
+        theNoir.src = '../assets/img/noir/classica/' + this.options[this.selectedIndex].value + '.png';
+    }, false);	
+
+var chooseRouge = document.getElementById('chooseRouge');
+    var theRouge = document.getElementById('theRouge');
+    
+    chooseRouge.addEventListener('change', function() {
+        theRouge.src = '../assets/img/rouge/classica/' + this.options[this.selectedIndex].value + '.png';
+    }, false);	
+	
+var chooseOchre = document.getElementById('chooseOchre');
+    var theOchre = document.getElementById('theOchre');
+    
+    chooseOchre.addEventListener('change', function() {
+        theOchre.src = '../assets/img/ochre/classica/' + this.options[this.selectedIndex].value + '.png';
+    }, false);	
+	
+var chooseBlue = document.getElementById('chooseBlue');
+    var theBlue = document.getElementById('theBlue');
+    
+    chooseBlue.addEventListener('change', function() {
+        theBlue.src = '../assets/img/blue/classica/' + this.options[this.selectedIndex].value + '.png';
+    }, false);	
+	
+var chooseGrey = document.getElementById('chooseGrey');
+    var theGrey = document.getElementById('theGrey');
+    
+    chooseGrey.addEventListener('change', function() {
+        theGrey.src = '../assets/img/grey/classica/' + this.options[this.selectedIndex].value + '.png';
+    }, false);	
+	
+var chooseCopper = document.getElementById('chooseCopper');
+    var theCopper = document.getElementById('theCopper');
+    
+    chooseCopper.addEventListener('change', function() {
+        theCopper.src = '../assets/img/copper/classica/' + this.options[this.selectedIndex].value + '.jpg';
+    }, false);	
+	
+var chooseRust = document.getElementById('chooseRust');
+    var theRust = document.getElementById('theRust');
+    
+    chooseRust.addEventListener('change', function() {
+        theRust.src = '../assets/img/rust/classica/' + this.options[this.selectedIndex].value + '.png';
+    }, false);
+	
+var chooseBrushed = document.getElementById('chooseBrushed');
+    var theBrushed = document.getElementById('theBrushed');
+    
+    chooseBrushed.addEventListener('change', function() {
+        theBrushed.src = '../assets/img/brushed/classica/' + this.options[this.selectedIndex].value + '.png';
+    }, false);	
+</script>
+<script>
+
+// Button ID
+var buttonId = '#cookie-understand';
+// Cookie name
+var cookieName = 'lecookie';
+// Cookie value
+var cookieValue = 'le-cookie1';
+// Cookie expire (days)
+var cookieExpire = 10;
+
+// When click button, create cookie.
+$(document).ready(function(){
+  $(buttonId).click(function() {
+    if ($.cookie(cookieName) == null){
+
+      // Create the cookie.
+      $.cookie(cookieName, cookieValue, { expires: cookieExpire, path: '/' });
+
+      // Hide the alert message.
+      $('.cookie-bar').removeClass('cookie-bar--active');
+    }
+  });
+
+  checkCookie();
+
+  $('body').on('click', '#delete-cookie', function() {
+    
+    // Delete the cookie
+    $.removeCookie(cookieName, { path: '/' }); 
+  
+    checkCookie();        
+  });
+
+}); 
+
+// If no cookie, show the cookie bar.
+function checkCookie(){
+    if ($.cookie(cookieName) == null) {
+      // No cookie = Show cookie bar
+      $('.cookie-bar').addClass('cookie-bar--active');
+    }
+}	  
+</script>
+  </body>
+</html>

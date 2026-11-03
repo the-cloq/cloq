@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+	<title>CLOQ Classica</title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+  </head>
+  <style>
+  html, body {margin: 0; height: 100%; overflow: hidden}
+
+.modal {
+  padding:0;
+  margin:0;
+  overflow-x: hidden; 
+  overflow-y: auto;
+}
+.device_icon {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:40px;
+  height:40px;
+  border-radius:20px;
+}
+.arrow {
+  position:absolute;
+  top:50%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:40px;
+  height:40px;
+  border-radius:20px;
+}
+.left {
+  left:30px;
+}
+.right {
+  right:30px;
+}
+  .tab, .landscape, .desk {
+  display:none;
+}
+.header {
+  display:flex;
+  align-items: center;
+  position: fixed;
+  top:0;
+  height:80px;
+  gap:15px;
+  padding:0 40px;
+  width:100%;
+}
+.dot {
+    width:8px;
+    height:8px;
+    border-radius:4px;
+    background: #555;
+}
+.dot_row {
+  display:flex;
+  align-items: center;
+  height:20px;
+  background:#f7f7f7;
+  gap:10px;
+  padding:5px 0;
+  width:100%;
+}
+.main {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+  background:#ffffff;
+  margin-top: 80px;
+}
+.iframe {
+  border: 8px solid #ededed;
+  border-radius:25px;
+  display:flex;
+  width:335px;
+  height:680px;
+}
+.mob {
+  display:flex;
+  border: 1px solid #0057FF; 
+}
+@media (min-width: 1000px) {
+  .iframe {
+  display:flex;
+  width:768px;
+  height:1024px;
+  border-radius:20px;
+}
+  .mob {
+  display:flex;
+  border: none;
+}
+.tab {
+  display:flex;
+  border: 1px solid #0057FF; 
+}
+}
+@media (min-width: 1200px) {
+  .iframe {
+  display:flex;
+  width:1024px;
+  height:768px;
+  border-radius:20px;
+}
+  .mob, .tab {
+  display:flex;
+  border: none;
+}
+.landscape {
+  display:flex;
+  border: 1px solid #0057FF; 
+}
+}
+@media (min-width: 1440px) {
+  .iframe {
+  display:flex;
+  width:1280px;
+  height:800px;
+  border-radius:10px;
+}
+  .mob, .tab, .landscape {
+  display:flex;
+  border: none;
+}
+.desk {
+  display:flex;
+  border: 1px solid #0057FF; 
+}
+}
+.reverse {
+  rotate:180deg;
+}
+.tab {
+  rotate:90deg;
+}
+  </style>
+  <body>
+    <div class="modal">
+      <div class="header">
+        <div class="device_icon mob"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="26" viewBox="0 0 14 26" fill="none">
+<rect x="0.869141" y="1.11328" width="12.2608" height="23.7738" rx="1.30935" stroke="#878B9A" stroke-width="1.5"/>
+<ellipse cx="7.00049" cy="22.1269" rx="0.625492" ry="0.70205" fill="#878B9A"/>
+<path d="M4.61328 3.73291H9.76165" stroke="#878B9A" stroke-width="1.02967" stroke-linecap="round"/>
+</svg></div>
+        <div class="device_icon tab"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18" fill="none">
+<rect x="1.70508" y="17.2495" width="16.4996" height="20.5907" rx="1.30935" transform="rotate(-90 1.70508 17.2495)" stroke="#878B9A" stroke-width="1.5"/>
+</svg></div>
+<div class="device_icon landscape"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18" fill="none">
+  <rect x="1.70508" y="17.2495" width="16.4996" height="20.5907" rx="1.30935" transform="rotate(-90 1.70508 17.2495)" stroke="#878B9A" stroke-width="1.5"/>
+  </svg></div>
+        <div class="device_icon desk"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+<path d="M19.1349 7.9175L19.1349 2.97635C19.1349 1.88477 18.25 0.999875 17.1584 0.999875L2.84074 0.999876C1.74916 0.999876 0.864256 1.88478 0.864257 2.97636L0.864257 11.6594C0.864257 12.751 1.74916 13.6359 2.84074 13.6359L8.42349 13.6359C9.51507 13.6359 10.4 14.5208 10.4 15.6124L10.4 17.0957" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M13.7764 18.9995H6.85942" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round"/>
+</svg></div>
+      </div>
+      <div class="main">
+        <div class="arrow reverse left"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20" fill="none">
+<path d="M17.6445 0.89502L26.7495 10L17.6445 19.105" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.25 10H26.495" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+        <iframe class="iframe" src="https://jaseography.xyz" frameborder="0"></iframe>
+        <div class="arrow right"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20" fill="none">
+<path d="M17.6445 0.89502L26.7495 10L17.6445 19.105" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M1.25 10H26.495" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></div>
+      </div>
+      </div>
+  </body>
+</html>

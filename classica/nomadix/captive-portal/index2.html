@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+	<title></title>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0">
+  </head>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+  html, body {
+    background:#f7f7f7;
+    margin: 0; 
+    height: 100%; 
+    font-family: "Inter", sans-serif;
+    overflow: scroll;
+    scrollbar-color: #c2c2c2 #f7f7f7;
+  }
+  /*
+  ::-webkit-scrollbar {
+    display: none;
+}*/
+.modal {
+  padding:0;
+  margin:0;
+  overflow-x: hidden; 
+  overflow-y: auto;
+  background: #f7f7f7;
+}
+.header {
+  display:flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  top:0;
+  height:80px;
+  gap:15px;
+  width:100%;
+  background:#f7f7f7BF;
+  margin-right:100px;
+  backdrop-filter: blur(10px);
+  z-index:99999999999;
+}
+.device_icon, .tool_icon {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width:40px;
+  height:40px;
+  border-radius:20px;
+  transition: background-color 0.2s ease-in-out;
+}
+.arrow {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:50px;
+  height:50px;
+  border-radius:25px;
+  background:#fff;
+  z-index:1000;
+}
+#tools {
+  transition: opacity 0.3s ease-out;
+}
+.inactive {
+  opacity: 0;
+}
+.leftbar {
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index:1000;
+    left:5px;
+    padding:10px;
+    min-width:60px;
+    height:100%;
+    gap:20px;
+    top:40px;
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+.rightbar {
+    position:fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index:1000;
+    right:5px;
+    padding:10px;
+    min-width:60px;
+    height:100%;
+    gap:20px;
+    top:40px;
+    opacity: 1;
+    transition: all 0.3s linear;
+}
+
+.header:hover + .tools .leftbar, .header:hover + .tools .rightbar, .header:hover + .tools .widget { 
+    opacity: 0;
+}
+
+  .tablet, .landscape, .desk {
+  display:none;
+}
+.toolbox {
+  display:none;
+}
+.dot {
+    width:8px;
+    height:8px;
+    border-radius:4px;
+    background: #555;
+}
+.dot_row {
+  display:flex;
+  align-items: center;
+  height:20px;
+  background:#f7f7f7;
+  gap:10px;
+  padding:5px 0;
+  width:100%;
+}
+.main {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background:#f7f7f7;
+  margin-top: 80px;
+  height:100%;
+}
+.iframe {
+  border: 0px solid #fff;
+  border-top: 1px solid #E8E8E8;
+  height: calc(100% - 80px);
+  position: fixed;
+  top: 80px;
+  margin:0;
+  width: 100%;
+  max-width: 1920px;
+  max-height:1080px;
+  /*box-shadow: 0px 8px 25px 0px rgba(0, 0, 0, 0.2);*/
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+  transition: scale 0.3s;
+}
+.mob {
+  display:flex;
+  border: none; 
+}
+.nav {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap:15px;
+  margin-right:100px;
+  border-bottom:1px solid #00000033;
+}
+.widget {
+    display:none;
+    position:fixed;
+    top: calc(50% + 40px);
+    left:250px;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+    z-index:500;
+    opacity: 1;
+    width:200px;
+    transition: all 0.3s linear;
+}
+.widget p {
+    color: #222;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 150%;
+    margin:0;
+}
+@media (min-width:768px) {
+  .nav {
+  display: flex;
+}
+
+}
+
+@media (min-width: 1000px) {
+  .mob, .tablet {
+  display:flex;
+  border: none;
+}
+}
+@media (min-width:1180px) {
+  .toolbox {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    left: 5px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+}
+  .arrow {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  min-width:50px;
+  min-height:50px;
+  border-radius:25px;
+  background:#fff;
+  cursor:pointer;
+}
+.nope {
+  display:none;
+}
+  .mob, .tablet, .landscape, .desk {
+  display:flex;
+  border: none;
+}
+
+.mob, .tablet, .landscape {
+  display:flex;
+  border: none;
+}
+}
+.reverse {
+  rotate:180deg;
+  cursor:default;
+}
+.active {
+    border: 1px solid #0091FA;
+}
+.tool_icon:hover {
+  background: #0000000A;
+  cursor:pointer;
+}
+.device_icon:not(.active):hover {
+  background: #0000000A;
+  cursor:pointer;
+}
+.device_icon.active .icon path, .device_icon.active .icon rect, .device_icon:not(.active):hover .icon path, .device_icon:not(.active):hover .icon rect, .tool_icon:hover .icon path, .arrow:hover .icon path {
+  stroke: #000;
+}
+
+/* START TOOLTIP STYLES */
+[tooltip] {
+  position: relative;
+}
+
+[tooltip]::before,
+[tooltip]::after {
+  text-transform: none;
+  font-size: 13px;
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  position: absolute;
+  display: none;
+  opacity: 0;
+}
+[tooltip]::before {
+  content: '';
+  border: 5px solid transparent;
+  z-index: 1001;
+}
+[tooltip]::after {
+  content: attr(tooltip);
+  text-align: center;
+  
+  /* 
+    Let the content set the size of the tooltips 
+    but this will also keep them from being obnoxious
+    */
+  max-width: 200px;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 3px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  background: #333;
+  color: #fff;
+  z-index: 1000;
+}
+
+/* Make the tooltips respond to hover */
+[tooltip]:hover::before,
+[tooltip]:hover::after {
+  display: block;
+}
+
+/* don't show empty tooltips */
+[tooltip='']::before,
+[tooltip='']::after {
+  display: none !important;
+}
+
+/* FLOW: UP */
+[tooltip]:not([flow])::before,
+[tooltip][flow^="up"]::before {
+  bottom: 100%;
+  border-bottom-width: 0;
+  border-top-color: #333;
+}
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::after {
+  bottom: calc(100% + 5px);
+}
+[tooltip]:not([flow])::before,
+[tooltip]:not([flow])::after,
+[tooltip][flow^="up"]::before,
+[tooltip][flow^="up"]::after {
+  left: 50%;
+  transform: translate(-50%, -.5em);
+}
+
+/* FLOW: DOWN */
+[tooltip][flow^="down"]::before {
+  top: 100%;
+  border-top-width: 0;
+  border-bottom-color: #333;
+}
+[tooltip][flow^="down"]::after {
+  top: calc(100% + 5px);
+}
+[tooltip][flow^="down"]::before,
+[tooltip][flow^="down"]::after {
+  left: 50%;
+  transform: translate(-50%, .5em);
+}
+
+/* FLOW: LEFT */
+[tooltip][flow^="left"]::before {
+  top: 50%;
+  border-right-width: 0;
+  border-left-color: #333;
+  left: calc(0em - 5px);
+  transform: translate(-.5em, -50%);
+}
+[tooltip][flow^="left"]::after {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translate(-.5em, -50%);
+}
+
+/* FLOW: RIGHT */
+[tooltip][flow^="right"]::before {
+  top: 50%;
+  border-left-width: 0;
+  border-right-color: #333;
+  right: calc(0em - 5px);
+  transform: translate(.5em, -50%);
+}
+[tooltip][flow^="right"]::after {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translate(.5em, -50%);
+}
+
+/* KEYFRAMES */
+@keyframes tooltips-vert {
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes tooltips-horz {
+  to {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+/* FX All The Things */ 
+[tooltip]:not([flow]):hover::before,
+[tooltip]:not([flow]):hover::after,
+[tooltip][flow^="up"]:hover::before,
+[tooltip][flow^="up"]:hover::after,
+[tooltip][flow^="down"]:hover::before,
+[tooltip][flow^="down"]:hover::after {
+  animation: tooltips-vert 300ms ease-out forwards;
+}
+
+[tooltip][flow^="left"]:hover::before,
+[tooltip][flow^="left"]:hover::after,
+[tooltip][flow^="right"]:hover::before,
+[tooltip][flow^="right"]:hover::after {
+  animation: tooltips-horz 300ms ease-out forwards;
+}
+
+.scale-75 {
+    scale: 0.75;
+}
+.reposition {
+    top: -40px;
+}
+
+.buttons {
+  display:flex;
+  justify-content: center;
+  gap:15px;
+  font-size: 14px;
+}
+.buttons input {
+  position: absolute;
+  left: -100vw;
+}
+.buttons label {
+  position: relative;
+  padding: 5px 20px;
+  border-radius: 20px;
+  color: #222;
+  display: inline-block;
+  background: #fff;
+  box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.10);
+  transition: all 0.25s;
+}
+.buttons label:hover {
+  cursor: pointer;
+  box-shadow: none;
+  background:#0000000A;
+}
+.buttons input:checked + label {
+  background: #fff;
+  box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.30);
+}
+.tab {
+  display: flex;
+  padding: 8px 15px;
+  align-items: center;
+  gap: 10px;
+  border-radius:20px;
+  margin-bottom:5px;
+  position:relative;
+  bottom:0px;
+  transition: all 0.25s;
+}
+.tab p {
+  font-size:14px;
+  color:#222;
+  font-weight:300;
+  line-height:0;
+  padding:0;
+  margin:0;
+}
+.tab:hover {
+  background:#0000000a;
+  cursor:pointer;
+}
+.tab:hover .icon path, .tab.active_ .icon path {
+  stroke: #000 !important;
+}
+.tab.active_::after {
+  border-bottom: 1px solid #000;
+  content: '';
+  width:100%;
+  position:absolute;
+  bottom:-6px;
+  right:0px;
+  padding: 0;
+}
+.tab.active_:hover {
+  background:none;
+  cursor:default;
+}
+/*
+#drag_div {
+    display: flex;
+    position: absolute;
+    width: 300px;
+    height: 200px;
+    border-radius: 8px;
+    align-items: center;
+    box-sizing: border-box;
+    pointer-events: none;
+    background-color: #fff;
+    flex-direction:column;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.25);
+    cursor: move;
+    z-index:1002;
+}
+
+#hit_div {
+  display: flex;
+  padding: 10px 50px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.unselectable {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#hit_div { pointer-events: auto }
+*/
+  </style>
+  <body id="body">
+    <div id="grid" class="modal">
+        <div class="header">
+            <div class="nav">
+                <div class="tab">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+              <path d="M20 14.5C21.1046 14.5 22 13.6046 22 12.5C22 11.3954 21.1046 10.5 20 10.5C18.8954 10.5 18 11.3954 18 12.5C18 13.6046 18.8954 14.5 20 14.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 6.5C21.1046 6.5 22 5.60457 22 4.5C22 3.39543 21.1046 2.5 20 2.5C18.8954 2.5 18 3.39543 18 4.5C18 5.60457 18.8954 6.5 20 6.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 22.5C21.1046 22.5 22 21.6046 22 20.5C22 19.3954 21.1046 18.5 20 18.5C18.8954 18.5 18 19.3954 18 20.5C18 21.6046 18.8954 22.5 20 22.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 14.5C5.10457 14.5 6 13.6046 6 12.5C6 11.3954 5.10457 10.5 4 10.5C2.89543 10.5 2 11.3954 2 12.5C2 13.6046 2.89543 14.5 4 14.5Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 12.5H18" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18 4.5H14C12 4.5 11 5.5 11 7.5V17.5C11 19.5 12 20.5 14 20.5H18" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+                  <p>Workflow</p>
+                </div>
+                <div class="tab active_">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12.383 7.94358L16.9889 3.33766C18.2796 2.04694 20.3723 2.04694 21.663 3.33766C22.9537 4.62838 22.9537 6.72105 21.663 8.01177L17.0314 12.6434M7.68315 12.6434L3.44321 16.8833L2.61048 21.613C2.51545 22.1527 2.99493 22.6181 3.53156 22.507L8.11732 21.5574L12.383 17.2918M6.34135 8.28094L4.99004 9.63225M9.39462 9.6911L7.22076 11.865M10.7465 12.6872L9.39522 14.0385M13.8019 14.0973L11.6281 16.2712M15.1528 17.0934L13.8015 18.4448M18.2082 18.5036L16.0343 20.6775M4.01678 16.4117L8.66977 21.0647M18.5092 22.9452L22.6678 18.7865C22.9707 18.4837 22.9707 17.9926 22.6678 17.6897L6.76387 1.78576C6.46099 1.48287 5.96992 1.48287 5.66703 1.78576L1.50841 5.94438C1.20553 6.24726 1.20553 6.73833 1.50841 7.04121L17.4124 22.9452C17.7152 23.248 18.2063 23.248 18.5092 22.9452Z" stroke="#878B9A" stroke-width="1.5"/>
+              </svg>
+                  <p>Design</p>
+                </div>
+                <div class="tab">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M9.50978 4.73062L18.0698 9.01062C21.9098 10.9306 21.9098 14.0706 18.0698 15.9906L9.50978 20.2706C3.74978 23.1506 1.39978 20.7906 4.27978 15.0406L5.14978 13.3106C5.36978 12.8706 5.36978 12.1406 5.14978 11.7006L4.27978 9.96062C1.39978 4.21062 3.75978 1.85062 9.50978 4.73062Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M5.43994 12.5H10.8399" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <p>Publish</p>
+                </div>
+                <div class="tab">
+                  <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+                    <path d="M22 7H16" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M6 7H2" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M10 10.5C11.933 10.5 13.5 8.933 13.5 7C13.5 5.067 11.933 3.5 10 3.5C8.067 3.5 6.5 5.067 6.5 7C6.5 8.933 8.067 10.5 10 10.5Z" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 18H18" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 18H2" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M14 21.5C15.933 21.5 17.5 19.933 17.5 18C17.5 16.067 15.933 14.5 14 14.5C12.067 14.5 10.5 16.067 10.5 18C10.5 19.933 12.067 21.5 14 21.5Z" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <p>Assign a Network</p>
+                </div>
+              </div>
+        </div>
+        <div id="tools" class="tools">
+
+        <div class="leftbar">
+          <div class="toolbox">
+            <div tooltip="Visibility" flow="right" class="tool_icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="18" viewBox="0 0 24 18" fill="none">
+                <path d="M1 9C1 9 5 1 12 1C19 1 23 9 23 9C23 9 19 17 12 17C5 17 1 9 1 9Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 12C13.6569 12 15 10.6569 15 9C15 7.34315 13.6569 6 12 6C10.3431 6 9 7.34315 9 9C9 10.6569 10.3431 12 12 12Z" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              </svg></div>
+            <div tooltip="Translations" flow="right" class="tool_icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <path d="M1 4.20007H15.4" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M4.59863 7.39996C6.78858 11.5134 8.25635 13.2402 11.3986 15" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M12.1986 4.59985C10.5625 10.0355 8.45914 12.8377 2.59863 17.3999" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M8.75 1.3999C8.75 0.985689 8.41421 0.649902 8 0.649902C7.58579 0.649902 7.25 0.985689 7.25 1.3999L8.75 1.3999ZM7.25 1.3999L7.25 3.7999L8.75 3.7999L8.75 1.3999L7.25 1.3999Z" fill="#878B9A" />
+                <path d="M12.2002 20.5999L15.5061 11.1741C15.8143 10.2952 17.0509 10.2779 17.3837 11.1477L21.0002 20.5999" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+                <line x1="13.7988" y1="17.4498" x2="19.3988" y2="17.4498" stroke="#878B9A" stroke-width="1.5" />
+              </svg></div>
+            <div tooltip="Undo" flow="right" class="tool_icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 13L4 8L9 3" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4.5 20H14C17.3137 20 20 17.3137 20 14V14C20 10.6863 17.3137 8 14 8H4.5" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round"/>
+              </svg></div>
+            <div tooltip="Redo" flow="right" class="tool_icon"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 13L20 8L15 3" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19.5 20H10C6.68629 20 4 17.3137 4 14V14C4 10.6863 6.68629 8 10 8H19.5" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round"/>
+              </svg></div>
+          </div>
+          <div class="arrow reverse left" style="opacity:.3"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="20" viewBox="0 0 28 20" fill="none">
+              <path d="M17.6445 0.89502L26.7495 10L17.6445 19.105" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M1.25 10H26.495" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></div>
+          <div class="toolbox">
+            <div id="mobile_icon" tooltip="Mobile" flow="right" class="device_icon mob" onclick="mobile()"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="14" height="26" viewBox="0 0 14 26" fill="none">
+                <rect x="0.869141" y="1.11328" width="12.2608" height="23.7738" rx="1.30935" stroke="#878B9A" stroke-width="1.5" />
+                <ellipse cx="7.00049" cy="22.1269" rx="0.625492" ry="0.70205" fill="#878B9A" />
+                <path d="M4.61328 3.73291H9.76165" stroke="#878B9A" stroke-width="1.02967" stroke-linecap="round" />
+              </svg></div>
+            <div id="tablet_icon" tooltip="Tablet Portrait" flow="right" class="device_icon tablet" onclick="tablet()"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 18 24" fill="none">
+                <rect x="0.75" y="0.75" width="16.5" height="22.5" rx="1.30935" stroke="#878B9A" stroke-width="1.5" />
+              </svg></div>
+            <div id="landscape_icon" tooltip="Tablet Landscape" flow="right" class="device_icon landscape" onclick="tablet_land()"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18" fill="none">
+                <rect x="1.70508" y="17.2495" width="16.4996" height="20.5907" rx="1.30935" transform="rotate(-90 1.70508 17.2495)" stroke="#878B9A" stroke-width="1.5" />
+              </svg></div>
+            <div id="desktop_icon" tooltip="Desktop" flow="right" class="device_icon desk active" onclick="desktop()"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M19.1349 7.9175L19.1349 2.97635C19.1349 1.88477 18.25 0.999875 17.1584 0.999875L2.84074 0.999876C1.74916 0.999876 0.864256 1.88478 0.864257 2.97636L0.864257 11.6594C0.864257 12.751 1.74916 13.6359 2.84074 13.6359L8.42349 13.6359C9.51507 13.6359 10.4 14.5208 10.4 15.6124L10.4 17.0957" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M13.7764 18.9995H6.85942" stroke="#878B9A" stroke-width="1.5" stroke-linecap="round" />
+              </svg></div>
+          </div>
+        </div>
+        <div class="rightbar">
+            <div class="arrow right" tooltip="Next Screen" flow="left"><svg xmlns="http://www.w3.org/2000/svg" class="icon" width="28" height="20" viewBox="0 0 28 20" fill="none">
+                <path d="M17.6445 0.89502L26.7495 10L17.6445 19.105" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M1.25 10H26.495" stroke="#878B9A" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+              </svg></div>
+        </div>
+        <div id="widget" class="widget">
+            <p>If <strong>Portrait View</strong> isn't fully visible, you can choose to view it at a reduced size.</p>
+            <div class="buttons">
+                <input type="radio" name="data" id="fullsize" checked>
+                <label for="fullsize">100%</label>
+                <input type="radio" name="data" id="fitscreen">
+                <label for="fitscreen">Fit Screen</label>
+              </div>
+
+        </div>
+        </div>
+        <!--<div id="drag_div">
+          <div id="hit_div">
+            <svg xmlns="http://www.w3.org/2000/svg" width="41" height="8" viewBox="0 0 41 8" fill="none">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M4 2C4.55228 2 5 1.55228 5 1C5 0.447715 4.55228 0 4 0C3.44772 0 3 0.447715 3 1C3 1.55228 3.44772 2 4 2ZM1 5C1.55228 5 2 4.55228 2 4C2 3.44772 1.55228 3 1 3C0.447716 3 0 3.44772 0 4C0 4.55228 0.447716 5 1 5ZM5 4C5 4.55228 4.55228 5 4 5C3.44772 5 3 4.55228 3 4C3 3.44772 3.44772 3 4 3C4.55228 3 5 3.44772 5 4ZM7 2C7.55228 2 8 1.55228 8 1C8 0.447715 7.55228 0 7 0C6.44772 0 6 0.447715 6 1C6 1.55228 6.44772 2 7 2ZM8 4C8 4.55228 7.55228 5 7 5C6.44772 5 6 4.55228 6 4C6 3.44772 6.44772 3 7 3C7.55228 3 8 3.44772 8 4ZM10 2C10.5523 2 11 1.55228 11 1C11 0.447715 10.5523 0 10 0C9.44772 0 9 0.447715 9 1C9 1.55228 9.44772 2 10 2ZM11 4C11 4.55228 10.5523 5 10 5C9.44772 5 9 4.55228 9 4C9 3.44772 9.44772 3 10 3C10.5523 3 11 3.44772 11 4ZM13 2C13.5523 2 14 1.55228 14 1C14 0.447715 13.5523 0 13 0C12.4477 0 12 0.447715 12 1C12 1.55228 12.4477 2 13 2ZM14 4C14 4.55228 13.5523 5 13 5C12.4477 5 12 4.55228 12 4C12 3.44772 12.4477 3 13 3C13.5523 3 14 3.44772 14 4ZM16 2C16.5523 2 17 1.55228 17 1C17 0.447715 16.5523 0 16 0C15.4477 0 15 0.447715 15 1C15 1.55228 15.4477 2 16 2ZM17 4C17 4.55228 16.5523 5 16 5C15.4477 5 15 4.55228 15 4C15 3.44772 15.4477 3 16 3C16.5523 3 17 3.44772 17 4ZM19 2C19.5523 2 20 1.55228 20 1C20 0.447715 19.5523 0 19 0C18.4477 0 18 0.447715 18 1C18 1.55228 18.4477 2 19 2ZM20 4C20 4.55228 19.5523 5 19 5C18.4477 5 18 4.55228 18 4C18 3.44772 18.4477 3 19 3C19.5523 3 20 3.44772 20 4ZM22 2C22.5523 2 23 1.55228 23 1C23 0.447715 22.5523 0 22 0C21.4477 0 21 0.447715 21 1C21 1.55228 21.4477 2 22 2ZM23 4C23 4.55228 22.5523 5 22 5C21.4477 5 21 4.55228 21 4C21 3.44772 21.4477 3 22 3C22.5523 3 23 3.44772 23 4ZM25 2C25.5523 2 26 1.55228 26 1C26 0.447715 25.5523 0 25 0C24.4477 0 24 0.447715 24 1C24 1.55228 24.4477 2 25 2ZM26 4C26 4.55228 25.5523 5 25 5C24.4477 5 24 4.55228 24 4C24 3.44772 24.4477 3 25 3C25.5523 3 26 3.44772 26 4ZM28 2C28.5523 2 29 1.55228 29 1C29 0.447715 28.5523 0 28 0C27.4477 0 27 0.447715 27 1C27 1.55228 27.4477 2 28 2ZM29 4C29 4.55228 28.5523 5 28 5C27.4477 5 27 4.55228 27 4C27 3.44772 27.4477 3 28 3C28.5523 3 29 3.44772 29 4ZM31 2C31.5523 2 32 1.55228 32 1C32 0.447715 31.5523 0 31 0C30.4477 0 30 0.447715 30 1C30 1.55228 30.4477 2 31 2ZM32 4C32 4.55228 31.5523 5 31 5C30.4477 5 30 4.55228 30 4C30 3.44772 30.4477 3 31 3C31.5523 3 32 3.44772 32 4ZM34 2C34.5523 2 35 1.55228 35 1C35 0.447715 34.5523 0 34 0C33.4477 0 33 0.447715 33 1C33 1.55228 33.4477 2 34 2ZM35 4C35 4.55228 34.5523 5 34 5C33.4477 5 33 4.55228 33 4C33 3.44772 33.4477 3 34 3C34.5523 3 35 3.44772 35 4ZM37 2C37.5523 2 38 1.55228 38 1C38 0.447715 37.5523 0 37 0C36.4477 0 36 0.447715 36 1C36 1.55228 36.4477 2 37 2ZM38 4C38 4.55228 37.5523 5 37 5C36.4477 5 36 4.55228 36 4C36 3.44772 36.4477 3 37 3C37.5523 3 38 3.44772 38 4ZM40 5C40.5523 5 41 4.55228 41 4C41 3.44772 40.5523 3 40 3C39.4477 3 39 3.44772 39 4C39 4.55228 39.4477 5 40 5ZM5 7C5 7.55228 4.55228 8 4 8C3.44772 8 3 7.55228 3 7C3 6.44772 3.44772 6 4 6C4.55228 6 5 6.44772 5 7ZM7 8C7.55228 8 8 7.55228 8 7C8 6.44772 7.55228 6 7 6C6.44772 6 6 6.44772 6 7C6 7.55228 6.44772 8 7 8ZM11 7C11 7.55228 10.5523 8 10 8C9.44772 8 9 7.55228 9 7C9 6.44772 9.44772 6 10 6C10.5523 6 11 6.44772 11 7ZM13 8C13.5523 8 14 7.55228 14 7C14 6.44772 13.5523 6 13 6C12.4477 6 12 6.44772 12 7C12 7.55228 12.4477 8 13 8ZM17 7C17 7.55228 16.5523 8 16 8C15.4477 8 15 7.55228 15 7C15 6.44772 15.4477 6 16 6C16.5523 6 17 6.44772 17 7ZM19 8C19.5523 8 20 7.55228 20 7C20 6.44772 19.5523 6 19 6C18.4477 6 18 6.44772 18 7C18 7.55228 18.4477 8 19 8ZM23 7C23 7.55228 22.5523 8 22 8C21.4477 8 21 7.55228 21 7C21 6.44772 21.4477 6 22 6C22.5523 6 23 6.44772 23 7ZM25 8C25.5523 8 26 7.55228 26 7C26 6.44772 25.5523 6 25 6C24.4477 6 24 6.44772 24 7C24 7.55228 24.4477 8 25 8ZM29 7C29 7.55228 28.5523 8 28 8C27.4477 8 27 7.55228 27 7C27 6.44772 27.4477 6 28 6C28.5523 6 29 6.44772 29 7ZM31 8C31.5523 8 32 7.55228 32 7C32 6.44772 31.5523 6 31 6C30.4477 6 30 6.44772 30 7C30 7.55228 30.4477 8 31 8ZM35 7C35 7.55228 34.5523 8 34 8C33.4477 8 33 7.55228 33 7C33 6.44772 33.4477 6 34 6C34.5523 6 35 6.44772 35 7ZM37 8C37.5523 8 38 7.55228 38 7C38 6.44772 37.5523 6 37 6C36.4477 6 36 6.44772 36 7C36 7.55228 36.4477 8 37 8Z" fill="#CBCBCB"/>
+      </svg>
+          </div>
+        <div>Toolset</div>
+      </div>-->
+        <div class="main">
+          <iframe id="device" class="iframe" src="https://jaseography.xyz/nomadix/captive-portal/portal-page.html" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="yes"></iframe>
+        </div>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>	
+      <script>
+        $(document).ready(function(){
+            $('.device_icon').on('click', function(){
+                $('.device_icon').removeClass('active');
+                $(this).addClass('active');   
+            })
+        });
+
+        $(document).ready(function(){
+            $('#fitscreen').on('click', function(){
+                $('.iframe').addClass('scale-75');
+                $('.iframe').addClass('reposition');
+            })
+        });
+
+        $(document).ready(function(){
+            $('#fullsize').on('click', function(){
+                $('.iframe').removeClass('scale-75');
+                $('.iframe').removeClass('reposition');
+            })
+        });
+
+        $(document).ready(function(){
+            $('.device_icon').on('click', function(){
+                $('.iframe').removeClass('scale-75');
+                $('.iframe').removeClass('reposition');
+                $('#fitscreen').prop('checked', false);
+                $('#fullsize').prop('checked', true);
+            })
+        });
+
+        $(document).ready(function(){
+    $('.tab').on('click', function(){
+        $('.tab').removeClass('active_');
+        $(this).addClass('active_');
+    })
+});
+
+function desktop() {
+    document.getElementById('device').style.width = '100%'
+    document.getElementById('device').style.height = 'calc(100% - 80px)'
+    document.getElementById('device').style.border = 'none'
+    document.getElementById('device').style.borderTop = '1px solid #E8E8E8'
+    document.getElementById('device').style.borderRadius = '0px'
+    document.getElementById('device').style.position = 'fixed'
+    document.getElementById('device').style.marginTop = '0'
+    document.getElementById('widget').style.display = 'none'
+
+  window.onresize = function() {
+  if (window.innerWidth <= 1440) {
+    document.getElementById('device').style.width = '100%'
+    document.getElementById('device').style.height = 'calc(100% - 80px)'
+  }
+}
+}
+
+function tablet_land() {
+    document.getElementById('device').style.width = '1024px'
+    document.getElementById('device').style.height = '768px'
+    document.getElementById('device').style.border = '8px solid #ffffff'
+    document.getElementById('device').style.borderRadius = '40px'
+    document.getElementById('device').style.marginTop = '20px'
+    document.getElementById('device').style.marginBottom = '25px'
+    document.getElementById('widget').style.display = 'none'
+    document.getElementById('device').style.position = 'sticky'
+
+  window.onresize = function() {
+  if (window.innerWidth <= 1200) {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+  } else {
+    document.getElementById('device').style.width = '1024px'
+    document.getElementById('device').style.height = '768px'
+  }
+  if (window.innerWidth <=1000) {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+  }
+}
+}
+
+function tablet() {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+    document.getElementById('device').style.border = '8px solid #ffffff'
+    document.getElementById('device').style.borderRadius = '40px'
+    document.getElementById('device').style.marginTop = '20px'
+    document.getElementById('device').style.marginBottom = '25px'
+    document.getElementById('widget').style.display = 'flex'
+    document.getElementById('device').style.position = 'sticky'
+
+  window.onresize = function() {
+  if (window.innerWidth <= 1000) {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+    document.getElementById('widget').style.display = 'none'
+  } else {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+    document.getElementById('widget').style.display = 'flex'
+  }
+}
+}
+
+function mobile() {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+    document.getElementById('device').style.border = '8px solid #ffffff'
+    document.getElementById('device').style.borderRadius = '40px'
+    document.getElementById('widget').style.display = 'none'
+    document.getElementById('device').style.position = 'sticky'
+    document.getElementById('device').style.marginTop = '20px'
+    document.getElementById('device').style.marginBottom = '25px'
+
+  window.onresize = function() {
+  if (window.innerWidth >= 1000) {
+    document.getElementById('device').style.width = '335px'
+    document.getElementById('device').style.height = '725px'
+  } else {
+    document.getElementById('device').style.width = '768px'
+    document.getElementById('device').style.height = '1024px'
+  }
+}
+}
+
+/* Hide Tools if inactive 
+let idleTimer = null;
+let idleState = false;
+
+function showTools(time) {
+  clearTimeout(idleTimer);
+  if (idleState == true) {
+    $("#tools").removeClass("inactive");
+  }
+  idleState = false;
+  idleTimer = setTimeout(function() {
+    $("#tools").addClass("inactive");
+    idleState = true;
+  }, time);
+}
+
+showTools(2000);
+
+$(window).mousemove(function(){
+    showTools(2000);
+});
+*/
+
+/*
+let drag_div, hit_div;
+let win_rect; // window client area
+let dragging;
+let offset;
+let colors = {
+    // up: "rgb(255, 254, 165)",
+    // down: "rgb(165, 255, 180)",
+    // bg: "rgb(255, 165, 165)"
+}
+
+// add hit-test functionality to DOMRect
+DOMRect.prototype.hit = function (x, y) {
+    return x >= this.left && x <= this.right &&
+        y >= this.top && y <= this.bottom;
+} 
+
+// yum
+function px(n) {
+    return `${n}px`;
+}
+
+function init() {
+    // HTML elements
+    drag_div = document.getElementById("drag_div");
+    hit_div = document.getElementById("hit_div");
+    
+    // listeners
+    window.addEventListener("pointerdown", pointerDown);
+    window.addEventListener("pointermove", pointerMove);
+    window.addEventListener("pointerup", pointerUp);
+    window.addEventListener("resize", resize);
+
+    // init data
+    dragging = false;
+    offset = {x: 0, y: 0}
+    win_rect = document.body.getBoundingClientRect();
+
+    // position div to center
+    let drag_rect = drag_div.getBoundingClientRect();
+    let left = Math.round((win_rect.width / 2) - (drag_rect.width / 2));
+    let top = Math.round((win_rect.height / 2) - (drag_rect.height / 2));
+    drag_div.style.left = px(left);
+    drag_div.style.top = px(top);
+}
+
+function resize(event) {
+    // keep track of changed client area dimensions 
+    win_rect = document.body.getBoundingClientRect();
+}
+
+function pointerDown (event) {
+    let [x, y] = [event.clientX, event.clientY];
+    let drag_rect = drag_div.getBoundingClientRect();
+    hit_rect = hit_div.getBoundingClientRect();
+    if (hit_rect.hit(x, y)) {
+        dragging = true;
+        offset.x = x - drag_rect.x;
+        offset.y = y - drag_rect.y;
+        hit_div.style.backgroundColor = colors.down;
+    }
+}
+    
+
+function pointerMove(event) {
+    let [x, y] = [event.clientX, event.clientY];
+    let drag_rect = drag_div.getBoundingClientRect();
+    if (dragging) {
+        let left = x - offset.x;
+        let right = left + drag_rect.width;
+        let top = y - offset.y;
+        let bottom = top + drag_rect.height;
+        
+        // prevent dragging off screen left/right
+        if (left < 0) {
+            left = 0;
+        } else if (right > win_rect.right) {
+            left = win_rect.right - drag_rect.width;
+        }
+        
+        // prevent dragging off screen top/bottom 
+        if (top < 0) {
+            top = 0;
+        } else if (bottom > win_rect.bottom) {
+            top = win_rect.bottom - drag_rect.height;
+        }
+        
+        drag_div.style.left = px(left);
+        drag_div.style.top = px(top);
+    }
+}
+
+function pointerUp(event) {
+    dragging = false;
+    hit_div.style.backgroundColor = colors.up;
+}
+
+init();
+*/
+function openPopUp() {
+         let url = "https://jaseography.xyz/nomadix/captive-portal/cp.html";
+         let height = 720;
+         let width = 1280;
+         var left = ( screen.width - width ) / 2;
+         var top = ( screen.height - height ) / 2;
+         var newWindow = window.open( url, "center window", 'resizable = yes, width=' + width + ', height=' + height + ', top='+ top + ', left=' + left);
+      }
+
+      </script>
+  </body>
+</html>

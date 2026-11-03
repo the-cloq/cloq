@@ -1,0 +1,494 @@
+  <!-- Payment buttons -->
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Noir - English","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-noir-en');
+    }
+    initPayPalButton();
+  </script>
+    <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Noir - Norwegian","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-noir-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Yellow Ochre - English","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-ochre-en');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Yellow Ochre - Norwegian","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-ochre-no');
+    }
+    initPayPalButton();
+  </script>
+ <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Grey - English","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-grey-en');
+    }
+    initPayPalButton();
+  </script>
+ <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Grey - Norwegian","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-grey-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Brushed Steel - English","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-brushed-en');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Brushed Steel - Norwegian","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-brushed-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Rouge - English","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-rouge-en');
+    }
+    initPayPalButton();
+  </script>
+    <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Rouge - Norwegian","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-rouge-no');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Blue - English","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-blue-en');
+    }
+    initPayPalButton();
+  </script>
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Blue - Norwegian","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-blue-no');
+    }
+    initPayPalButton();
+  </script>
+		
+ <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Vintage Copper - English","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-copper-en');
+    }
+    initPayPalButton();
+  </script>
+		
+  <script>
+    function initPayPalButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'pill',
+          color: 'blue',
+          layout: 'vertical',
+          label: 'checkout',
+          
+        },
+
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{"description":"CLOQ, Grande Vintage Copper - Norwegian","amount":{"currency_code":"GBP","value":2400,"breakdown":{"item_total":{"currency_code":"GBP","value":2000},"shipping":{"currency_code":"GBP","value":0},"tax_total":{"currency_code":"GBP","value":400}}}}]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+            
+            // Full available details
+            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+            actions.redirect('https://thecloq.art/thankyou/');
+            
+          });
+        },
+
+        onError: function(err) {
+          console.log(err);
+        }
+      }).render('#pp-btn-copper-no');
+    }
+    initPayPalButton();
+  </script>
+  <!-- End Payment buttons -->

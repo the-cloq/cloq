@@ -1,0 +1,87 @@
+<div id="colours" class="box">
+    <div class="swiper-container swiper-container-horizontal">
+      <div class="swiper-pagination swiper-pagination-clickable"><span class="swiper-pagination-bullet swiper-pagination-bullet-active">Hours &amp; Minutes</span><span class="swiper-pagination-bullet">Seconds</span>
+        <div class="active-mark "></div>
+      </div>
+      <div class="swiper-wrapper" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
+        <div class="swiper-slide swiper-slide-active" style="width: 293px;">
+          <ul>
+            <li>
+              <input type="radio" id="white" name="color" value="white">
+              <label for="white"></label>
+              <div class="check white white__"></div>
+            </li>
+            <li>
+              <input type="radio" id="cyan" name="color" value="cyan">
+              <label for="cyan"></label>
+              <div class="check cyan cyan__"></div>
+            </li>
+            <li>
+              <input type="radio" id="green" name="color" value="green" checked="">
+              <label for="green"></label>
+              <div class="check green green__"></div>
+            </li>
+            <li>
+              <input type="radio" id="pink" name="color" value="pink">
+              <label for="pink"></label>
+              <div class="check pink pink__"></div>
+            </li>
+            <li>
+              <input type="radio" id="orange" name="color" value="orange">
+              <label for="orange"></label>
+              <div class="check orange orange__"></div>
+            </li>
+            <li>
+              <input type="radio" id="red" name="color" value="red">
+              <label for="red"></label>
+              <div class="check red red__"></div>
+            </li>
+          </ul>
+        </div>
+        <div class="swiper-slide swiper-slide-next" style="width: 293px;">
+          <ul>
+            <li>
+              <input type="radio" id="white_s" name="scolor" value="white">
+              <label for="white_s"></label>
+              <div class="check white white__"></div>
+            </li>
+            <li>
+              <input type="radio" id="cyan_s" name="scolor" value="cyan">
+              <label for="cyan_s"></label>
+              <div class="check cyan cyan__"></div>
+            </li>
+            <li>
+              <input type="radio" id="green_s" name="scolor" value="green" checked="">
+              <label for="green_s"></label>
+              <div class="check green green__"></div>
+            </li>
+            <li>
+              <input type="radio" id="pink_s" name="scolor" value="pink">
+              <label for="pink_s"></label>
+              <div class="check pink pink__"></div>
+            </li>
+            <li>
+              <input type="radio" id="orange_s" name="scolor" value="orange">
+              <label for="orange_s"></label>
+              <div class="check orange orange__"></div>
+            </li>
+            <li>
+              <input type="radio" id="red_s" name="scolor" value="red">
+              <label for="red_s"></label>
+              <div class="check red red__"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="switch spacer">
+      <input type="hidden" name="ambience" value="1">
+      <input type="checkbox" name="ambience" onclick="this.previousSibling.value=1-this.previousSibling.value" checked="">
+      <label for="ambience"></label>
+      <span>Display Seconds
+      </span>
+      <p>If this is set to OFF, CLOQ will not display seconds</p>
+  
+    </div>
+  
+  </div>

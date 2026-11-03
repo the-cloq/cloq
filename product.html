@@ -1,0 +1,331 @@
+<html lang="en">
+<head>
+  <title>Choice Filter Example (Select-Select)</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <style>
+	  select {
+		  width:50% !important;
+	  }
+  /*******************************
+* MODAL AS LEFT/RIGHT SIDEBAR
+* Add "left" or "right" in modal parent div, after class="modal".
+* Get free snippets on bootpen.com
+*******************************/
+	.modal.left .modal-dialog,
+	.modal.right .modal-dialog {
+		position: fixed;
+		margin: auto;
+		width: 50%;
+		height: 100%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+		        transform: translate3d(0%, 0, 0);
+	}
+
+	.modal.left .modal-content,
+	.modal.right .modal-content {
+		height: 100%;
+		overflow-y: auto;
+	}
+	
+	.modal.left .modal-body,
+	.modal.right .modal-body {
+		padding: 15px 15px 80px;
+	}
+
+/*Left*/
+	.modal.left.fade .modal-dialog{
+		left: -50%;
+		-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+		        transition: opacity 0.3s linear, left 0.3s ease-out;
+	}
+	
+	.modal.left.fade.in .modal-dialog{
+		left: 0;
+	}
+        
+/*Right*/
+	.modal.right.fade .modal-dialog {
+		right: -320px;
+		-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+		        transition: opacity 0.3s linear, right 0.3s ease-out;
+	}
+	
+	.modal.right.fade.in .modal-dialog {
+		right: 0;
+	}
+
+/* ----- MODAL STYLE ----- */
+	.modal-content {
+		border-radius: 0;
+		border: none;
+	}
+
+	.modal-header {
+		border-bottom-color: #EEEEEE;
+		background-color: #FAFAFA;
+	}
+
+			   
+	  </style>
+
+</head>
+<body>
+
+<div class="">
+  <h2>ChoiceFilter</h2>
+  <br>
+  <h4>Dropdown - Dropdwon | Dependency</h4>
+  <p>An example where a <u>select dropdown filters</u> the choices of another <u>select dropdown</u>.</p>
+  <form>
+    <div class="form-group">
+      <select class="form-control" id="sizes" onchange="$('#imageToSwap').attr('src', this.options[this.selectedIndex].value + '.png');">
+        <option value="select-a-size">Select a size</option>
+		  
+		<option value="classic">Classic</option>
+        <option value="large">Large</option>
+      </select>
+
+      <br>
+
+      <select class="form-control" id="colours" onchange="$('#imageToSwap').attr('src', this.options[this.selectedIndex].value + '.png');">
+        <option value="select-a-colour">Select a colour</option>
+		  
+        <option value="lg_red">Red</option>
+		<option value="lg_black">Black</option>
+		<option value="lg_white">White</option>
+		<option value="lg_yellow_ochre">Yellow Ochre</option>
+		<option value="lg_blue">Blue</option>
+		<option value="lg_brushed">Brushed Steel</option>
+		  
+		<option value="cl_red">Red</option>
+		<option value="cl_black">Black</option>
+		<option value="cl_white">White</option>
+		<option value="cl_yellow_ochre">Yellow Ochre</option>
+		<option value="cl_blue">Blue</option>
+		<option value="cl_brushed">Brushed Steel</option>
+      </select>
+
+      <br>
+
+      <select class="form-control" id="languages" onchange="$('#imageToSwap').attr('src', this.options[this.selectedIndex].value + '.png');">  
+		<option value="select-a-language">Select a language</option>
+		  
+		<option value="cl_red_eng">Classic Red English</option>
+		<option value="cl_black_eng">Classic Black English</option>
+		<option value="cl_white_eng">Classic White English</option>
+		<option value="cl_yellow_ochre_eng">Classic Yellow Ochre English</option>
+		<option value="cl_blue_eng">Classic Blue English</option>
+		<option value="cl_brushed_eng">Classic Brushed English</option>
+
+		<option value="cl_red_nor">Classic Red Norwegian</option>
+		<option value="cl_black_nor">Classic Black Norwegian</option>
+		<option value="cl_white_nor">Classic White Norwegian</option>
+		<option value="cl_yellow_ochre_nor">Classic Yellow Ochre Norwegian</option>
+		<option value="cl_blue_nor">Classic Blue Norwegian</option>
+		<option value="cl_brushed_nor">Classic Brushed Norwegian</option>
+		  
+		<option value="lg_red_eng">Large Red English</option>
+        <option value="lg_black_eng">Large Black English</option>
+        <option value="lg_white_eng">Large White English</option>
+		<option value="lg_yellow_ochre_eng">Large Yellow Ochre English</option>
+		<option value="lg_blue_eng">Large Blue English</option>
+		<option value="lg_brushed_eng">Large Brushed English</option>
+		  
+		<option value="lg_red_nor">Large Red Norwegian</option>
+        <option value="lg_black_nor">Large Black Norwegian</option>
+        <option value="lg_white_nor">Large White Norwegian</option>
+		<option value="lg_yellow_ochre_nor">Large Yellow Ochre Norwegian</option>
+		<option value="lg_blue_nor">Large Blue Norwegian</option>
+		<option value="lg_brushed_nor">Large Brushed Norwegian</option>
+
+      </select>
+		
+		<img id="imageToSwap" class="profile" src="select-a-language.png" alt="" data-toggle="modal" data-target="#myModal2">
+		<button type="button" class="btn btn-demo" data-toggle="modal" data-target="#myModal2">
+			Right Sidebar Modal
+		</button>
+		
+    </div>
+  </form>
+	  		  	<!-- Modal -->
+	<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+					</p>
+					<!-- Set up a container element for the button -->
+			 <div id="smart-button-container">
+      <div style="text-align: center;">
+        <div style="margin-bottom: 1.25rem;">
+          <p>Large CLOQ</p>
+          <select id="item-options">
+			  <option value="RED" price="1">RED - 1 GBP</option>
+			  <option value="BLACK" price="1">BLACK - 1 GBP</option>
+			  <option value="BRUSHED" price="1">BRUSHED - 1 GBP</option>
+		  </select>
+			
+          <select style="visibility: hidden" id="quantitySelect"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
+        </div>
+      <div id="paypal-button-container"></div>
+      </div>
+    </div>
+				</div>
+
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div><!-- modal -->
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AfdxZawhsW8-AIYHYizk5aby4mjrRGaHiGtXB8y_evgmsKYqWhH8_utWTzY5bxH-sijmtHh3TNNvHmYb&enable-funding=venmo&currency=GBP" data-sdk-integration-source="button-factory"></script>
+<script type="text/javascript" src="assets/js/choicefilter.js"> </script>
+  <script>
+  	window.onload = function() {
+
+      //select elements
+  		var sizes = document.getElementById("sizes");
+  		var colours = document.getElementById("colours");
+
+      //create a connection between them 
+  		sizes.filtchoices(colours,{
+  			data:{
+  				"large":["lg_red","lg_black","lg_white","lg_yellow_ochre","lg_blue","lg_brushed"],
+  				"classic":["cl_red","cl_black","cl_white","cl_yellow_ochre","cl_blue","cl_brushed"]
+  			},
+  			independentChoices : "select-a-colour",
+  			autoSelectedChoicesAfterFilter: "select-a-colour",
+        showAllChildChoicesWhen: "all"
+  		}); 
+
+  		var languages = document.getElementById("languages");
+  		colours.filtchoices(languages,{
+
+  			data:{
+  				"lg_red":["lg_red_eng", "lg_red_nor"],
+				"lg_black":["lg_black_eng","lg_black_nor"],
+				"lg_white":["lg_white_eng","lg_white_nor"],
+				"lg_yellow_ochre":["lg_yellow_ochre_eng","lg_yellow_ochre_nor"],
+				"lg_blue":["lg_blue_eng","lg_blue_nor"],
+				"lg_brushed":["lg_brushed_eng","lg_brushed_nor"],
+				
+				"cl_red":["cl_red_eng", "cl_red_nor"],
+				"cl_black":["cl_black_eng","cl_black_nor"],
+				"cl_white":["cl_white_eng","cl_white_nor"],
+				"cl_yellow_ochre":["cl_yellow_ochre_eng","cl_yellow_ochre_nor"],
+				"cl_blue":["cl_blue_eng","cl_blue_nor"],
+				"cl_brushed":["cl_brushed_eng","cl_brushed_nor"]
+  			},
+  			independentChoices: ["select-a-language"],
+  			autoSelectedChoicesAfterFilter: ["select-a-language"]
+  		});
+  	}
+	</script>
+    <script>
+      function initPayPalButton() {
+        var shipping = 1;
+        var itemOptions = document.querySelector("#smart-button-container #item-options");
+    var quantity = parseInt(5);
+    var quantitySelect = document.querySelector("#smart-button-container #quantitySelect");
+    if (!isNaN(quantity)) {
+      quantitySelect.style.visibility = "visible";
+    }
+    var orderDescription = 'Large CLOQ';
+    if(orderDescription === '') {
+      orderDescription = 'Item';
+    }
+    paypal.Buttons({
+      style: {
+        shape: 'pill',
+        color: 'gold',
+        layout: 'vertical',
+        label: 'checkout',
+        
+      },
+      createOrder: function(data, actions) {
+        var selectedItemDescription = itemOptions.options[itemOptions.selectedIndex].value;
+        var selectedItemPrice = parseFloat(itemOptions.options[itemOptions.selectedIndex].getAttribute("price"));
+        var tax = (0 === 0 || false) ? 0 : (selectedItemPrice * (parseFloat(0)/100));
+        if(quantitySelect.options.length > 0) {
+          quantity = parseInt(quantitySelect.options[quantitySelect.selectedIndex].value);
+        } else {
+          quantity = 1;
+        }
+
+        tax *= quantity;
+        tax = Math.round(tax * 100) / 100;
+        var priceTotal = quantity * selectedItemPrice + parseFloat(shipping) + tax;
+        priceTotal = Math.round(priceTotal * 100) / 100;
+        var itemTotalValue = Math.round((selectedItemPrice * quantity) * 100) / 100;
+
+        return actions.order.create({
+          purchase_units: [{
+            description: orderDescription,
+            amount: {
+              currency_code: 'GBP',
+              value: priceTotal,
+              breakdown: {
+                item_total: {
+                  currency_code: 'GBP',
+                  value: itemTotalValue,
+                },
+                shipping: {
+                  currency_code: 'GBP',
+                  value: shipping,
+                },
+                tax_total: {
+                  currency_code: 'GBP',
+                  value: tax,
+                }
+              }
+            },
+            items: [{
+              name: selectedItemDescription,
+              unit_amount: {
+                currency_code: 'GBP',
+                value: selectedItemPrice,
+              },
+              quantity: quantity
+            }]
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(orderData) {
+          
+          // Full available details
+          console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+          // Show a success message within this page, e.g.
+          const element = document.getElementById('paypal-button-container');
+          element.innerHTML = '';
+          element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+          // Or go to another URL:  actions.redirect('thank_you.html');
+
+        });
+      },
+      onError: function(err) {
+        console.log(err);
+      },
+    }).render('#paypal-button-container');
+  }
+  initPayPalButton();
+    </script>
+</body>
+</html>

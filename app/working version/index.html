@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Input Switch</title>
+    <style type="text/css">#preloader{position:fixed;top:0;left:0;right:0;bottom:0;background-color:#0e1822;z-index:99}.status:after,.status:before{content:'';position:absolute;top:0}.status,.status:after,.status:before{border-radius:10%;width:2em;height:2em;animation:1.2s ease-in-out infinite animation}.status{margin:300px auto;transform:translateZ(0);animation-delay:-.16s}.status:before{left:-3.5em;animation-delay:-.32s}.status:after{left:3.5em}@keyframes animation{0%,100%,80%{box-shadow:0 2em 0 -1em #29aeae}40%{box-shadow:0 2em 0 0 #29aeae}}.loader{display:none;top:50%;left:42%;position:absolute;transform:translate(-50%,-50%)}input{margin:5px 0}</style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css">
+    <link rel="stylesheet" href="cloqapp.css">
+    </head>
+    <body>
+        <input type="checkbox" id="hbx">
+        <label class="hamburger" for="hbx">
+          <div id="hamburger-top"></div>
+          <div id="hamburger-mid"></div>
+          <div id="hamburger-bot"></div>
+        </label>
+        <div id="about">
+          <div class="j-brief-header">
+            <h2 class="sm-header">ABOUT THE ARTIST</h2>
+            <svg class="sig" width="316" height="116" viewBox="0 0 316 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M53.2515 12.9839C55.5325 12.9839 57.521 18.4523 59.2171 29.3892H59.3926C65.1827 26.6404 74.2773 23.4529 86.6763 19.8268C98.0811 17.0779 104.865 15.7035 107.029 15.7035C107.848 15.879 108.258 16.4346 108.258 17.3704V17.6335C108.258 18.6278 104.515 19.6805 97.0283 20.7918C83.4596 24.067 71.6746 27.8393 61.6735 32.1088C61.6735 32.3428 60.9132 32.6644 59.3926 33.0738V33.6002C59.3926 56.3513 52.8421 77.8741 39.7413 98.1688C31.4362 109.457 23.5991 115.101 16.2299 115.101H14.0366C6.19952 115.101 1.60837 109.866 0.263187 99.397L0 96.9406C0 81.1494 9.18231 65.0365 27.5469 48.6019C38.0744 40.5308 47.2275 34.7992 55.0061 31.407V31.1438C55.0061 26.8158 53.6024 21.4059 50.7951 14.9139C51.2045 13.6272 52.0233 12.9839 53.2515 12.9839ZM4.47418 95.186V97.467C4.47418 104.544 6.90135 109.106 11.7557 111.153C13.0424 111.504 14.2121 111.679 15.2649 111.679H15.7035C24.9443 111.679 34.3605 102.087 43.9523 82.9039C51.4969 66.06 55.2693 50.181 55.2693 35.2671H55.0061C48.1048 38.6008 40.9987 42.958 33.688 48.3387C25.9678 54.4797 19.973 60.533 15.7035 66.4986C8.21729 77.26 4.47418 86.8225 4.47418 95.186ZM49.6546 0H49.9178C50.7951 0 51.4969 0.438645 52.0233 1.31594C52.1988 1.60837 52.2865 1.9008 52.2865 2.19323V2.36868C52.2865 2.60263 52.228 2.89506 52.1111 3.24597V3.68462C52.1111 4.26948 51.7601 4.8251 51.0583 5.35147C50.4734 5.70239 49.9178 5.87785 49.3915 5.87785H49.1283C48.3679 5.87785 47.6954 5.55617 47.1105 4.91283C46.935 4.50342 46.8473 4.12327 46.8473 3.77235V3.59689C46.8473 3.30446 46.8766 3.07052 46.935 2.89506C46.8766 2.7196 46.8473 2.5149 46.8473 2.28096C46.8473 1.52064 47.3152 0.87729 48.251 0.350916C48.7189 0.116972 49.1867 0 49.6546 0Z" fill="url(#paint0_linear_310_19)" />
+              <path d="M114.837 10.4398H115.101C117.148 10.5567 118.346 11.1416 118.697 12.1943V12.7207C118.288 13.7735 117.586 14.2998 116.592 14.2998H116.241C116.007 14.2998 115.51 14.1829 114.75 13.9489C114.633 13.8904 114.516 13.8612 114.399 13.8612C112.352 13.8612 109.252 16.6685 105.099 22.2832C103.637 24.4472 102.438 26.8158 101.503 29.3892C101.561 29.3892 101.59 29.4185 101.59 29.477C103.52 28.8921 108.053 25.1198 115.188 18.1599C117.469 15.7035 118.873 14.4753 119.399 14.4753H119.575C120.16 14.4753 121.505 15.7035 123.61 18.1599C131.623 26.0555 140.659 30.0033 150.718 30.0033H150.806C161.743 30.0033 173.353 25.2367 185.635 15.7035C185.986 15.528 186.336 15.4403 186.687 15.4403H186.951C188.12 15.6158 188.705 16.1129 188.705 16.9317V17.1949C188.705 17.7798 187.916 18.5986 186.336 19.6513C182.886 22.2247 179.26 24.5641 175.458 26.6696C166.568 31.3485 158.468 33.688 151.157 33.688H149.49C141.712 33.688 134.108 31.1146 126.681 25.9678C124.926 24.8566 122.411 22.6633 119.136 19.3881C113.404 25.1197 109.369 28.7166 107.029 30.1788C104.105 32.3428 101.678 33.4248 99.7479 33.4248C98.6952 33.4248 97.9641 32.9569 97.5547 32.0211C97.4377 31.7287 97.3792 31.3778 97.3792 30.9684V30.442C97.3792 27.6931 99.4262 23.5699 103.52 18.0722C107.79 12.9839 111.562 10.4398 114.837 10.4398Z" fill="url(#paint1_linear_310_19)" />
+              <path d="M198.004 6.66741C198.823 7.1353 199.233 7.72016 199.233 8.42199C198.999 9.12382 196.981 10.6152 193.179 12.8962C190.197 15.1771 188.705 17.0487 188.705 18.5108V18.8617C188.705 20.9672 192.273 22.985 199.408 24.915C204.204 26.8451 206.602 29.7401 206.602 33.6002H206.777C217.656 27.8101 231.225 21.9907 247.484 16.1421C248.595 15.7912 249.355 15.6158 249.765 15.6158H249.94C251.11 15.7327 251.695 16.2884 251.695 17.2826C251.695 18.3354 248.741 19.7098 242.834 21.4059C226.692 27.6639 214.205 33.337 205.374 38.4253C203.97 41.7005 201.601 45.0635 198.268 48.5142C193.296 53.0176 189.612 55.2693 187.214 55.2693H185.81C183.763 54.9769 182.74 54.0118 182.74 52.3742V52.0233C182.74 48.6896 189.144 43.3966 201.952 36.1444C202.186 35.0916 202.303 34.2436 202.303 33.6002C202.303 30.5005 198.765 28.044 191.688 26.231C186.892 24.3594 184.494 22.0492 184.494 19.3004V18.8617C184.494 15.0602 188.559 10.9954 196.689 6.66741H198.004ZM186.775 51.8479H187.214C188.851 51.8479 191.805 49.7131 196.074 45.4436C197.654 43.806 198.443 42.7533 198.443 42.2854C194.408 44.3324 190.518 47.4322 186.775 51.5847V51.8479Z" fill="url(#paint2_linear_310_19)" />
+              <path d="M259.064 10.4398C261.579 10.9661 262.807 12.1651 262.748 14.0366V14.2998C262.69 16.4638 260.321 18.7448 255.642 21.1427C252.192 22.3709 250.028 22.9558 249.15 22.8973C248.273 24.4764 247.805 25.9678 247.747 27.3715V27.6346C247.688 30.2665 249.735 31.6409 253.888 31.7579H254.59C263.597 31.9919 281.055 27.4592 306.964 18.1599C310.999 16.5223 313.368 15.7035 314.07 15.7035H314.245C315.415 15.9374 316 16.5223 316 17.4581C315.942 18.4523 314.304 19.3881 311.087 20.2654C299.565 24.8273 286.991 28.8629 273.364 32.372C264.766 34.419 258.362 35.384 254.151 35.2671H253.712C247.981 35.0916 244.618 33.1616 243.624 29.477C243.507 29.1845 243.448 28.7751 243.448 28.2488L243.536 27.196C243.594 23.6284 245.934 19.4758 250.554 14.7385C253.946 11.8142 256.783 10.3813 259.064 10.4398ZM251.958 18.6863H252.133C256.344 17.0487 258.45 15.528 258.45 14.1244V14.0366L257.923 13.9489H257.836C256.607 13.8904 254.648 15.4696 251.958 18.6863Z" fill="url(#paint3_linear_310_19)" />
+              <defs>
+                <linearGradient id="paint0_linear_310_19" x1="87.5" y1="53.5" x2="246.542" y2="-80.387" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#29AEAE" />
+                  <stop offset="0.998652" stop-color="#AE04FE" />
+                  <stop offset="0.998752" stop-color="#BC70FF" />
+                </linearGradient>
+                <linearGradient id="paint1_linear_310_19" x1="87.5" y1="53.5" x2="246.542" y2="-80.387" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#29AEAE" />
+                  <stop offset="0.998652" stop-color="#AE04FE" />
+                  <stop offset="0.998752" stop-color="#BC70FF" />
+                </linearGradient>
+                <linearGradient id="paint2_linear_310_19" x1="87.5" y1="53.5" x2="246.542" y2="-80.387" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#29AEAE" />
+                  <stop offset="0.998652" stop-color="#AE04FE" />
+                  <stop offset="0.998752" stop-color="#BC70FF" />
+                </linearGradient>
+                <linearGradient id="paint3_linear_310_19" x1="87.5" y1="53.5" x2="246.542" y2="-80.387" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#29AEAE" />
+                  <stop offset="0.998652" stop-color="#AE04FE" />
+                  <stop offset="0.998752" stop-color="#BC70FF" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <p class="margin-top-0">Jason Dinsdale is an award winning graphic designer, creative director, acclaimed photographer, artist and product designer based in Buckinghamshire, England. A passion for clean design, typography and simplistic, minimal art forms, his early influencers include Kasimir Malevich for his paradoxical and illogical symmetry, and Piet Mondrian - a pioneer of abstract art, were he reached a point where his artistic vocabulary was reduced to simple geometric elements.</p>
+          <p>In the midst of Covid Lockdowns, Jase turned his weekends into a new creative hobby and exerted his coding skills to take his artworks to the next level by developing and combining technology with art, to form an exquisite timepiece that is CLOQ. </p>
+          <input type="button" class="simplebtn" onClick="parent.location='https://thecloq.art/'" value="Buy from my Studio" formtarget="_blank">
+        </div>
+        <div class="topnav">
+          <img src="https://my-cloq.tiiny.site/cloq_logo.svg" alt="CLOQ">
+          <button id="submitBtn" class="button" name="ok" type="submit" value="ok" ontouchstart="" style="display:none;">
+            <img src="https://my-cloq.tiiny.site/send_w.svg">
+          </button>
+        </div>
+        <form id="myForm">
+        <div class="waves">
+          <div id="panel1" class="tab_panel" aria-hidden="false">
+            <div class="container">
+              <div class="title">
+                <img class="wc_icon" src="https://my-cloq.tiiny.site/color.svg">
+                <h1>Colours</h1>
+              </div>
+              <h2>Set the colours for hours and minutes to alter the mood</h2>
+              <div id="colours" class="box">
+                <div class="fanen-container">
+                    <div class="tabs">
+                      <div class="fanen active" id="tab1">Hours & Minutes</div>
+                      <div class="fanen" id="tab2">Seconds</div>
+                      <div class="fanen-indicator"></div>
+                    </div>
+                
+                    <div class="fanen-content tab1-active">
+                      <div class="fanen-panel" id="content1">
+                        <div class="radio-buttons">
+                          <input name="hm" type="radio" class="radio-btn" id="hm1" checked>
+                          <input name="hm" type="radio" class="radio-btn" id="hm2">
+                          <input name="hm" type="radio" class="radio-btn" id="hm3">
+                          <input name="hm" type="radio" class="radio-btn" id="hm4">
+                          <input name="hm" type="radio" class="radio-btn" id="hm5">
+                          <input name="hm" type="radio" class="radio-btn" id="hm6">
+                        </div>
+                      </div>
+                
+                      <div class="fanen-panel" id="content2">
+                        <div class="radio-buttons">
+                          <input name="s" type="radio" class="radio-btn" id="s1">
+                          <input name="s" type="radio" class="radio-btn" id="s2"checked>
+                          <input name="s" type="radio" class="radio-btn" id="s3">
+                          <input name="s" type="radio" class="radio-btn" id="s4">
+                          <input name="s" type="radio" class="radio-btn" id="s5">
+                          <input name="s" type="radio" class="radio-btn" id="s6">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <div class="toggle-item">
+                  <div class="toggle-wrapper">
+                    <input name="seconds_status" value="1" type="checkbox" id="seconds_status" class="toggle-input" checked>
+                    <label for="seconds_status" class="toggle-label"></label>
+                    <span>Display Seconds</span>
+                  </div>
+                  <p>Choose to show or hide the ambient temperature in CLOQ Mode</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="panel2" class="tab_panel" aria-hidden="true">
+            <div class="container">
+              <div class="title">
+                <img class="wc_icon" src="https://my-cloq.tiiny.site/brightness.svg">
+                <h1>Auto Brightness</h1>
+              </div>
+              <h2>CLOQ senses the presence or absence of light, and adjusts brightness accordingly</h2>
+              <div class="box">
+                <h3>Refine brightness</h3>
+                <div class="slider_wrap">
+                  <div id="slider1"></div>
+                  <input type="hidden" id="brightness" class="slider-input" value="15">
+                  <p class="spacer">Adjust the global brightness to suit the ambience of your living space</p>
+                </div>
+                <div class="toggle-item">
+                  <div class="toggle-wrapper">
+                    <input name="ldrSensor_status" value="1" type="checkbox" id="ldrSensor_status" class="toggle-input" checked>
+                    <label for="ldrSensor_status" class="toggle-label"></label>
+                    <span>Auto Brightness Sensor</span>
+                  </div>
+                  <p>If the Auto Brightness is set to OFF, CLOQ will not adjust brightness automatically</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="panel3" class="tab_panel" aria-hidden="true">
+            <div class="container">
+              <div class="title">
+                <img class="wc_icon" src="https://my-cloq.tiiny.site/msensor.svg">
+                <h1>Motion Sensor</h1>
+              </div>
+              <h2>The sensor checks for movement every 1 - 15 minutes. If movement isn't detected, CLOQ's display reverts to standby mode but remains active</h2>
+              <div class="box">
+                <h3>Motion Detection</h3>
+                <div class="slider_wrap">
+                  <div id="slider2"></div>
+                  <input type="hidden" id="sensor_timer" class="slider-input" value="1">
+                  <p class="spacer">Adjust the global brightness to suit the ambience of your living space</p>
+                </div>
+                <div class="toggle-item">
+                  <div class="toggle-wrapper">
+                    <input name="motionSensor" value="1" type="checkbox" id="motionSensor" class="toggle-input" checked>
+                    <label for="motionSensor" class="toggle-label"></label>
+                    <span>Motion Sensor</span>
+                  </div>
+                  <p>If the Motion Sensor is set to OFF, CLOQ will remain lit at all times</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="panel4" class="tab_panel" aria-hidden="true">
+            <div class="container">
+              <div class="title">
+                <img class="wc_icon" src="https://my-cloq.tiiny.site/weather.svg">
+                <h1>Weather Conditions</h1>
+              </div>
+              <h2>CLOQ uses the free Open Weather Map Service to display the current temperature and weather conditions</h2>
+              <div class="card-container">
+                <div class="card" id="flipCard">
+                  <!-- Front Side -->
+                  <div class="side front">
+                    <h3>Location</h3>
+                    <div class="input-row">
+                      <input type="text" id="location" name="location" placeholder="City, Countrycode" value="Chesham, GB">
+                      <button id="submit-location" disabled></button>
+                    </div>
+                    <div class="flip-icon" onclick="flipCard()" role="button" tabindex="0">
+                    </div>
+                  </div>
+                          
+                  <!-- Back Side 3f572b62fea31c192fae70757e9de676 -->
+                  <div class="side back">
+                    <h3>API Key</h3>
+                    <input type="text" id="apikey" name="apikey" placeholder="32 Character API Key" value="409cc3736e4fa7176890bed5e9656117">
+                    <div class="flip-icon" onclick="flipCard()" role="button" tabindex="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+        <!-- Box containing the sunrise and sunset information -->
+        <div id="ss" class="box-large">
+            <h3 id="title_"></h3>
+            
+            <!-- Flex container for h4 and Total Sunlight Hours -->
+            <div class="sunlight-container">
+              <h4 id="sunset-time"></h4>
+              <h5 id="sunlight-hours">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.0523 4.60639L5.66212 4.21461C5.27194 3.82283 4.64166 3.83288 4.26148 4.21461L4.25148 4.22466C3.8613 4.61644 3.8613 5.24931 4.25148 5.63105L4.64166 6.02283C5.03183 6.41461 5.65211 6.41461 6.04229 6.02283L6.0523 6.01279C6.44247 5.63105 6.44247 4.98813 6.0523 4.60639V4.60639ZM3.01091 10.9954H1.99045C1.4402 10.9954 1 11.4374 1 11.99V12C1 12.5525 1.4402 12.9945 1.99045 12.9945H3.00091C3.56116 13.0046 4.00136 12.5626 4.00136 12.01V12C4.00136 11.4374 3.56116 10.9954 3.01091 10.9954ZM12.015 1H12.005C11.4447 1 11.0045 1.44201 11.0045 1.99452V2.9589C11.0045 3.51142 11.4447 3.95342 11.995 3.95342H12.005C12.5653 3.96347 13.0055 3.52146 13.0055 2.96895V1.99452C13.0055 1.44201 12.5653 1 12.015 1V1ZM19.7585 4.22466C19.3683 3.83288 18.7381 3.83288 18.3479 4.21461L17.9577 4.60639C17.5675 4.99817 17.5675 5.63105 17.9577 6.01279L17.9677 6.02283C18.3579 6.41461 18.9882 6.41461 19.3684 6.02283L19.7585 5.63105C20.1487 5.23927 20.1487 4.61644 19.7585 4.22466V4.22466ZM17.9477 19.3936L18.3379 19.7854C18.7281 20.1772 19.3583 20.1772 19.7485 19.7854C20.1387 19.3936 20.1387 18.7607 19.7485 18.369L19.3583 17.9772C18.9682 17.5854 18.3379 17.5954 17.9577 17.9772C17.5575 18.379 17.5575 19.0018 17.9477 19.3936ZM20.0086 11.99V12C20.0086 12.5525 20.4488 12.9945 20.9991 12.9945H22.0096C22.5598 12.9945 23 12.5525 23 12V11.99C23 11.4374 22.5598 10.9954 22.0096 10.9954H20.9991C20.4488 10.9954 20.0086 11.4374 20.0086 11.99ZM12.005 5.9726C8.6935 5.9726 6.00227 8.67489 6.00227 12C6.00227 15.3251 8.6935 18.0274 12.005 18.0274C15.3165 18.0274 18.0077 15.3251 18.0077 12C18.0077 8.67489 15.3165 5.9726 12.005 5.9726ZM11.995 23H12.005C12.5553 23 12.9955 22.558 12.9955 22.0055V21.0411C12.9955 20.4886 12.5553 20.0466 12.005 20.0466H11.995C11.4447 20.0466 11.0045 20.4886 11.0045 21.0411V22.0055C11.0045 22.558 11.4447 23 11.995 23ZM4.25148 19.7753C4.64166 20.1671 5.27194 20.1671 5.66212 19.7753L6.0523 19.3836C6.44247 18.9918 6.43247 18.3589 6.0523 17.9772L6.04229 17.9671C5.65211 17.5753 5.02183 17.5753 4.63165 17.9671L4.24147 18.3589C3.8613 18.7607 3.8613 19.3836 4.25148 19.7753Z" fill="white"/>
+                    </svg>
+                <span id="sunlight-hours-time"></span>
+              </h5>
+            </div>
+          
+            <div class="anchor-baseline">
+              <div class="beziercurve">
+                <!-- Bezier Curve with SVG animation for sun -->
+                <svg id="sunPath" xmlns="http://www.w3.org/2000/svg" width="335" height="73" viewBox="0 0 335 73" fill="none">
+                    <path id="curve" d="M0 69.8975C56.1994 69.8975 111.319 3 167.541 3C227.168 3 274.438 69.8975 335 69.8975" stroke="white" stroke-opacity="0.2" stroke-width="5"/>
+                    
+                    <!-- Sun element within the SVG -->
+                    <circle id="sunSVG" r="10" fill="#FFC300">
+                      <animateMotion id="sunMotion" begin="0s" dur="24h" repeatCount="indefinite" 
+                        path="M0 69.8975C56.1994 69.8975 111.319 3 167.541 3C227.168 3 274.438 69.8975 335 69.8975" />
+                    </circle>
+                    
+                    <!-- Sunrise marker -->
+                    <circle id="sunriseMarker" r="4" fill="#FFD700" opacity="0.8" />
+                    
+                    <!-- Sunset marker -->
+                    <circle id="sunsetMarker" r="4" fill="#FF6347" opacity="0.8" />
+                  </svg>
+                <h5 id="sunrise-time">.</h5>
+              </div>
+            </div>
+          </div>
+
+              <div class="box">
+                <h3>Current Temperature</h3>
+                <div class="temp-toggles">
+                  <input type="radio" id="celcius" name="temperature" class="radio-input" checked>
+                  <label for="celcius" class="radio-label">Celsius</label>
+                  <input type="radio" id="fahrenheit" name="temperature" class="radio-input">
+                  <label for="fahrenheit" class="radio-label">Fahrenheit</label>
+                </div>
+                <div class="squeezed">
+                  <div class="temp">
+                    <div id="conditions"></div>
+                    <div id="cel" class="hidden-box">
+                      <h4><span>C</span>
+                      </h4>
+                    </div>
+                    <div id="fah" class="hidden-box">
+                      <h4><span>F</span>
+                      </h4>
+                    </div>
+                  </div>
+                  <p class="center">Choose your preferred temperature scale</p>
+                </div>
+              </div>
+              <div class="box">
+                <h3>Ambient Temperatures</h3>
+                <div class="slider_wrap">
+                  <div id="slider3"></div>
+                  <input type="hidden" id="cool" class="slider-input" value="5">
+                  <input type="hidden" id="warm" class="slider-input" value="17">
+                  <input type="hidden" id="hot" class="slider-input" value="27">
+                  <p style="margin-top:50px;">Adjust the temperatures to favour your <span class="c-cool">COOL</span>, <span class="c-warm">WARM</span> and <span class="c-hot">HOT</span> comfort levels </p>
+                </div>
+              </div>
+              <div class="box">
+                <h3>Weather Features</h3>
+                <div class="toggle-item">
+                  <div class="toggle-wrapper">
+                    <input name="ambience" value="1" type="checkbox" id="ambience" class="toggle-input" checked>
+                    <label for="ambience" class="toggle-label"></label>
+                    <span>Display Ambience</span>
+                  </div>
+                  <p>Choose to show or hide the ambient temperature in CLOQ Mode</p>
+                </div>
+                <div class="toggle-item">
+                  <div class="toggle-wrapper">
+                    <input name="show_weather" value="1" type="checkbox" id="show_weather" class="toggle-input" checked>
+                    <label for="show_weather" class="toggle-label"></label>
+                    <span>Display Weather</span>
+                  </div>
+                  <p>Choose to show or hide the weather conditions in Weather Mode</p>
+                </div>
+              </div>
+              <div id="api_key" class="box sm padding-bottom-0">
+                <div class="accordion">
+                  <h3>Advanced Settings</h3>
+                </div>
+                <div class="accordion-content">
+                  <h5>APP Styling and Functions URL</h5>
+                  <input class="spacing" style="margin-bottom:20px;" name="url" id="url" type="text" spellcheck="false" value="my-cloq.tiiny.site" onblur="this.value=removeSpaces(this.value);">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="panel5" class="tab_panel" aria-hidden="true">
+            <div class="container">
+              <div class="title">
+                <img class="wc_icon" src="https://my-cloq.tiiny.site/zone_pink.svg">
+                <h1>Daylight Saving Time</h1>
+              </div>
+              <h2>Daylight saving during the summer months so that darkness falls at a later clock time</h2>
+              <div class="box">
+                <h3>Setting the clock</h3>
+                <div class="dst-toggles">
+                  <input type="radio" id="auto" name="season" class="radio-input" checked>
+                  <label for="auto" class="radio-label">Auto</label>
+                  <input type="radio" id="summer" name="season" class="radio-input">
+                  <label for="summer" class="radio-label">Summer</label>
+                  <input type="radio" id="winter" name="season" class="radio-input">
+                  <label for="winter" class="radio-label">Winter</label>
+                </div>
+              </div>
+              <div id="sumR" class="box hidden-box">
+                <div class="slider_wrap">
+                  <h5>Summer Offset</h5>
+                  <div id="slider4"></div>
+                  <input type="hidden" id="summer_offset" class="slider-input" value="1">
+                  <p class="spacer">Setting the time backwards from standard time during the winter months</p>
+                </div>
+              </div>
+              <div id="wintR" class="box hidden-box">
+                <div class="slider_wrap">
+                  <h5>Winter Offset</h5>
+                  <div id="slider5"></div>
+                  <input type="hidden" id="winter_offset" class="slider-input" value="-1">
+                  <p class="spacer">Setting the time forwards from standard time during the winter months</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="basenav">
+          <div class="inside">
+            <div class="tab_heading col" aria-controls="panel1" aria-selected="true">Colours</div>
+            <div class="tab_heading lumins" aria-controls="panel2" aria-selected="false">Lumins</div>
+            <div class="tab_heading motion" aria-controls="panel3" aria-selected="false">Motion</div>
+            <div class="tab_heading weather" aria-controls="panel4" aria-selected="false">Weather</div>
+            <div class="tab_heading wifi" aria-controls="panel5" aria-selected="false">DST</div>
+          </div>
+        </div>
+      </form>
+    <script>window.addEventListener('load', function () { var preloader = document.getElementById('preloader');var status = document.querySelector('.status'); status.style.transition = "opacity 1s ease-out";status.style.opacity = 0;status.addEventListener('transitionend', function() {preloader.style.display = 'none';});document.body.style.overflow = 'visible';});</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js"></script>
+    <script src="cloqapp.js"></script>
+</body>
+</html>
